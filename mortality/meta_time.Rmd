@@ -1,0 +1,163 @@
+---
+title: "Supplementary File: Meta analysis of interaction (time since baseline as metric)"
+
+output: html_document
+---
+This document contains the meta-analysis of the surivival models, using time since baseline as the metric of interest and neuroticism by conscientiousness as the predictor of interest.
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+options(knitr.kable.NA = '')
+```
+
+The following packages were used to generate this table: 
+
+```{r load_packages, warning = FALSE, message = FALSE, results = 'hide'}
+library(papaja)
+library(tidyverse)
+library(metafor)
+library(knitr)
+library(kableExtra)
+```
+
+Specify the location of the study analysis objects. The first author stored these in a Box Sync folder, but you may have downloaded these to a different location. The files needed for this table are available at [osf.io/mzfu9](https://osf.io/mzfu9/) in the Individual Study Output folder.
+
+```{r}
+data.path = c("../study output/")
+```
+
+First we load the individual study analysis objects.
+
+```{r, results = 'hide'}
+study.names = c("EAS", "HRS", "LBC", "LBLS", "MAP", "MAS", "MIDUS", "NAS", "OATS", "ROS", "SLS", "WLS")
+
+lapply(paste0(data.path, study.names, "_survival_output.Rdata"), load, .GlobalEnv)
+```
+
+
+```{r}
+meta.data.time <- data.frame()
+n <- 0
+
+for(i in study.names){
+  n <- n+1
+  x <- get(paste0(i, "_survival_output"))
+  meta.data.time[n, "study"] <- i
+  meta.data.time[n, "coef"] <- x$time$model2$coef["z.neur:z.con", "coef"]
+  meta.data.time[n, "se"] <- x$time$model2$coef["z.neur:z.con", "se(coef)"]
+  meta.data.time[n, "n"] <- x$time$model2$ntotal
+  meta.data.time[n, "n_died"] <- x$descriptives$died.tab["1"]
+  
+  meta.data.time[n, "lowC.est"] <- x$HR.N$time$LowC$est
+  meta.data.time[n, "lowC.se"] <- x$HR.N$time$LowC$se
+  meta.data.time[n, "hghC.est"] <- x$HR.N$time$HghC$est
+  meta.data.time[n, "hghC.se"] <- x$HR.N$time$HghC$se
+  
+  #calculate hazard ratios at low and high C
+  lowC.HR <- exp(x$HR.N$time$LowC$est)
+  lowC.HR.lwr <- exp(x$HR.N$time$LowC$est - 1.96*x$HR.N$time$LowC$se)
+  lowC.HR.upr <- exp(x$HR.N$time$LowC$est + 1.96*x$HR.N$time$LowC$se)
+  meta.data.time[n, "lowC.CI"] <- paste0(printnum(lowC.HR)," [",printnum(lowC.HR.lwr),", ",printnum(lowC.HR.upr),"]")
+
+  hghC.HR <- exp(x$HR.N$time$HghC$est)
+  hghC.HR.lwr <- exp(x$HR.N$time$HghC$est - 1.96*x$HR.N$time$HghC$se)
+  hghC.HR.upr <- exp(x$HR.N$time$HghC$est + 1.96*x$HR.N$time$HghC$se)
+  meta.data.time[n, "hghC.CI"] <- paste0(printnum(hghC.HR)," [",printnum(hghC.HR.lwr),", ",printnum(hghC.HR.upr),"]")
+
+}
+
+meta.results.time <- rma(yi = coef, 
+                    sei = se, 
+                    ni = n,  
+                    measure = "RR",
+                    slab = study, 
+                    data = meta.data.time)
+```
+
+```{r, echo = F}
+save(meta.results.time, file = "../created data/meta_time.Rdata")
+```
+
+
+```{r}
+#meta-analyze HR at low and high c
+
+meta.low.time <- rma(yi = lowC.est, 
+                    sei = lowC.se, 
+                    ni = n,  
+                    measure = "RR",
+                    slab = study, 
+                    data = meta.data.time)
+
+meta.hgh.time <- rma(yi = hghC.est, 
+                    sei = hghC.se, 
+                    ni = n,  
+                    measure = "RR",
+                    slab = study, 
+                    data = meta.data.time)
+
+
+#find plot limits
+max.ci.mod1 = max(exp(meta.data.time$coef+1.96*meta.data.time$se))
+min.ci.mod1 = min(exp(meta.data.time$coef-1.96*meta.data.time$se))
+range.mod1 = max.ci.mod1-min.ci.mod1
+
+lower.mod1 = min.ci.mod1-(range.mod1*2.5)
+upper.mod1 = max.ci.mod1+(range.mod1)
+
+cex.set = .7
+
+#estimate position of extra information
+pos.mod1 = min.ci.mod1-lower.mod1
+pos.mod1 = pos.mod1/13
+pos.mod1 = c(lower.mod1+3*pos.mod1,
+             lower.mod1+5*pos.mod1,
+             lower.mod1+8*pos.mod1,
+             lower.mod1+11*pos.mod1)
+
+#extract weighted values at -1 and +1 sd
+meta_est_lowc_mod1 = printnum(exp(meta.low.time$b))
+meta_lwr_lowc_mod1 = printnum(exp(meta.low.time$ci.lb))
+meta_upr_lowc_mod1 = printnum(exp(meta.low.time$ci.ub))
+meta_lowc_ci_mod1 = paste0(meta_est_lowc_mod1, " [",
+                           meta_lwr_lowc_mod1, ", ",
+                           meta_upr_lowc_mod1, "]")
+
+meta_est_hghc_mod1 = printnum(exp(meta.hgh.time$b))
+meta_lwr_hghc_mod1 = printnum(exp(meta.hgh.time$ci.lb))
+meta_upr_hghc_mod1 = printnum(exp(meta.hgh.time$ci.ub))
+meta_hghc_ci_mod1 = paste0(meta_est_hghc_mod1, " [",
+                           meta_lwr_hghc_mod1, ", ",
+                           meta_upr_hghc_mod1, "]")
+
+meta.data.time$study = gsub("LBC", "LBC1936", meta.data.time$study)
+
+#forest plot
+forest(meta.results.time,
+       xlim = c(lower.mod1, upper.mod1),
+       cex = cex.set,
+       slab = meta.data.time$study,
+       transf=exp,
+       refline = 1,
+       ilab = meta.data.time[,c("n", "n_died",
+                                "lowC.CI",
+                                "hghC.CI")],
+       ilab.xpos = pos.mod1)
+
+#additional text
+text(c(pos.mod1), length(study.names)+1.5,
+     c("N", "Died", "-1SD Con", "+1SD Con"), cex = cex.set)
+text((pos.mod1[4]+pos.mod1[5])/2, length(study.names)+2.5,
+     "Neuroticism Hazard Ratio", cex = cex.set)
+text(lower.mod1, length(study.names)+1.5,
+     "Study", cex = cex.set, pos = 4)
+text(upper.mod1, length(study.names)+1.5,
+     "Interaction Hazard Ratio [95% CI]", cex = cex.set, pos=2)
+text(pos.mod1[3:4], -1,
+     c(meta_lowc_ci_mod1, meta_hghc_ci_mod1), cex = cex.set)
+text(lower.mod1, -2, pos=4, cex=cex.set, 
+     bquote(paste("(Q = ",
+     .(formatC(meta.results.time$QE, digits=2, format="f")), ", df = ", .(meta.results.time$k - meta.results.time$p),
+     ", p = ", .(formatC(meta.results.time$QEp, digits=2, format="f")), "; ", I^2, " = ",
+     .(formatC(meta.results.time$I2, digits=1, format="f")), "%)")))
+```

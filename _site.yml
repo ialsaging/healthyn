@@ -3,51 +3,41 @@ output_dir: "."
 navbar:
   title: "PSY 611"
   left:
-    - text: Syllabus
-      href: schedule.html
-    - text: Lectures
+    - text: Mortality
       menu:
-      - text: "1-Introduction"
-        href: "lectures/1-intro.html"
-      - text: "2-Validity"
-        href: "lectures/2-measurement.html"
-      - text: "3-Describing data I"
-        href: "lectures/3-describing_data.html"
-      - text: "4-Describing data II"
-        href: "lectures/4-describing_data.html"
-      - text: "5-Matrix algebra"
-        href: "lectures/5-matrix.html"
-      - text: "6-Probability"
-        href: "lectures/6-probability.html"
-      - text: "7-Binomial"
-        href: "lectures/7-binomial.html"
-      - text: "8-Normal"
-        href: "lectures/8-normal.html"
-      - text: "9-Sampling"
-        href: "lectures/9-sampling.html"
-      - text: "10-Hypothesis testing I"
-        href: "lectures/10-nhst.html"
-      - text: "11-Hypothesis testing II"
-        href: "lectures/11-nhst.html"
-    - text: Labs
-      menu:
-      - text: "Introduction to R and RStudio"
-        href: "labs/lab-1.html"
-      - text: "R Basics and Descriptives"
-        href: "labs/lab-2.html"
-      - text: "Matrix Algebra"
-        href: "labs/lab-3.html"  
-      - text: "Probability Distributions"
-        href: "labs/lab-4.html"  
-      - text: "Data Wrangling"
-        href: "labs/lab-5.html"  
-    - text: Homework
-      href: homework.html
-    - text: Useful Material
-      href: bonus.html
+      - text: "Descriptive statistics"
+        href: "mortality/descriptives.html"
+      - text: "Survival statistics"
+        href: "mortality/survival_stats.html"
+      - text: "Survival since baseline (published)"
+        menu: 
+          - text: "Forest plot of interaction"
+            href: "mortality/meta_time.html"
+          - text: "Main effects of personality"
+            href: "mortality/meta_time_maineffects.html"
+          - text: "Hazard ratio plot"
+            href: "mortality/meta_time_hrPlot.html"
+          - text: "Surival plot"
+            href: "mortality/meta_time_survivalPlot.html"
+          - text: "Moderation by study properties"
+            href: "mortality/moderation.html"
+          - text: "Moderated by gender"
+            href: "mortality/meta_time_gender.html"
+          - text: "Moderated by age"
+            href: "mortality/meta_time_ageinteraction.html"
+          - text: "Power analysis"
+            href: "mortality/power_analysis.html"
+      - text: "Survival by age"
+        menu:
+          - text: "Forest plot of interaction"
+            href: "mortality/meta_age.html"
+          - text: "Hazard ratio plot"
+            href: "mortality/meta_age_hrPlot.html"
+          - text: "Moderated by gender"
+            href: "mortality/meta_age_gender"
   right:
     - icon: fa-github
-      href: https://github.com/uopsych/psy611
+      href: https://github.com/ilsaging/healthyn
 output:
   html_document:
     lib_dir: site_libs

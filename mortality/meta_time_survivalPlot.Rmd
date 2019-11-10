@@ -1,0 +1,71 @@
+---
+title: "Supplementary: Survival plots (time since baseline as metric)"
+output: html_document
+---
+This document contains the survival plots of the surivival models, using time since baseline as the metric of interest and neuroticism by conscientiousness as the predictor of interest.
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+options(knitr.kable.NA = '')
+```
+
+The following packages were used to generate this table: 
+
+```{r load_packages, warning = FALSE, message = FALSE, results = 'hide'}
+library(papaja)
+library(tidyverse)
+library(knitr)
+library(kableExtra)
+```
+
+Specify the location of the study analysis objects. The first author stored these in a Box Sync folder, but you may have downloaded these to a different location. The files needed for this table are available at [osf.io/mzfu9](https://osf.io/mzfu9/) in the Individual Study Output folder.
+
+```{r}
+data.path = c("../study output/")
+```
+
+First we load the individual study analysis objects.
+
+```{r, results = 'hide'}
+study.names = c("EAS", "HRS", "LBC", "LBLS", "MAP", "MAS", "MIDUS", "NAS", "OATS", "ROS", "SLS", "WLS")
+
+lapply(paste0(data.path, study.names, "_survival_output.Rdata"), load, .GlobalEnv)
+```
+
+Next we extract the predicted values from each object.
+
+```{r}
+plottime.s = lapply(paste0(study.names, "_survival_output"), 
+                  FUN = function(x) get(x)$plotdata$time.s) %>%
+  map2_df(., study.names, ~ mutate(.x, study = .y))
+
+plot_n = data.frame(study = study.names,
+                    n = sapply(paste0(study.names, "_survival_output"), 
+                  FUN = function(x) get(x)$time$model2$ntotal))
+
+plottime.s = plottime.s %>%
+  full_join(plot_n)
+```
+
+Finally, we plot individual values, as well as the overall weighted line. 
+
+```{r}
+plottime.s %>%
+  mutate(study = gsub("LBC", "LBC1936", study)) %>%
+  mutate(z.neur = factor(z.neur, levels = c(-1, 1), labels = c("High Neuroticism", "Low Neuroticism")),
+         z.con = factor(z.con, levels = c(-1, 1), labels = c("High Conscientiousness", "Low Conscientiousness"))) %>%
+  ggplot(aes(x = time, y = probability)) +
+  geom_line(aes(color = study), linetype = "dashed") +
+  # stat_smooth(aes(weight = n),
+  #             method = "loess",
+  #             formula = y ~ x,
+  #             se =  TRUE,
+  #             size = 1, color = "black") + 
+  scale_x_continuous("Time (in months since personality assessment)") +
+  scale_y_continuous("Probability of survival") +
+  facet_grid(z.neur~z.con) + 
+  theme_bw() + 
+  theme(legend.position = "bottom")
+```
+
+

@@ -1,0 +1,217 @@
+---
+title: "Power analysis for heterogeneity in meta-analysis"
+output: 
+  html_document:
+    toc: TRUE
+    toc_depth: 2
+    toc_float: TRUE
+    theme: cosmo
+---
+
+This document contains the power analysis for the primary models of interest. For each model, we display the power to detect significant $\tau$ values, or different standard deviations of between-study effects (reported in the metric of odds ratios). We also mark the level of $tau$ estimated by our model and the power to detect this effect. We note here that we are well powered to detect between-study variability that is commonly found in psychology ([van Erp, Verhagen, Grasman, & Wagenmakers, 2017](https://openpsychologydata.metajnl.com/articles/10.5334/jopd.33/)).
+
+Many thanks to Brenton Wiernik, who developed the code to calculate power based on our analyses!
+
+```{r function, echo = F}
+# Based on methods described by Hedges and Pigott, https://doi.org/10.1037/1082-989X.9.4.426, p. 438
+# Written 2019-10-25 by Brenton M. Wiernik
+# Licensed GPL v3.0
+
+power_curve <- function(object, tau, level = .95) {
+  if (! inherits(object, "rma.uni")) stop("'object' must be an object of class 'rma.uni'")
+  tau2 <- tau^2
+  obs_tau2 <- object$tau2
+  obs_tau <- sqrt(obs_tau2)
+  obs_H2 <- object$H2
+  s2 <- obs_tau2 / (obs_H2 - 1)
+  df <- object$k - object$p
+  crit <- qchisq(.95, df)
+  wi <- 1 / object$vi
+  a <- sum(wi) - sum(wi^2) / sum(wi)
+  mu_q <- function(tau2) a * tau2 + df
+  b <- function(tau2) df + 2 * a * tau2 + 
+    (sum(wi^2) - 2 * sum(wi^3) / sum(wi) + 
+       sum(wi^2)^2 / sum(wi)^2) * tau2^2
+  var_q <- function(tau2) 2 * b(tau2)
+  r <- function(tau2) var_q(tau2) / (2 * mu_q(tau2))
+  s <- function(tau2) 2 * mu_q(tau2)^2 / var_q(tau2)
+  H <- function(tau2) pchisq(crit / r(tau2), s(tau2))
+  power <- 1 - H(tau2)
+  out <- list(obs_tau = obs_tau, power = data.frame(tau = tau, power = power))
+  return(out)
+}
+```
+
+```{r load_packages, warning = FALSE, message = FALSE, results = 'hide', echo = F}
+library(tidyverse)
+library(metafor)
+library(papaja)
+library(here)
+```
+
+```{r tau, echo = F}
+tau = seq(0, .5, .01) # possible values of the standard deviation of effect sizes
+```
+
+
+# Neuroticism
+
+```{r neur_main, echo = F}
+load(here("created data/main_effects_neur.Rdata"))
+
+power_neur = power_curve(meta.results.time.neur, tau, level = .95)
+obs = power_curve(meta.results.time.neur, power_neur$obs_tau, level =.95)$power[1,2]
+
+#for which tau are we powered?
+pwr.95=.95
+pwr.99=.99
+tau.95 = which(abs(power_neur$power$power-pwr.95)==min(abs(power_neur$power$power-pwr.95)))
+pwr.95 = power_neur$power$power[tau.95]
+tau.95 = power_neur$power$tau[tau.95]
+tau.99 = which(abs(power_neur$power$power-pwr.99)==min(abs(power_neur$power$power-pwr.99)))
+pwr.99 = power_neur$power$power[tau.99]
+tau.99 = power_neur$power$tau[tau.99]
+
+
+power_neur$power %>%
+  mutate(tau_d = tau/(pi/sqrt(3))) %>%
+  ggplot(aes(x = tau_d, y = power)) +
+  geom_point()+
+  geom_line()+
+  geom_vline(aes(xintercept = power_neur$obs_tau/(pi/sqrt(3))), color = "red") +
+  geom_vline(aes(xintercept = tau.95/(pi/sqrt(3))), color = "red") +
+  geom_vline(aes(xintercept = tau.99/(pi/sqrt(3))), color = "red") +
+  geom_label(aes(x = power_neur$obs_tau, y = obs, 
+                 label = paste("power =", round(obs, 3), 
+                               "\ntau = ", round( power_neur$obs_tau/(pi/sqrt(3)), 3))), hjust = "inward")+
+  geom_label(aes(x = tau.95/(pi/sqrt(3)), y = pwr.95-.3, 
+                 label = paste("power =", round(pwr.95, 3), 
+                               "\ntau = ", round( tau.95/(pi/sqrt(3)), 3))), hjust = "inward")+
+  geom_label(aes(x = tau.99/(pi/sqrt(3)), y = pwr.99-.15, 
+                 label = paste("power =", round(pwr.99, 3), 
+                               "\ntau = ", round( tau.99/(pi/sqrt(3)), 3))), hjust = "inward")+
+  labs(x = "Standard deviation of Risk Ratios between studies", 
+       y = "Power | alpha = .05",
+       title = "Power analyses neuroticism term in mortality models (time since baseline)") +
+  theme_bw()
+```
+
+
+# Conscientiousness
+
+```{r con_main, echo = F}
+load(here("created data/main_effects_con.Rdata"))
+
+power_con = power_curve(meta.results.time.con, tau, level = .95)
+obs = power_curve(meta.results.time.con, power_con$obs_tau, level =.95)$power[1,2]
+
+#for which tau are we powered?
+pwr.95=.95
+pwr.99=.99
+tau.95 = which(abs(power_con$power$power-pwr.95)==min(abs(power_con$power$power-pwr.95)))
+pwr.95 = power_con$power$power[tau.95]
+tau.95 = power_con$power$tau[tau.95]
+tau.99 = which(abs(power_con$power$power-pwr.99)==min(abs(power_con$power$power-pwr.99)))
+pwr.99 = power_con$power$power[tau.99]
+tau.99 = power_con$power$tau[tau.99]
+
+
+power_con$power %>%
+  mutate(tau_d = tau/(pi/sqrt(3))) %>%
+  ggplot(aes(x = tau_d, y = power)) +
+  geom_point()+
+  geom_line()+
+  geom_vline(aes(xintercept = power_con$obs_tau/(pi/sqrt(3))), color = "red") +
+  geom_vline(aes(xintercept = tau.95/(pi/sqrt(3))), color = "red") +
+  geom_vline(aes(xintercept = tau.99/(pi/sqrt(3))), color = "red") +
+  geom_label(aes(x = power_con$obs_tau/(pi/sqrt(3)), y = obs, 
+                 label = paste("power =", round(obs, 3), 
+                               "\ntau = ", round( power_con$obs_tau/(pi/sqrt(3)), 3))), hjust = "inward")+
+  geom_label(aes(x = tau.95/(pi/sqrt(3)), y = pwr.95-.15, 
+                 label = paste("power =", round(pwr.95, 3), 
+                               "\ntau = ", round( tau.95/(pi/sqrt(3)), 3))), hjust = "inward")+
+  geom_label(aes(x = tau.99/(pi/sqrt(3)), y = pwr.99-.05, 
+                 label = paste("power =", round(pwr.99, 3), 
+                               "\ntau = ", round( tau.99/(pi/sqrt(3)), 3))), hjust = "inward")+
+  labs(x = "Standard deviation of Risk Ratios between studies", 
+       y = "Power | alpha = .05",
+       title = "Power analyses heteroconscientiousness term in mortality models (time since baseline)") +
+  theme_bw()
+```
+
+# Interaction
+
+```{r interaction, echo = F}
+load(here("created data/meta_time.Rdata"))
+
+power_mortality = power_curve(meta.results.time, tau, level = .95)
+obs = power_curve(meta.results.time, power_mortality$obs_tau, level =.95)$power[1,2]
+
+#for which tau are we powered?
+pwr.95=.95
+pwr.99=.99
+tau.95 = which(abs(power_mortality$power$power-pwr.95)==min(abs(power_mortality$power$power-pwr.95)))
+pwr.95 = power_mortality$power$power[tau.95]
+tau.95 = power_mortality$power$tau[tau.95]
+tau.99 = which(abs(power_mortality$power$power-pwr.99)==min(abs(power_mortality$power$power-pwr.99)))
+pwr.99 = power_mortality$power$power[tau.99]
+tau.99 = power_mortality$power$tau[tau.99]
+
+power_mortality$power %>%
+  mutate(tau_d = tau/(pi/sqrt(3))) %>%
+  ggplot(aes(x = tau_d, y = power)) +
+  geom_point()+
+  geom_line()+
+  geom_vline(aes(xintercept = power_mortality$obs_tau/(pi/sqrt(3))), color = "red") +
+  geom_vline(aes(xintercept = tau.95/(pi/sqrt(3))), color = "red") +
+  geom_vline(aes(xintercept = tau.99/(pi/sqrt(3))), color = "red") +
+  geom_label(aes(x = power_mortality$obs_tau/(pi/sqrt(3)), y = obs, 
+                 label = paste("power =", round(obs, 3), 
+                               "\ntau = ", round( power_mortality$obs_tau/(pi/sqrt(3)), 3))), hjust = "inward")+
+  geom_label(aes(x = tau.95/(pi/sqrt(3)), y = pwr.95-.3, 
+                 label = paste("power =", round(pwr.95, 3), 
+                               "\ntau = ", round(tau.95/(pi/sqrt(3)), 3))), hjust = "inward")+
+  geom_label(aes(x = tau.99/(pi/sqrt(3)), y = pwr.99-.15, 
+                 label = paste("power =", round(pwr.99, 3), 
+                               "\ntau = ", round( tau.99/(pi/sqrt(3)), 3))), hjust = "inward")+
+  labs(x = "Standard deviation of Risk Ratios between studies", 
+       y = "Power | alpha = .05",
+       title = "Power analyses interaction term in mortality models (time since baseline)") +
+  theme_bw()
+```
+
+# Code
+
+## Packages
+
+```{r ref.label="load_packages"}
+```
+
+## Function
+
+```{r, ref.label="function", eval = F}
+```
+
+We set the following vector of $\tau$ values to estimate.
+
+```{r, ref.label="tau", eval = F}
+```
+
+## Main effect: neuroticism
+
+```{r, ref.label="neur_main"}
+```
+
+
+## Main effect: concsientiousness
+
+```{r, ref.label="con_main"}
+```
+
+## Interaction
+
+```{r, ref.label="interaction"}
+```
+
+
+
