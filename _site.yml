@@ -1,7 +1,7 @@
-name: Data Analysis I
+name: Healthy Neuroticism
 output_dir: "."
 navbar:
-  title: "PSY 611"
+  title: "IALSA: Healthy Neuroticism"
   left:
     - text: Mortality
       menu:
