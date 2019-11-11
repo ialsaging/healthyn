@@ -1,0 +1,286 @@
+---
+title: 'Regression results for physical activity status'
+output: 
+  html_document:
+    toc: TRUE
+    toc_depth: 2
+    toc_float: TRUE
+    theme: cosmo
+---
+
+This document contains the summaries of the regression analyses with smoking status as the outcome and all covariates included. We provide the code used to generate this table, which calls upon our analysis summary objects (also provided).
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+options(knitr.kable.NA = '')
+```
+
+```{r load_packages, warning = FALSE, message = FALSE, results = 'hide', echo = F}
+library(papaja)
+library(tidyverse)
+library(tools)
+library(psych)
+library(knitr)
+library(kableExtra)
+library(here)
+```
+
+```{r load_data, results='hide', echo = F}
+study.names = c("BASEII", "EAS","ELSA", "HRS", "ILSE", "LBC",
+                "LBLS", "MAP", "MAS","MIDUS","NAS", "OATS", 
+                "ROS","SLS","WLS")
+
+lapply(here(paste0(study.names, "_behavior.Rdata")), load, .GlobalEnv)
+```
+
+
+```{r identify, echo = F}
+#identify which studies have active outcome
+active.names = lapply(paste0(study.names,"_behavior"), 
+                      FUN = function(x) rownames(get(x)$descriptives))
+active.names = sapply(active.names, FUN = function(x) "active" %in% x)
+active.names = study.names[active.names]
+```
+
+```{r columns, echo = F}
+columns = unite(
+  expand.grid(stat = c("estimate", "std.error", "OR", "statistic", "p.value"),
+              study = active.names),
+  columns, study, stat, sep="_")$columns
+```
+
+```{r header, echo = F}
+header = c(" " = 1, "BASEII" = 5, "EAS" = 5, "ELSA" = 5, "HRS" = 5, "ILSE" = 5, 
+           "LBLS" = 5, "LBC" = 5, "MAP" = 5, "MAS" = 5, "MIDUS" = 5, "NAS" = 5, "OATS" = 5,  
+           "ROS" = 5, "SLS" = 5, "WLS" = 5)
+```
+
+# Main Effects
+
+```{r main, message = FALSE, warning = FALSE, results='asis', echo = F}
+#sample size
+active.n = data.frame(study = active.names, 
+                      term = "N", estimate = 
+                        sapply(X = active.names, FUN = function(x)
+                          get(paste0(x,"_behavior"))$regression$main$active$n)) %>%
+  mutate(study = paste0(study, "_estimate")) %>%
+  spread(key = "study", value = "estimate")
+
+lapply(X = active.names, FUN = function(x) get(paste0(x,"_behavior"))$regression$main$active$coef) %>%
+  map2_df(., active.names, ~ mutate(.x, study = .y)) %>%
+  mutate(OR = exp(estimate)) %>%
+  gather(key = "key", value = "value", -study, -term) %>%
+  unite(study_stat, study, key, sep="_") %>%
+  filter(!is.infinite(value)) %>%
+  spread(key = "study_stat", value = "value") %>%
+  gather(key = "key", value = "value", which(grepl("p", names(.)))) %>%
+  mutate(sig = value, 
+    value = printp(value),
+    value = cell_spec(value, "html", 
+                      color = ifelse(sig >= .05 | is.na(sig), 
+                                     "black", "red"))) %>%
+    filter(!grepl("NA", value))%>%
+    dplyr::select(-sig) %>%
+    spread(key = "key", value = "value") %>%
+    full_join(active.n) %>%
+    mutate(term = gsub("\\(", "", term), 
+           term = gsub("\\)", "", term),
+           term = toTitleCase(term),
+           term = gsub("\\:", " x ", term), 
+          term = factor(term, 
+                         levels = c("Intercept", "Age", "Gender", "Edu", "Agree", "Extra", "Open", 
+                                    "Neur", "Con", "Neur x con", "N"))) %>%
+    arrange(term) %>%
+    dplyr::select(term, columns) %>%
+    kable(.,  booktabs = T, escape = F, digits = 2, format = "html", 
+          align=c(rep('c',times=ncol(.))),
+          col.names = c("Term", rep(c("Est","SE","OR", "t value", "p"), length(active.names)))) %>%
+    kable_styling("bordered", full_width = TRUE) %>%
+  add_header_above(header = header) 
+```
+
+# Interaction, no covariates
+
+
+```{r interaction, message = FALSE, warning = FALSE, results='asis', echo = F}
+#sample size
+active.n = data.frame(study = active.names, 
+                      term = "N", estimate = 
+                        sapply(X = active.names, FUN = function(x)
+                          get(paste0(x,"_behavior"))$regression$intr$active$n)) %>%
+  mutate(study = paste0(study, "_estimate")) %>%
+  spread(key = "study", value = "estimate")
+
+lapply(X = active.names, FUN = function(x) get(paste0(x,"_behavior"))$regression$intr$active$coef) %>%
+  map2_df(., active.names, ~ mutate(.x, study = .y)) %>%
+  mutate(OR = exp(estimate)) %>%
+  gather(key = "key", value = "value", -study, -term) %>%
+  unite(study_stat, study, key, sep="_") %>%
+  filter(!is.infinite(value)) %>%
+  spread(key = "study_stat", value = "value") %>%
+  gather(key = "key", value = "value", which(grepl("p", names(.)))) %>%
+  mutate(sig = value, 
+    value = printp(value),
+    value = cell_spec(value, "html", 
+                      color = ifelse(sig >= .05 | is.na(sig), 
+                                     "black", "red"))) %>%
+    filter(!grepl("NA", value))%>%
+    dplyr::select(-sig) %>%
+    spread(key = "key", value = "value") %>%
+    full_join(active.n) %>%
+    mutate(term = gsub("\\(", "", term), 
+           term = gsub("\\)", "", term),
+           term = toTitleCase(term),
+           term = gsub("\\:", " x ", term), 
+           term = factor(term, 
+                       levels = c("Intercept", "Age", "Gender", "Edu", "Agree", "Extra", "Open", 
+                                  "Neur", "Con", "Neur x con", "N"))) %>%
+  arrange(term) %>%
+  dplyr::select(term, columns) %>%
+  kable(.,  booktabs = T, escape = F, digits = 2, format = "html", 
+        align=c(rep('c',times=ncol(.))),
+        col.names = c("Term", rep(c("Est","SE","OR", "t value", "p"), length(active.names)))) %>%
+  kable_styling("bordered", full_width = TRUE) %>%
+add_header_above(header = header) 
+```
+
+# Interaction, demographics
+
+```{r demo, message = FALSE, warning = FALSE, results='asis', echo = F}
+#sample size
+active.n = data.frame(study = active.names, 
+                      term = "N", estimate = 
+                        sapply(X = active.names, FUN = function(x)
+                          get(paste0(x,"_behavior"))$regression$cov1$active$n)) %>%
+  mutate(study = paste0(study, "_estimate")) %>%
+  spread(key = "study", value = "estimate")
+
+lapply(X = active.names, FUN = function(x) get(paste0(x,"_behavior"))$regression$cov1$active$coef) %>%
+  map2_df(., active.names, ~ mutate(.x, study = .y)) %>%
+  mutate(OR = exp(estimate)) %>%
+  gather(key = "key", value = "value", -study, -term) %>%
+  unite(study_stat, study, key, sep="_") %>%
+  filter(!is.infinite(value)) %>%
+  spread(key = "study_stat", value = "value") %>%
+  gather(key = "key", value = "value", which(grepl("p", names(.)))) %>%
+  filter(!is.na(value)) %>%
+  mutate(sig = value, 
+    value = printp(value),
+    value = cell_spec(value, "html", 
+                      color = ifelse(sig >= .05 | is.na(sig), 
+                                     "black", "red"))) %>%
+    filter(!grepl("NA", value))%>%
+    dplyr::select(-sig) %>%
+    spread(key = "key", value = "value") %>%
+    full_join(active.n) %>%
+    mutate(term = gsub("\\(", "", term), 
+           term = gsub("\\)", "", term),
+           term = toTitleCase(term),
+           term = gsub("\\:", " x ", term), 
+           term = factor(term, 
+                         levels = c("Intercept", "Age", "Gender", "Edu", "Agree", "Extra", "Open", 
+                                    "Neur", "Con", "Neur x con", "N"))) %>%
+    arrange(term) %>%
+    dplyr::select(term, columns) %>%
+    kable(.,  booktabs = T, escape = F, digits = 2, format = "html", 
+          align=c(rep('c',times=ncol(.))),
+          col.names = c("Term", rep(c("Est","SE","OR", "t value", "p"), length(active.names)))) %>%
+    kable_styling("bordered", full_width = TRUE) %>%
+  add_header_above(header = header)  
+```
+
+# Interaction, all covariates
+
+```{r all_cov, message = FALSE, warning = FALSE, results='asis', echo = F}
+#sample size
+active.n = data.frame(study = active.names, 
+                      term = "N", estimate = 
+                        sapply(X = active.names, FUN = function(x)
+                          get(paste0(x,"_behavior"))$regression$cov2$active$n)) %>%
+  mutate(study = paste0(study, "_estimate")) %>%
+  spread(key = "study", value = "estimate")
+
+lapply(X = active.names, FUN = function(x) get(paste0(x,"_behavior"))$regression$cov2$active$coef) %>%
+  map2_df(., active.names, ~ mutate(.x, study = .y)) %>%
+  mutate(OR = exp(estimate)) %>%
+  gather(key = "key", value = "value", -study, -term) %>%
+  unite(study_stat, study, key, sep="_") %>%
+  filter(!is.infinite(value)) %>%
+  spread(key = "study_stat", value = "value") %>%
+  gather(key = "key", value = "value", which(grepl("p", names(.)))) %>%
+  filter(!is.na(value)) %>%
+  mutate(sig = value, 
+    value = printp(value),
+    value = cell_spec(value, "html", 
+                      color = ifelse(sig >= .05 | is.na(sig), 
+                                     "black", "red"))) %>%
+  filter(!grepl("NA", value)) %>%
+  dplyr::select(-sig) %>%
+  spread(key = "key", value = "value") %>%
+  full_join(active.n) %>%
+  mutate(term = gsub("\\(", "", term), 
+         term = gsub("\\)", "", term),
+         term = toTitleCase(term),
+         term = gsub("\\:", " x ", term), 
+         term = factor(term, 
+                       levels = c("Intercept", "Age", "Gender", "Edu", "Agree", "Extra", "Open", 
+                                  "Neur", "Con", "Neur x con", "N"))) %>%
+  arrange(term) %>%
+  dplyr::select(term, columns) %>%
+  kable(.,  booktabs = T, escape = F, digits = 2, format = "html", 
+        align=c(rep('c',times=ncol(.))),
+        col.names = c("Term", rep(c("Est","SE","OR", "t value", "p"), length(active.names)))) %>%
+  kable_styling("bordered", full_width = TRUE) %>%
+add_header_above(header = header) 
+```
+
+
+# Code
+
+## Preparation 
+The following packages were used to generate this table: 
+
+```{r ref.label = "load_packages", warning = FALSE, message = FALSE, results = 'hide', eval = F}
+```
+
+Specify the location of the study analysis objects. The first author stored these in a Box Sync folder, but you may have downloaded these to a different location. The files needed for this table are available at [osf.io/mzfu9](https://osf.io/mzfu9/) in the Individual Study Output folder.
+
+
+First we load the individual study analysis objects.
+
+```{r ref.label = "load_data", results='hide', eval = F}
+```
+
+Then we identify which studies have physical activity as an outcome.
+
+```{r ref.label = "identify", eval = F}
+```
+
+```{r ref.label = "columns", eval = F}
+```
+
+```{r ref.label = "header", eval = F}
+```
+
+## Main Effects
+
+```{r ref.label = "main", message = FALSE, warning = FALSE, results='asis', eval = F}
+```
+
+## Interaction, no covariates
+
+
+```{r ref.label = "interaction", message = FALSE, warning = FALSE, results='asis', eval = F}
+```
+
+## Interaction, demographics
+
+```{r ref.label = "demo", message = FALSE, warning = FALSE, results='asis', eval = F}
+```
+
+## Interaction, all covariates
+
+```{r ref.label = "all_cov", message = FALSE, warning = FALSE, results='asis', eval = F}
+```
+
+

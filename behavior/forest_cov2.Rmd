@@ -1,0 +1,259 @@
+---
+title: 'Forest Plot of interaction term (controlling for all covariates)'
+output: 
+  html_document:
+    toc: TRUE
+    toc_depth: 2
+    toc_float: TRUE
+    theme: cosmo
+---
+
+This document contains the forest plot summarizing the cross-sectional analyses described in the manuscript. 
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+options(knitr.kable.NA = '')
+```
+
+```{r load_packages, warning = FALSE, message = FALSE, results = 'hide', echo = F}
+library(tidyverse)
+library(metafor)
+library(papaja)
+library(here)
+```
+
+```{r load_data, echo = F}
+load(here("created data/meta_smoker_cov2.Rdata"))
+load(here("created data/meta_drinker_cov2.Rdata"))
+load(here("created data/meta_active_cov2.Rdata"))
+```
+
+```{r merge, warning = F, message = F, echo = F}
+smoker.cov2.data <- smoker.cov2.data %>%
+  mutate(outcome = "smoker")
+
+drinker.cov2.data <- drinker.cov2.data %>%
+  mutate(outcome = "drinker")
+
+active.cov2.data <- active.cov2.data %>%
+  mutate(outcome = "active")
+
+data_cov2_all <- smoker.cov2.data %>%
+  full_join(drinker.cov2.data) %>%
+  full_join(active.cov2.data) %>%
+  mutate(n = printnum(n)) #format as integer with commas
+```
+
+```{r print, echo = F}
+smoker.lowc.weighted = paste0(printnum(exp(smoker.cov2_lowc.rma$b)), " [", 
+                              printnum(exp(smoker.cov2_lowc.rma$ci.lb)), ", ",
+                              printnum(exp(smoker.cov2_lowc.rma$ci.ub)), "]")
+smoker.hghc.weighted = paste0(printnum(exp(smoker.cov2_hghc.rma$b)), " [", 
+                              printnum(exp(smoker.cov2_hghc.rma$ci.lb)), ", ",
+                              printnum(exp(smoker.cov2_hghc.rma$ci.ub)), "]")
+
+drinker.lowc.weighted = paste0(printnum(exp(drinker.cov2_lowc.rma$b)), " [", 
+                              printnum(exp(drinker.cov2_lowc.rma$ci.lb)), ", ",
+                              printnum(exp(drinker.cov2_lowc.rma$ci.ub)), "]")
+drinker.hghc.weighted = paste0(printnum(exp(drinker.cov2_hghc.rma$b)), " [", 
+                              printnum(exp(drinker.cov2_hghc.rma$ci.lb)), ", ",
+                              printnum(exp(drinker.cov2_hghc.rma$ci.ub)), "]")
+
+active.lowc.weighted = paste0(printnum(exp(active.cov2_lowc.rma$b)), " [", 
+                              printnum(exp(active.cov2_lowc.rma$ci.lb)), ", ",
+                              printnum(exp(active.cov2_lowc.rma$ci.ub)), "]")
+active.hghc.weighted = paste0(printnum(exp(active.cov2_hghc.rma$b)), " [", 
+                              printnum(exp(active.cov2_hghc.rma$ci.lb)), ", ",
+                              printnum(exp(active.cov2_hghc.rma$ci.ub)), "]")
+```
+
+
+```{r bounds, echo = F}
+  # find maximum upper bound of confidence intervals
+max.ci.cov2 = max(exp(data_cov2_all$centered_estimate + 1.96*data_cov2_all$centered_std.error))
+  # find minimum lower bound of confidence intervals
+min.ci.cov2 = min(exp(data_cov2_all$centered_estimate - 1.96*data_cov2_all$centered_std.error))
+
+range.cov2 = max.ci.cov2-min.ci.cov2
+
+#give some space on either side. These are the plot bounds
+lower.cov2 = min.ci.cov2-(range.cov2*2.5) 
+upper.cov2 = max.ci.cov2+(range.cov2)
+
+#estimate position of extra information
+lower.cov2 = min.ci.cov2-(range.cov2*2.5)
+upper.cov2 = max.ci.cov2+(range.cov2*.75)
+
+#estimate position of extra information
+  # range of space between left side of plot and lowerbound of confidence intervals
+pos.cov2 = min.ci.cov2-lower.cov2
+  # break that into equal sections. I find that 11 works for one column of sample
+  # sizes and two columns of estimates and confidence intervals
+pos.cov2 = pos.cov2/11
+  #use the sections for figure out where you want each column to be in that space
+pos.cov2 = c(lower.cov2+3*pos.cov2,
+             lower.cov2+6*pos.cov2,
+             lower.cov2+9*pos.cov2)
+```
+
+```{r rows, echo = F}
+extra.space = 5
+
+# which rows are for active disease
+total.active = nrow(active.cov2.data)
+rows.active = c(1, total.active)
+
+# which rows are for drinker
+total.drinker = nrow(drinker.cov2.data)
+# skip row for drinker summary, space, and active title
+rows.drinker = c(rows.active[2] + extra.space, rows.active[2] + extra.space + total.drinker - 1)
+
+# which rows are for highblood pressure
+total.smoker = nrow(smoker.cov2.data)
+# skip row for smoker summary, space, title
+rows.smoker = c(rows.drinker[2] + extra.space, rows.drinker[2] + extra.space + total.smoker - 1)
+```
+
+```{r paraemters, echo = F}
+cex.value = .65
+par(font = 1)
+```
+
+```{r forest, fig.height = 9, fig.width = 7, echo = F}
+forest(data_cov2_all$centered_estimate, #estimate
+       data_cov2_all$centered_std.error^2, #variance
+       xlim = c(lower.cov2, upper.cov2-3), #limits of x-axis, full figure
+       alim = c(floor(min.ci.cov2), ceiling(max.ci.cov2)-3),
+       ylim = c(-1, nrow(data_cov2_all) + extra.space*2 + 2), # limits of y-axis
+       cex = cex.value, #font size
+       slab = data_cov2_all$study, #study label
+       transf=exp, #transformation to estimates (takes from log odds to odds ratio)
+       refline = 1, # where is the vertical line representing the null?
+       # which rows do I fill in. Remember, data frame goes from top to bottom, but row numbers on 
+       # figure go from bottom to top
+       rows = c(rows.smoker[2]:rows.smoker[1], 
+                rows.drinker[2]:rows.drinker[1],
+                rows.active[2]:rows.active[1]),
+       # what extra information is added?
+       ilab = data_cov2_all[,c("n", "lowc_OR", "hghc_OR")],
+       # where does extra information go?
+       ilab.xpos = pos.cov2)
+
+# add weighted average effects polygon
+addpoly(smoker.cov2.rma, row=rows.smoker[1]-1, cex = cex.value, transf = exp, mlab = "", col = "blue")
+addpoly(drinker.cov2.rma, row=rows.drinker[1]-1, cex = cex.value, transf = exp, mlab = "", col = "blue")
+addpoly(active.cov2.rma, row=rows.active[1]-1, cex = cex.value, transf = exp, mlab = "", col = "blue")
+
+### add text with Q-value, dfs, p-value, and I^2 statistic for subgroups
+text(x = lower.cov2, y = rows.smoker[1]-2.25, pos=4, cex = cex.value,
+     bquote(paste("RE Model for smoking status analyses (Q = ",
+                  .(formatC(smoker.cov2.rma$QE, digits=2, format="f")),
+                  ", df = ", .(smoker.cov2.rma$k - smoker.cov2.rma$p),
+                  ", p = ", .(formatC(smoker.cov2.rma$QEp, digits=2, format="f")), "; ", I^2, " = ",
+                  .(formatC(smoker.cov2.rma$I2, digits=1, format="f")), "%)")))
+text(x = lower.cov2, y = rows.drinker[1]-2.25, pos=4, cex = cex.value,
+     bquote(paste("RE Model for alcoholic consumption analyses (Q = ",
+                  .(formatC(drinker.cov2.rma$QE, digits=2, format="f")),
+                  ", df = ", .(drinker.cov2.rma$k - drinker.cov2.rma$p),
+                  ", p = ", .(formatC(drinker.cov2.rma$QEp, digits=2, format="f")), "; ", I^2, " = ",
+                  .(formatC(drinker.cov2.rma$I2, digits=1, format="f")), "%)")))
+text(x = lower.cov2, y = rows.active[1]-2.25, pos=4, cex = cex.value,
+     bquote(paste("RE Model for physical activity analyses (Q = ",
+                  .(formatC(active.cov2.rma$QE, digits=2, format="f")),
+                  ", df = ", .(active.cov2.rma$k - active.cov2.rma$p),
+                  ", p = ", .(formatC(active.cov2.rma$QEp, digits=2, format="f")), "; ", I^2, " = ",
+                  .(formatC(active.cov2.rma$I2, digits=1, format="f")), "%)")))
+
+#bold font
+par(font = 2)
+
+# add "overall"" label to each set of analyses
+text(lower.cov2, y = c(rows.smoker[1]-1, rows.drinker[1]-1, rows.active[1]-1), pos = 4, cex = cex.value, "Overall")
+
+# add overall sample sizes for each set of analyses
+text(x = pos.cov2[1], y = rows.smoker[1]-1, cex = cex.value, printnum(sum(smoker.cov2.data$n)))
+text(x = pos.cov2[1], y = rows.drinker[1]-1, cex = cex.value, printnum(sum(drinker.cov2.data$n)))
+text(x = pos.cov2[1], y = rows.active[1]-1, cex = cex.value, printnum(sum(active.cov2.data$n)))
+
+# add weighted average simple slopes for each set of analyses
+text(x = pos.cov2[2], y = rows.smoker[1]-1, cex = cex.value, smoker.lowc.weighted)
+text(x = pos.cov2[2], y = rows.drinker[1]-1, cex = cex.value, drinker.lowc.weighted)
+text(x = pos.cov2[2], y = rows.active[1]-1, cex = cex.value, active.lowc.weighted)
+
+text(x = pos.cov2[3], y = rows.smoker[1]-1, cex = cex.value, smoker.hghc.weighted)
+text(x = pos.cov2[3], y = rows.drinker[1]-1, cex = cex.value, drinker.hghc.weighted)
+text(x = pos.cov2[3], y = rows.active[1]-1, cex = cex.value, active.hghc.weighted)
+
+# column labels
+text(lower.cov2, nrow(data_cov2_all) + extra.space*2 + 1,
+     "Study", cex = cex.value, pos = 4)
+text(upper.cov2, nrow(data_cov2_all) + extra.space*2 + 1,
+     "Interaction Coefficient Odds Ratio [95% CI]", cex = cex.value, pos=2)
+text(pos.cov2[1], nrow(data_cov2_all) + extra.space*2 + 1,
+     "Sample Size", cex = cex.value)
+text(pos.cov2[2], nrow(data_cov2_all) + extra.space*2 + 1,
+     "-1SD Con", cex = cex.value)
+text(pos.cov2[3], nrow(data_cov2_all) + extra.space*2 + 1,
+     "+1SD Con", cex = cex.value)
+text((pos.cov2[2]+pos.cov2[3])/2, nrow(data_cov2_all) + extra.space*2 + 2,
+     "Neuroticism Coefficient", cex = cex.value)
+
+#bold and italic font, plus bigger text
+par(font = 4)
+
+# outcome labels
+text(lower.cov2, rows.smoker[2] + 1,
+     "Smoking Status", cex = cex.value, pos = 4)
+text(lower.cov2, rows.drinker[2] + 1,
+     "Alcohol Consumption", cex = cex.value, pos = 4)
+text(lower.cov2, rows.active[2] + 1,
+     "Physical Activity", cex = cex.value, pos = 4)
+```
+
+# Code
+
+The following packages were used to generate this figure: 
+
+```{r ref.label = "load_packages", warning = FALSE, message = FALSE, results = 'hide', eval= F}
+```
+
+The files needed for this table are available at [osf.io/mzfu9](https://osf.io/mzfu9/) in the Meta Analysis Output folder.
+
+First we load the meta-analysis objects. As we load them in, we rename some of the objects (as they were given the same name during creation).
+
+```{r ref.label = "load_data", eval= F}
+```
+
+The data frames contain the estimates and standard errors for each study, as well as confidence intervals. We bind these into a single large data frame.
+
+```{r ref.label = "merge", warning = F, message = F, eval= F}
+```
+
+We use results of meta-analysis of simple slopes to create objects for the weighted average results.
+
+```{r ref.label = "print", eval= F}
+```
+
+
+Next we calculate the bounds of the figure (along the x-axis), based on the data we know will be plotted. Then we use the known bounds to point to where we want the extra information. For this figure, extra information is the sample size, the estimate and confidence interval of the simple slopes of neuroticism at ±1SD conscientiousness. 
+
+```{r ref.label = "bounds", eval= F}
+```
+
+Now we calculated the needed space along the y-axis. First we determine how many extra rows we need between each "set" of analyses (in this case, between each chronic condition). We need two extra rows for specific information: the weighted average estimates and a label. From there, I added extra rows until the figure looked appealing. I ended up with 5 extra rows.
+
+From there, I figure out which rows will be filled with each set of analyses. It's important to remember that rows start from the bottom and as you move up the figure, the row number increases. 
+
+```{r ref.label = "rows", eval= F}
+```
+
+The last step before beginning the plot is to set the font size and formatting. `font = 1` is the non-bold, non-italic font.
+
+```{r ref.label = "paraemters", eval= F}
+```
+
+The final chunck builds the forest plot. Comments are included throughout as a guide.
+
+```{r ref.label = "forest", fig.height = 9, fig.width = 7, eval= F}
+```
+

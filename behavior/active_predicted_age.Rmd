@@ -1,0 +1,61 @@
+---
+title: 'Predicted Values: Physical activity status (age interaction)'
+output: 
+  html_document:
+    toc: TRUE
+    toc_depth: 2
+    toc_float: TRUE
+    theme: cosmo
+---
+
+This document contains the plot of predicted probabilities from each individual study, as well as the weighted average effect, from the three-way interaction of neuroticism by conscientiousness by age.
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+options(knitr.kable.NA = '')
+```
+
+```{r load_packages, warning = FALSE, message = FALSE, results = 'hide', echo = F}
+library(tidyverse)
+library(metafor)
+library(here)
+```
+
+```{r load_data, echo = F}
+load(here("created data/plot_active_age.Rdata"))
+```
+
+```{r plot, fig.height= 9, echo = F}
+active.plot.age %>%
+  ggplot(aes(x = x, y = predicted)) +
+  geom_ribbon(aes(ymin=lower, ymax=upper), fill="black", alpha=.15,
+              data = weighted.vals.age)+
+  geom_line(aes(color = study), lty="dashed") +
+  geom_line(data = weighted.vals.age, color="black") +
+  scale_x_continuous("Neuroticism")+
+  scale_y_continuous("Probability of \n being currently active") +
+  facet_grid(facet~group)+
+  theme_minimal()+
+  theme(legend.position = "bottom")
+
+```
+
+# Code
+
+The following packages were used to generate this figure: 
+
+```{r ref.label = "load_packages", warning = FALSE, message = FALSE, results = 'hide', eval = F}
+```
+
+The files needed for this table are available at [osf.io/mzfu9](https://osf.io/mzfu9/) in the Meta Analysis Output folder.
+
+First we load the meta-analysis objects. To see how these objects were created, see the meta-analysis scripts titled XXXXX that are available at [osf.io/XXXX](https://osf.io/XXXX/).
+
+```{r ref.label = "load_data", eval = F}
+```
+
+We plot the values.
+
+```{r ref.label = "plot", fig.height= 9, eval = F}
+```
+

@@ -1,0 +1,67 @@
+---
+title: 'Personality Moderation of Physical Activity Models'
+output: 
+  html_document:
+    toc: TRUE
+    toc_depth: 2
+    toc_float: TRUE
+    theme: cosmo
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+options(knitr.kable.NA = '')
+```
+
+The following packages were used to generate this figure: 
+
+```{r load_packages, warning = FALSE, message = FALSE, results = 'hide', echo = F}
+library(papaja)
+library(tidyverse)
+library(knitr)
+library(kableExtra)
+library(here)
+```
+
+
+```{r load_data, echo = F}
+load(here("created data/mods_active.Rdata"))
+```
+
+```{r table, echo = F}
+rows = length(unique(active.mods$names))
+
+active.mods %>%
+  dplyr::select(-model) %>%
+  mutate(pval = printp(pval),
+         names = gsub("intrcpt", "reference (NEO-FFI)", names),
+         names = gsub("personality", "", names), 
+         names = ifelse(names == "", "IPIP or Goldberg", names)) %>%
+  kable(., booktabs = TRUE, escape = FALSE, digits = 2, 
+        col.names = c("Scale", "b", "SE", "CI lower", "CI upper", "Z", "p")) %>%
+  kable_styling() %>%
+  group_rows("Neuroticism main effect", 1, rows) %>%
+  group_rows("Conscientiousness main effect", 1+rows, rows*2) %>%
+  group_rows("Neuroticism x Conscientiousness (no covariates)", 1+rows*2, rows*3) %>%
+  group_rows("Neuroticism x Conscientiousness (demographic covariates)", 1+rows*3, rows*4) %>%
+  group_rows("Neuroticism x Conscientiousness (demographic and personality covariates)", 1+rows*4, rows*5) %>%
+  group_rows("Age x Neuroticism x Conscientiousness", 1+rows*5, rows*6) 
+```
+
+
+# Code
+
+The following packages were used to generate this figure: 
+
+```{r ref.label = "load_packages", warning = FALSE, message = FALSE, results = 'hide', eval = F}
+```
+
+
+```{r ref.label = "load_data", eval = F}
+```
+
+```{r ref.label = "table", eval = F}
+```
+
+

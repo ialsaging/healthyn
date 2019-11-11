@@ -1,0 +1,142 @@
+---
+title: "Descriptive Statistics"
+output: 
+  html_document:
+    toc: TRUE
+    toc_depth: 2
+    toc_float: TRUE
+    theme: cosmo
+---
+
+This document contains the descriptive statistics (number of non-missing observations, mean, standard deviation, minimum value, maximum value and internal reliablity, where relevant) of the variables used in the current coordinated analyses. We provide the code used to generate this table, which calls upon our analysis summary objects (also provided).
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+options(knitr.kable.NA = '')
+```
+
+
+```{r load_packages, warning = FALSE, message = FALSE, results = 'hide', echo = F}
+library(papaja)
+library(tidyverse)
+library(knitr)
+library(kableExtra)
+library(here)
+```
+
+
+```{r load_data, results='hide', echo = F}
+study.names = c("BASEII", "EAS","ELSA", "HRS", "ILSE", "LBC",
+                "LBLS", "MAP", "MAS","MIDUS","NAS", "OATS", 
+                "ROS","SLS","WLS")
+
+lapply(here(paste0( study.names, "_behavior.Rdata")), load, .GlobalEnv)
+```
+
+
+```{r reliability, echo = F}
+alpha.list <- data.frame()
+n = 0
+for(i in study.names){
+  n = n+1
+  x = get(paste0(i,"_behavior")) # get output object
+  if(!is.null(x$alpha)){
+    y = as.data.frame(unlist(x$alpha))
+    y$study = i
+    alpha.list = rbind(alpha.list, y)
+  }
+}
+```
+
+
+```{r unlist, echo = F}
+alpha.list <- alpha.list %>%
+  mutate(var = rownames(.),
+         var = gsub("[0-9]", "", var)) %>%
+  separate(var, into = c("statistic", "var")) %>%
+  spread(key = statistic, value = `unlist(x$alpha)`)
+```
+
+
+```{r describe, message = FALSE, echo = F}
+describe.df = lapply(X = study.names, FUN = function(x) get(paste0(x,"_behavior"))$descriptives) %>%
+  map2_df(., study.names, ~ mutate(.x, study = .y, var = rownames(.x))) %>%
+  # join the descriptives to the data set containing the reliability statistics
+  full_join(alpha.list) %>%
+  # select the columns we want to include in the table
+  dplyr::select(study, var, n, mean, sd, min, max, alpha) %>%
+  # select rows representing variables used in analyses
+  filter(var %in% c("age", "gender", "edu", 
+                    "neur", "con", "extra", "agree", "open",
+                    "smoker", "drinker", "active"))
+```
+
+```{r rows, echo = F}
+rows = sapply(study.names, function(x) which(describe.df$study == x))
+rows = lapply(rows, function(x) c(min(x), max(x)))
+```
+
+```{r table, results = 'asis', echo = F}
+describe.df %>%
+  dplyr::select(-study) %>%
+  kable(.,  booktabs = T, escape = F, digits = 2, format = "html", 
+        col.names = c("Variable", "N Valid", "Mean", "SD", "Min", "Max", "$\\alpha$")) %>%
+  kable_styling(full_width = T, latex_options = c("repeat_header")) %>%
+  group_rows(names(rows)[1], rows[[1]][1], rows[[1]][2]) %>%
+  group_rows(names(rows)[2], rows[[2]][1], rows[[2]][2]) %>%
+  group_rows(names(rows)[3], rows[[3]][1], rows[[3]][2]) %>%
+  group_rows(names(rows)[4], rows[[4]][1], rows[[4]][2]) %>%
+  group_rows(names(rows)[5], rows[[5]][1], rows[[5]][2]) %>%
+  group_rows(names(rows)[6], rows[[6]][1], rows[[6]][2]) %>%
+  group_rows(names(rows)[7], rows[[7]][1], rows[[7]][2]) %>%
+  group_rows(names(rows)[8], rows[[8]][1], rows[[8]][2]) %>%
+  group_rows(names(rows)[9], rows[[9]][1], rows[[9]][2]) %>%
+  group_rows(names(rows)[10], rows[[10]][1], rows[[10]][2]) %>%
+  group_rows(names(rows)[11], rows[[11]][1], rows[[11]][2]) %>%
+  group_rows(names(rows)[12], rows[[12]][1], rows[[12]][2]) %>%
+  group_rows(names(rows)[13], rows[[13]][1], rows[[13]][2]) %>%
+  group_rows(names(rows)[14], rows[[14]][1], rows[[14]][2]) %>%
+  group_rows(names(rows)[15], rows[[15]][1], rows[[15]][2])
+```
+
+# Code
+
+The following packages were used to generate this table: 
+
+```{r ref.label = "load_packages", warning = FALSE, message = FALSE, results = 'hide', eval = F}
+```
+
+The files needed for this table are available at [osf.io/mzfu9](https://osf.io/mzfu9/) in the Individual Study Output folder.
+
+
+First we load the individual study analysis objects.
+
+```{r ref.label = "load_data", results='hide', eval = F}
+```
+
+We extract the relevant statistics in a loop. (The first author is just learning how to use the `purrr` package, and so often resorts to loops when under a time constraint.)
+
+First we extract the Cronbach's alpha values from the data objects. These are stored in a dataframe, with each reliability coefficient from each perosnality meausre from each study comprising a single row. 
+
+```{r ref.label = "reliability", eval = F}
+```
+
+The fit statistics had been extracted in long form. This code adds a "variable" variable and then spreads the data frame, so each trait within each study has a single row.
+
+```{r ref.label = "unlist", eval = F}
+```
+
+Next we extract and wrangle the descriptive statistics (a data frame created using the `describe()` function in the `psych` package).
+
+```{r ref.label = "describe", message = FALSE, eval = F}
+```
+
+We identify the rows corresponding to each data set. We then select the minimum and maximum rows as starting and end points for grouping.
+
+```{r ref.label = "rows", eval = F}
+```
+
+Finally, we pipe the data frame into the `kable()` function and additional formatting through the `kableExtra` package. We remove the study column, as this becomes redundant with the grouping headers. 
+```{r ref.label = "table", results = 'asis', eval = F}
+
+```
