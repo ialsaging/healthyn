@@ -18,11 +18,11 @@ This two-way interaction is the most popular operationalization of the "healthy 
 
 # The current project
 
-To estimate the population effect size of the healthy neuroticism interaction, we used a multi-study coordinated analysis. While healthy neuroticism has been broadly defined to include interactions with age, gender, and self-rated health, we focused on the moderation by conscientiousness to limit the scope of the project and to interrogate the most popular theory. Study sites in the Integrative Analysis of Longitudinal Study of Aging (IALSA) network were invited to participate provided they had measures of conscientiousness, neuroticism and at least one health variable of interest assessed concurrently.
+To estimate the population effect size of the healthy neuroticism interaction, we used a multi-study coordinated analysis. While healthy neuroticism has been broadly defined to include interactions with age, gender, and self-rated health, we focused on the moderation by conscientiousness to limit the scope of the project and to interrogate the most popular theory. Study sites in the Integrative Analysis of Longitudinal Study of Aging and Dementia (IALSA) network were invited to participate provided they had measures of conscientiousness, neuroticism and at least one health variable of interest assessed concurrently.
 
 # Coordinating analyses
 
-Some datasets in the IALSA network are controlled by data-sharing agreements that prohibit sending data to analysts outside the organization. Consequently, a master data analyst wrote template scripts that would conduct identical (or near identical) analyses across all datasets. Individual study sites assigned study-specific data analysts to prepare the data for analysis, including ensuring data were appropriate structured and that variables were named to match the template analysis. All data analysts met in Chicago, IL USA in January 2018, where study-analysts downloaded the template scripts and analyzed their data. These scripts aggregate summary statistics, which were uploaded to the Open Science Framework. The master data analyst downloaded these output files and analyzed them using a separate script, which conducted the meta-analysis. 
+Some datasets in the IALSA network are controlled by data-sharing agreements that prohibit sending data to analysts outside the organization. Consequently, a master data analyst wrote template scripts that would conduct identical (or near identical) analyses across all datasets. Individual study sites assigned study-specific data analysts to prepare the data for analysis, including ensuring data were appropriately structured and that variables were named to match the analysis template. All data analysts met in Chicago, IL USA in January 2018, where study-analysts downloaded the template scripts and analyzed their data. These scripts aggregate summary statistics, which were uploaded to the Open Science Framework. The master data analyst downloaded these output files and analyzed them using a separate script, which conducted the meta-analysis. 
 
 All scripts, including the template script, the study-specific scripts (which were sometimes adjusted to include appropriate covariates and outcomes), the study-output files, and the meta-analytic files and outputs are all available on OSF. A table of contents for those files is included for each study on this website.
 
@@ -34,13 +34,13 @@ Here you will find the supplementary analyses and information relevant to each o
 
 ## Project leaders
 
-- Eileen Graham
-- Nicholas Turiano
-- Sara Weston
+- Eileen K. Graham
+- Nicholas A. Turiano
+- Sara J. Weston
 
 ## Master data analyst
 
-- Sara Weston
+- Sara J. Weston
 
 ## Study specific data analysts
 
@@ -48,16 +48,17 @@ Here you will find the supplementary analyses and information relevant to each o
 - Tom Booth
 - Fleur Harrison
 - Bryan D. James
-- Nathan Lewis
-- Steve Makkar
+- Nathan A. Lewis
+- Steven R. Makkar
 - Swantje Mueller
 - Avron Spiro
-- Kristi Wisniewski
+- Kristi M. Wisniewski
 - Tomiko Yoneda
 - Ruixue Zhaoyang
 
 ## IALSA coordinators
 
-- Dan Mroczek
-- Andrea Piccinin
+- Dan K. Mroczek
+- Andrea M. Piccinin
 - Graciela Muniz-Terrera
+- Scott M. Hofer
