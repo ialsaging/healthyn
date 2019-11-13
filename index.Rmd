@@ -9,6 +9,55 @@ output:
     theme: cosmo
 ---
 
-# Descriptions here
+This website contains the supplemental material for the three-study series investigating the two-way interaction of neuroticism and conscientiousness in relationship to health outcomes. These three studies examined mortality, the prevelance and onset of chronic health conditions, and engagement in health behaviors across more than a dozen longitudinal datasets. 
 
-Describe the webpage
+# Background information
+
+This two-way interaction is the most popular operationalization of the "healthy neuroticism" theory ([Friedman, 2000](https://onlinelibrary.wiley.com/doi/abs/10.1111/1467-6494.00127?casa_token=-oILrBaXLQcAAAAA:f2aHtZekRCpwhREgSJZCk3XMU5YkZ4DZwP3jb4IfltRAeaiM6075bPVBpXf2JvcHQOq1B23W8n-ar_U)) and has been shown to predict lower levels of smoking ([Vollrath & Torgersen, 2002](https://www.researchgate.net/profile/Margarete_Vollrath/publication/222131832_Who_takes_health_risks_A_probe_into_8_personality_types/links/5a1c02b5aca272df080f48e9/Who-takes-health-risks-A-probe-into-8-personality-types.pdf); [Terracciano & Costa, 2004](https://onlinelibrary.wiley.com/doi/full/10.1111/j.1360-0443.2004.00687.x?casa_token=Xnz0prV8whkAAAAA:wrHEureYLAT6CtIzVlG9Y8FNAP8-zKLMnYGZgpUEUwFxsbeNnjwhxYyLhT1vu5bSBclBzZitf1WlKcE); [Weston & Jackson, 2015](https://s3.amazonaws.com/academia.edu.documents/46661299/Identification_of_the_healthy_neurotic_P20160620-8552-139py8l.pdf?response-content-disposition=inline%3B%20filename%3DIdentification_of_the_healthy_neurotic_P.pdf&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIWOWYYGZ2Y53UL3A%2F20191113%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20191113T025800Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=96a987726ed7f39c745b54b77ea953b304694f9707be33990e55161d40a9e558)), alcohol consumption ([Turiano, Whiteman, Hampson, Roberts,
+142 & Mroczek, 2012](https://www.ncbi.nlm.nih.gov/pubmed/22773867)), lower levels of IL-6 ([Turiano et al., 2013](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3545072/)), and lower rates of mortality ([Friedman, Kern, & Reynolds, 2010](https://www.ncbi.nlm.nih.gov/pubmed/20433617)). However, there is reason to believe the file drawer for these analyses is large, and that results are mixed. 
+
+# The current project
+
+To estimate the population effect size of the healthy neuroticism interaction, we used a multi-study coordinated analysis. While healthy neuroticism has been broadly defined to include interactions with age, gender, and self-rated health, we focused on the moderation by conscientiousness to limit the scope of the project and to interrogate the most popular theory. Study sites in the Integrative Analysis of Longitudinal Study of Aging (IALSA) network were invited to participate provided they had measures of conscientiousness, neuroticism and at least one health variable of interest assessed concurrently.
+
+# Coordinating analyses
+
+Some datasets in the IALSA network are controlled by data-sharing agreements that prohibit sending data to analysts outside the organization. Consequently, a master data analyst wrote template scripts that would conduct identical (or near identical) analyses across all datasets. Individual study sites assigned study-specific data analysts to prepare the data for analysis, including ensuring data were appropriate structured and that variables were named to match the template analysis. All data analysts met in Chicago, IL USA in January 2018, where study-analysts downloaded the template scripts and analyzed their data. These scripts aggregate summary statistics, which were uploaded to the Open Science Framework. The master data analyst downloaded these output files and analyzed them using a separate script, which conducted the meta-analysis. 
+
+All scripts, including the template script, the study-specific scripts (which were sometimes adjusted to include appropriate covariates and outcomes), the study-output files, and the meta-analytic files and outputs are all available on OSF. A table of contents for those files is included for each study on this website.
+
+# This website
+
+Here you will find the supplementary analyses and information relevant to each of the three healthy neuroticism projects. These files have been formatted to allow for quick assessment of the information. In addition, all code used to generate these files is available. 
+
+# Key researchers
+
+## Project leaders
+
+- Eileen Graham
+- Nicholas Turiano
+- Sara Weston
+
+## Master data analyst
+
+- Sara Weston
+
+## Study specific data analysts
+
+- Damaris Aschwanden
+- Tom Booth
+- Fleur Harrison
+- Bryan D. James
+- Nathan Lewis
+- Steve Makkar
+- Swantje Mueller
+- Avron Spiro
+- Kristi Wisniewski
+- Tomiko Yoneda
+- Ruixue Zhaoyang
+
+## IALSA coordinators
+
+- Dan Mroczek
+- Andrea Piccinin
+- Graciela Muniz-Terrera

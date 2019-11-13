@@ -1,0 +1,131 @@
+---
+title: "R Package Information"
+output: 
+  html_document:
+    toc: TRUE
+    toc_depth: 2
+    toc_float: TRUE
+    theme: cosmo
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+options(knitr.kable.NA = '')
+```
+
+This document contains the R package information for the analyses performed for the chronic conditions study.
+
+```{r load_packages, results='hide', warning=FALSE, message=FALSE, echo = F}
+library(devtools)
+library(knitr)
+library(kableExtra)
+library(lme4)
+library(merTools)
+library(tidyverse)
+library(metafor)
+library(papaja)
+library(here)
+```
+
+
+```{r load_data, warning = FALSE, message=FALSE, echo = F}
+
+study.names = c("BASEII", "EAS", "ELSA", "HRS", "ILSE", "LBC",
+                "LBLS","MAP", "MAS", "MIDUS",
+                "NAS", "OATS", "ROS", "SLS", "WLS")
+
+load(here("created data/BASEII_cc_output_nosrh.Rdata"))
+load(here("created data/EAS_cc_output_nosrh.Rdata"))
+load(here("created data/ELSA_cc_output.Rdata"))
+load(here("created data/HRS_cc_output.Rdata"))
+load(here("created data/ILSE_cc_output_nosrh.Rdata"))
+load(here("created data/LBC_cc_output.Rdata"))
+load(here("created data/LBLS_cc_output.Rdata"))
+load(here("created data/MAP_cc_output.Rdata"))
+load(here("created data/MAS_cc_output_nosrh.Rdata"))
+load(here("created data/MIDUS_cc_output_nosrh.Rdata"))
+load(here("created data/nas_cc_output.Rdata"))
+load(here("created data/OATS_cc_output_nosrh.Rdata"))
+load(here("created data/ROS_cc_output.Rdata"))
+load(here("created data/SLS_cc_output.Rdata"))
+load(here("created data/WLS_cc_output.Rdata"))
+
+NAS_cc_output = nas_cc_output
+EAS_cc_output= eas_cc_output
+rm(nas_cc_output)
+rm(eas_cc_output)
+```
+
+```{r this_session, echo = F}
+s <- session_info()
+meta_cc_output = list(session_info = s)
+meta_cc_output$session_info$platform$os = NULL
+meta_cc_output$session_info$platform$ctype = NULL
+```
+
+```{r table, results = 'asis', echo = F}
+platform_info = lapply(c("meta", study.names), function(x) get(paste0(x, "_cc_output")))
+names(platform_info) = c("meta", study.names)
+
+platform_info %>%
+  map("session_info") %>%
+  map("platform") %>%
+  map_df(~unlist(.)) %>%
+  mutate(var = names(meta_cc_output$session_info$platform)) %>%
+  gather("study", "value", -var) %>%
+  spread("var", "value") %>%
+  mutate(study = factor(study, levels = c("meta", study.names))) %>%
+  arrange(study) %>%
+  kable(., booktabs = TRUE) %>%
+  kable_styling()
+```
+
+```{r table2, results = 'asis', echo = F}
+package_info = lapply(c(study.names), function(x) get(paste0(x, "_cc_output")))
+names(package_info) = c(study.names)
+
+meta_packages = meta_cc_output$session_info$packages
+meta_packages = meta_packages %>%
+  mutate(study = "meta") %>%
+  mutate(version = loadedversion,
+         `*` = attached) %>%
+  dplyr::select(study, package, version, `*`) %>%
+  mutate(`*` = ifelse(`*`, "*", ""))
+
+package_info %>%
+  map("session_info") %>%
+  map("packages") %>%
+  map2_df(., c(study.names), ~ mutate(.x, study = .y)) %>%
+  full_join(meta_packages) %>%
+  filter(`*` == "*") %>%
+  dplyr::select(study, package, version) %>%
+  spread(study, version) %>%
+  dplyr::select(c(package, "meta", study.names)) %>%
+  kable(., booktabs = TRUE) %>%
+  kable_styling(font_size = 9)
+```
+
+# Code
+
+```{r ref.label = "load_packages", results='hide', warning=FALSE, message=FALSE, eval = F}
+
+```
+
+
+```{r ref.label = "load_data", warning = FALSE, message=FALSE, eval = F}
+
+```
+
+```{r ref.label = "this_session", eval = F}
+```
+
+```{r ref.label = "table", results = 'asis', eval = F}
+
+```
+
+```{r ref.label = "table2", results = 'asis', eval = F}
+
+```
+
+
+

@@ -1,0 +1,123 @@
+---
+title: 'Cross Sectional Moderation by study variables'
+output: 
+  html_document:
+    toc: TRUE
+    toc_depth: 2
+    toc_float: TRUE
+    theme: cosmo
+---
+
+This document summarizes the analyses which test for between study moderation.
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+options(knitr.kable.NA = '')
+```
+
+```{r load_packages, warning = FALSE, message = FALSE, results = 'hide', echo = F}
+library(tidyverse)
+library(metafor)
+library(knitr)
+library(kableExtra)
+library(papaja)
+library(here)
+```
+
+```{r diabetes, warning = F, message = F, echo = F}
+load(here("meta output/diabetes_cross_mods.Rdata"))
+
+diabetes.models = data.frame(model = c("mod1", "mod2", "mod3"))
+
+diabetes.models$output = list(mods.p.mod1, mods.p.mod2, mods.p.mod3)
+
+summary = diabetes.models %>%
+  mutate(summary = map(output, function(x) coef(summary(x)))) %>%
+  mutate(summary = map(summary, ~mutate(., var = rownames(.)))) %>%
+  dplyr::select(-output) %>%
+  unnest() %>%
+  mutate(outcome = "diabetes")
+```
+
+```{r hbp, warning = F, message = F, echo = F}
+rm(list = setdiff(ls(), "summary"))
+
+load(here("meta output/hbp_cross_mods.Rdata"))
+
+hbp.models = data.frame(model = c("mod1", "mod2", "mod3"))
+
+hbp.models$output = list(mods.p.mod1, mods.p.mod2, mods.p.mod3)
+
+summary = hbp.models %>%
+  mutate(summary = map(output, function(x) coef(summary(x)))) %>%
+  mutate(summary = map(summary, ~mutate(., var = rownames(.)))) %>%
+  dplyr::select(-output) %>%
+  unnest() %>%
+  mutate(outcome = "hbp") %>%
+  full_join(summary)
+```
+
+```{r heart, warning = F, message = F, echo = F}
+rm(list = setdiff(ls(), "summary"))
+
+load(here("meta output/heart_cross_mods.Rdata"))
+
+heart.models = data.frame(model = c("mod1", "mod2", "mod3"))
+
+heart.models$output = list(mods.p.mod1, mods.p.mod2, mods.p.mod3)
+
+summary = heart.models %>%
+  mutate(summary = map(output, function(x) coef(summary(x)))) %>%
+  mutate(summary = map(summary, ~mutate(., var = rownames(.)))) %>%
+  dplyr::select(-output) %>%
+  unnest() %>%
+  mutate(outcome = "heart") %>%
+  full_join(summary)
+```
+
+```{r table, warning = F, message = F, results = 'asis', echo = F}
+summary %>%
+  dplyr::select(-se, -zval) %>%
+  gather("key", "value", -model, -var, -outcome) %>%
+  unite("key", "model", "key", sep="_") %>%
+  spread("key", "value") %>%
+  arrange(outcome, var) %>%
+  dplyr::select(var, 
+                mod1_estimate, mod1_ci.lb, mod1_ci.ub, mod1_pval,
+                mod2_estimate, mod2_ci.lb, mod2_ci.ub, mod2_pval,
+                mod3_estimate, mod3_ci.lb, mod3_ci.ub, mod3_pval) %>%
+  mutate(mod1_pval = printp(mod1_pval),
+         mod2_pval = printp(mod2_pval),
+         mod3_pval = printp(mod3_pval)) %>%
+  kable(., digits = 2, booktabs = T, escape = FALSE, 
+        col.names = c("Variable", rep(c("b", "CI_l", "CI_u", "p"), 3))) %>%
+  kable_styling() %>%
+  add_header_above(c(" " = 1, "Model 1" = 4, "Model 2" = 4, "Model 3" = 4)) %>%
+  group_rows("Diabetes", 1, 5) %>%
+  group_rows("Hypertension", 6, 10) %>%
+  group_rows("Heart Disease", 11, 15)
+```
+
+# Code
+
+The following packages were used to generate this table: 
+
+```{r load_packages, warning = FALSE, message = FALSE, results = 'hide', eval = F}
+```
+
+First we load and summarize the diabetes data.
+
+```{r diabetes, eval = F}
+```
+
+Next we load and summarize the high blood pressure data.
+```{r hbp, eval = F}
+```
+
+Finally we load and summarize the heart condition data.
+
+```{r heart, eval = F}
+```
+
+```{r table, results = 'asis', eval = F}
+```

@@ -1,0 +1,93 @@
+---
+title: 'Predicted Values: Longitudinal'
+output: 
+  html_document:
+    toc: TRUE
+    toc_depth: 2
+    toc_float: TRUE
+    theme: cosmo
+---
+
+This document contains the plot of predicted probabilities from each individual study, as well as the weighted average effect, from the long-sectional analyses.
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+options(knitr.kable.NA = '')
+```
+
+
+```{r load_packages, warning = FALSE, message = FALSE, results = 'hide', echo = F}
+library(tidyverse)
+library(metafor)
+library(here)
+```
+
+```{r load_data, echo = F}
+load(here("meta output/hbp_long.Rdata"))
+weighted.long.hbp <- weighted.vals
+load(here("meta output/diabetes_long.Rdata"))
+weighted.long.diab <- weighted.vals
+load(here("meta output/heart_long.Rdata"))
+weighted.long.heart <- weighted.vals
+
+rm(weighted.vals)
+```
+
+
+```{r merge, echo = F, message = F, warning = F}
+weighted.long.hbp$outcome = "Hypertension"
+weighted.long.diab$outcome = "Diabetes"
+weighted.long.heart$outcome = "Heart Disease"
+
+weighted.long.all <- weighted.long.hbp %>%
+  full_join(weighted.long.diab) %>%
+  full_join(weighted.long.heart) %>%
+  mutate(outcome = factor(outcome, levels = c("Hypertension", "Diabetes", "Heart Disease")))
+
+hbp.long.plot$outcome = "Hypertension"
+diab.long.plot$outcome = "Diabetes"
+heart.long.plot$outcome = "Heart Disease"
+
+plot.long.all <- hbp.long.plot %>%
+  full_join(diab.long.plot) %>%
+  full_join(heart.long.plot) %>%
+  mutate(outcome = factor(outcome, levels = c("Hypertension", "Diabetes", "Heart Disease")))
+```
+
+```{r plot, fig.height= 9, echo = F}
+plot.long.all %>%
+  ggplot(aes(x = x, y = predicted)) +
+  geom_ribbon(aes(ymin=lower, ymax=upper), fill="black", alpha=.15,
+              data = weighted.long.all)+
+  geom_line(aes(color = study), lty="dashed") +
+  geom_line(data = weighted.long.all, color="black") +
+  scale_x_continuous("Neuroticism")+
+  scale_y_continuous("Probability of \n developing chronic condition") +
+  facet_grid(outcome~group)+
+  theme_minimal()+
+  theme(legend.position = "bottom")
+```
+
+# Code
+
+The following packages were used to generate this figure: 
+
+```{r ref.label = "load_packages", warning = FALSE, message = FALSE, results = 'hide', eval = F}
+```
+
+The files needed for this table are available at [osf.io/mzfu9](https://osf.io/mzfu9/) in the Meta Analysis Output folder.
+First we load the meta-analysis objects. To see how these objects were created, see the meta-analysis scripts titled `hbp_long_sectional.R`, `diabetes_long_sectional.R`, and `heart_long_sectional.R` that are available at [osf.io/35etv](https://osf.io/35etv/).
+
+```{r ref.label = "load_data", eval = F}
+```
+
+Next we merge the data frames from the different objects.
+
+```{r ref.label = "merge", eval = F, message = F, warning = F}
+```
+
+Finally, we plot the values.
+
+```{r ref.label = "plot", fig.height= 9, eval = F}
+```
+

@@ -1,0 +1,138 @@
+---
+title: 'Forest Plot: Cross Sectional Moderation'
+output: 
+  html_document:
+    toc: TRUE
+    toc_depth: 2
+    toc_float: TRUE
+    theme: cosmo
+---
+
+This document summarizes the analyses which test for between study moderation.
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+options(knitr.kable.NA = '')
+```
+
+
+```{r load_packages, warning = FALSE, message = FALSE, results = 'hide', echo = F}
+library(tidyverse)
+library(metafor)
+library(knitr)
+library(kableExtra)
+library(papaja)
+library(here)
+```
+
+```{r diabetes, warning = FALSE, message = FALSE, echo = F}
+load(here("meta output/diabetes_long_mods.Rdata"))
+
+diabetes.models = expand.grid(model = c("mod1", "mod2", "mod3"), 
+                              variable = c("personality", "mean years", "max years"))
+
+diabetes.models$output = list(mods.p.mod1, mods.p.mod2, mods.p.mod3,
+                              mods.mean.mod1, mods.mean.mod2, mods.mean.mod3,
+                              mods.max.mod1, mods.max.mod2, mods.max.mod3)
+
+summary = diabetes.models %>%
+  mutate(summary = map(output, function(x) coef(summary(x)))) %>%
+  mutate(summary = map(summary, ~mutate(., var = rownames(.)))) %>%
+  dplyr::select(-output) %>%
+  unnest() %>%
+  mutate(outcome = "diabetes")
+```
+
+```{r hbp, warning = FALSE, message = FALSE, echo = F}
+rm(list = setdiff(ls(), "summary"))
+
+load(here("meta output/hbp_long_mods.Rdata"))
+
+hbp.models = expand.grid(model = c("mod1", "mod2", "mod3"), 
+                              variable = c("personality", "mean years", "max years"))
+
+hbp.models$output = list(mods.p.mod1, mods.p.mod2, mods.p.mod3,
+                              mods.mean.mod1, mods.mean.mod2, mods.mean.mod3,
+                              mods.max.mod1, mods.max.mod2, mods.max.mod3)
+
+summary = hbp.models %>%
+  mutate(summary = map(output, function(x) coef(summary(x)))) %>%
+  mutate(summary = map(summary, ~mutate(., var = rownames(.)))) %>%
+  dplyr::select(-output) %>%
+  unnest() %>%
+  mutate(outcome = "hbp") %>%
+  full_join(summary)
+```
+
+```{r heart, warning = FALSE, message = FALSE, echo = F}
+rm(list = setdiff(ls(), "summary"))
+
+load(here("meta output/heart_long_mods.Rdata"))
+
+heart.models = expand.grid(model = c("mod1", "mod2", "mod3"), 
+                              variable = c("personality", "mean years", "max years"))
+
+heart.models$output = list(mods.p.mod1, mods.p.mod2, mods.p.mod3,
+                              mods.mean.mod1, mods.mean.mod2, mods.mean.mod3,
+                              mods.max.mod1, mods.max.mod2, mods.max.mod3)
+
+summary = heart.models %>%
+  mutate(summary = map(output, function(x) coef(summary(x)))) %>%
+  mutate(summary = map(summary, ~mutate(., var = rownames(.)))) %>%
+  dplyr::select(-output) %>%
+  unnest() %>%
+  mutate(outcome = "heart") %>%
+  full_join(summary)
+```
+
+```{r table, warning = FALSE, message = FALSE, results = 'asis', echo = F}
+summary %>%
+  dplyr::select(-se, -zval) %>%
+  gather("key", "value", -model, -var, -outcome, -variable) %>%
+  unite("key", "model", "key", sep="_") %>%
+  spread("key", "value") %>%
+  arrange(outcome, variable, var) %>%
+  dplyr::select(var, 
+                mod1_estimate, mod1_ci.lb, mod1_ci.ub, mod1_pval,
+                mod2_estimate, mod2_ci.lb, mod2_ci.ub, mod2_pval,
+                mod3_estimate, mod3_ci.lb, mod3_ci.ub, mod3_pval) %>%
+  mutate(mod1_pval = printp(mod1_pval),
+         mod2_pval = printp(mod2_pval),
+         mod3_pval = printp(mod3_pval)) %>%
+  kable(., digits = 2, booktabs = T, escape = FALSE, 
+        col.names = c("Variable", rep(c("b", "CI_l", "CI_u", "p"), 3))) %>%
+  kable_styling() %>%
+  add_header_above(c(" " = 1, "Model 1" = 4, "Model 2" = 4, "Model 3" = 4)) %>%
+  group_rows("Diabetes - moderated by personality", 1, 5) %>%
+  group_rows("Diabetes - moderated by average number of years", 6, 7) %>%
+  group_rows("Diabetes - moderated by maximum number of years", 8, 9) %>%
+  group_rows("Hypertension - moderated by personality", 10, 14) %>%
+  group_rows("Hypertension - moderated by average number of years", 15, 16) %>%
+  group_rows("Hypertension - moderated by maximum number of years", 17, 18) %>%
+  group_rows("Heart Disease - moderated by personality", 19, 23) %>%
+  group_rows("Heart Disease - moderated by average number of years", 24, 25) %>%
+  group_rows("Heart Disease - moderated by maximum number of years", 26, 27) 
+```
+
+# Code
+
+The following packages were used to generate this table: 
+
+```{r ref.label = "load_packages", warning = FALSE, message = FALSE, results = 'hide', eval = F}
+```
+First we load and summarize the diabetes data.
+```{r ref.label = "diabetes", eval = F}
+```
+
+Next we load and summarize the high blood pressure data.
+```{r ref.label = "hbp", eval = F}
+```
+
+Finally we load and summarize the heart condition data.
+```{r ref.label = "heart", eval = F}
+```
+
+```{r ref.label = "table", results = 'asis', eval = F}
+```
+
+

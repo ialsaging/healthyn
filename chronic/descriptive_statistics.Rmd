@@ -1,0 +1,173 @@
+---
+title: "Descriptive Statistics"
+output: 
+  html_document:
+    toc: TRUE
+    toc_depth: 2
+    toc_float: TRUE
+    theme: cosmo
+---
+
+This document contains the descriptive statistics (number of non-missing observations, mean, standard deviation, minimum value, maximum value and internal reliablity, where relevant) of the variables used in the current coordinated analyses. We provide the code used to generate this table, which calls upon our analysis summary objects (also provided).
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+options(knitr.kable.NA = '')
+```
+
+
+```{r load_packages, warning = FALSE, message = FALSE, results = 'hide', echo = F}
+library(papaja)
+library(tidyverse)
+library(knitr)
+library(kableExtra)
+library(here)
+```
+
+```{r load_data, warning = FALSE,message=FALSE, echo = F}
+study.names = c("BASEII", "EAS","ELSA", "HRS", "ILSE", "LBC", 
+                "LBLS","MAP", "MAS", "MIDUS", "NAS", "OATS", "ROS", "SLS","WLS")
+
+load(here("created data/BASEII_cc_output_nosrh.Rdata"))
+load(here("created data/EAS_cc_nosrh_output.Rdata"))
+load(here("created data/ELSA_cc_output_nosrh.Rdata"))
+load(here("created data/HRS_cc_output_nosrh.Rdata"))
+load(here("created data/ILSE_cc_output_nosrh.Rdata"))
+load(here("created data/LBC_cc_output.Rdata"))
+load(here("created data/MAP_cc_output.Rdata"))
+load(here("created data/MAS_cc_output_nosrh.Rdata"))
+load(here("created data/MIDUS_cc_output_nosrh.Rdata"))
+load(here("created data/nas_cc_output_nosrh.Rdata"))
+load(here("created data/OATS_cc_output_nosrh.Rdata"))
+load(here("created data/ROS_cc_output.Rdata"))
+load(here("created data/SLS_cc_output_nosrh.Rdata"))
+load(here("created data/WLS_cc_output_nosrh.Rdata"))
+load(here("created data/LBLS_cc_output_nosrh.Rdata"))
+
+#these lines of code simply rename the data objects which are in lower case or have years. this allows for aesthetic consistency in graphs and tables
+NAS_cc_output = nas_cc_output
+rm(nas_cc_output)
+```
+
+```{r reliability, echo = F}
+alpha.list <- data.frame()
+n = 0
+for(i in study.names){
+  n = n+1
+  x = get(paste0(i,"_cc_output")) # get output object
+  if(!is.null(x$alpha)){
+    y = as.data.frame(c(unlist(x$alpha), unlist(x$omega)))
+    y$study = i
+    alpha.list = rbind(alpha.list, y)
+  }
+}
+```
+
+```{r spread, echo = F}
+alpha.list <- alpha.list %>%
+  mutate(var = rownames(.),
+         var = gsub("[0-9]", "", var)) %>%
+  separate(var, into = c("statistic", "var")) %>%
+  spread(key = statistic, value = `c(unlist(x$alpha), unlist(x$omega))`)
+```
+
+```{r describe, message = FALSE, echo = F}
+describe.df = lapply(X = study.names, FUN = function(x) get(paste0(x,"_cc_output"))$descriptives) %>%
+  map2_df(., study.names, ~ mutate(.x, study = .y, var = rownames(.x))) %>%
+  # join the descriptives to the data set containing the reliability statistics
+  full_join(alpha.list) %>%
+  # select the columns we want to include in the table
+  select(study, var, n, mean, sd, min, max, alpha, omega) %>%
+  # select rows representing variables used in analyses
+  filter(var %in% c("age", "gender", "edu", "bmi", "has_cc", 
+                    "neur", "con", "extra", "agree", "open",
+                    "diabetes", "diabetes_diag", "highblood", "highblood_diag", "heart", "heart_diag"))
+```
+
+```{r, echo = FALSE}
+save(describe.df, file = here("output/describe.Rdata"))
+```
+
+```{r rows, echo = F}
+rows.BASEII = which(describe.df$study == "BASEII"); rows.BASEII = c(min(rows.BASEII), max(rows.BASEII))
+rows.EAS = which(describe.df$study == "EAS"); rows.EAS = c(min(rows.EAS), max(rows.EAS))
+rows.ELSA = which(describe.df$study == "ELSA"); rows.ELSA = c(min(rows.ELSA), max(rows.ELSA))
+rows.HRS = which(describe.df$study == "HRS"); rows.HRS = c(min(rows.HRS), max(rows.HRS))
+rows.ILSE = which(describe.df$study == "ILSE"); rows.ILSE = c(min(rows.ILSE), max(rows.ILSE))
+rows.LBC = which(describe.df$study == "LBC"); rows.LBC = c(min(rows.LBC), max(rows.LBC))
+rows.LBLS = which(describe.df$study == "LBLS"); rows.LBLS = c(min(rows.LBLS), max(rows.LBLS))
+rows.MAP = which(describe.df$study == "MAP"); rows.MAP = c(min(rows.MAP), max(rows.MAP))
+rows.MAS = which(describe.df$study == "MAS"); rows.MAS = c(min(rows.MAS), max(rows.MAS))
+rows.MIDUS = which(describe.df$study == "MIDUS"); rows.MIDUS = c(min(rows.MIDUS), max(rows.MIDUS))
+rows.NAS = which(describe.df$study == "NAS"); rows.NAS = c(min(rows.NAS), max(rows.NAS))
+rows.OATS = which(describe.df$study == "OATS"); rows.OATS = c(min(rows.OATS), max(rows.OATS))
+rows.ROS = which(describe.df$study == "ROS"); rows.ROS = c(min(rows.ROS), max(rows.ROS))
+rows.SLS = which(describe.df$study == "SLS"); rows.SLS = c(min(rows.SLS), max(rows.SLS))
+rows.WLS = which(describe.df$study == "WLS"); rows.WLS = c(min(rows.WLS), max(rows.WLS))
+```
+
+```{r table, results = 'asis', echo = F}
+describe.df %>%
+  select(-study) %>%
+  kable(.,  booktabs = T, escape = F, digits = 2, format = "html", 
+        col.names = c("Variable", "N Valid", "Mean", "SD", "Min", "Max", "$\\alpha$", "$\\omega$")) %>%
+  kable_styling(full_width = T, latex_options = c("repeat_header")) %>%
+  group_rows("BASEII", rows.BASEII[1], rows.BASEII[2]) %>%
+  group_rows("EAS", rows.EAS[1], rows.EAS[2]) %>%
+  group_rows("ELSA", rows.ELSA[1], rows.ELSA[2]) %>%
+  group_rows("HRS", rows.HRS[1], rows.HRS[2]) %>%
+  group_rows("ILSE", rows.ILSE[1], rows.ILSE[2]) %>%
+  group_rows("LBC", rows.LBC[1], rows.LBC[2]) %>%
+  group_rows("LBLS", rows.LBLS[1], rows.LBLS[2]) %>%
+  group_rows("MAP", rows.MAP[1], rows.MAP[2]) %>%
+  group_rows("MAS", rows.MAS[1], rows.MAS[2]) %>%
+  group_rows("MIDUS", rows.MIDUS[1], rows.MIDUS[2]) %>%
+  group_rows("NAS", rows.NAS[1], rows.NAS[2]) %>%
+  group_rows("OATS", rows.OATS[1], rows.OATS[2]) %>%
+  group_rows("ROS", rows.ROS[1], rows.ROS[2]) %>%
+  group_rows("SLS", rows.SLS[1], rows.SLS[2]) %>%
+  group_rows("WLS", rows.WLS[1], rows.WLS[2]) 
+```
+
+# Code
+
+The following packages were used to generate this table: 
+
+```{r ref.label = "load_packages", warning = FALSE, message = FALSE, results = 'hide', eval = F}
+```
+
+The files needed for this table are available at [osf.io/mzfu9](https://osf.io/mzfu9/) in the Individual Study Output folder.
+
+First we load the individual study analysis objects.
+
+```{r ref.label = "load_data", warning = FALSE,message=FALSE, eval = F}
+```
+
+We extract the relevant statistics in a loop. (The first author is just learning how to use the `purrr` package, and so often resorts to loops when under a time constraint.)
+
+First we extract the Cronbach's alpha and omega values from the data objects. These are stored in a dataframe, with each reliability coefficient from each perosnality meausre from each study comprising a single row. 
+
+```{r ref.label = "reliability", eval = F}
+```
+
+The fit statistics had been extracted in long form (e.g., the alpha and omega values are in the same column and not named). This code adds a "variable" variable and then spreads the data frame, so each trait within each study has a single row.
+
+```{r ref.label = "spread", eval = F}
+```
+
+Next we extract and wrangle the descriptive statistics (a data frame created using the `describe()` function in the `psych` package).
+
+```{r ref.label = "describe", message = FALSE, eval = F}
+```
+
+
+
+We identify the rows corresponding to each data set. We then select the minimum and maximum rows as starting and end points for grouping.
+
+```{r ref.label = "rows", eval = F}
+```
+
+Finally, we pipe the data frame into the `kable()` function and additional formatting through the `kableExtra` package. We remove the study column, as this becomes redundant with the grouping headers. 
+
+```{r ref.label = "table", results = 'asis', eval = F}
+```
