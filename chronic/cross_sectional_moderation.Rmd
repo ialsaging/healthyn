@@ -25,7 +25,7 @@ library(here)
 ```
 
 ```{r diabetes, warning = F, message = F, echo = F}
-load(here("meta output/diabetes_cross_mods.Rdata"))
+load(here("chronic/meta output/diabetes_cross_mods.Rdata"))
 
 diabetes.models = data.frame(model = c("mod1", "mod2", "mod3"))
 
@@ -42,7 +42,7 @@ summary = diabetes.models %>%
 ```{r hbp, warning = F, message = F, echo = F}
 rm(list = setdiff(ls(), "summary"))
 
-load(here("meta output/hbp_cross_mods.Rdata"))
+load(here("chronic/meta output/hbp_cross_mods.Rdata"))
 
 hbp.models = data.frame(model = c("mod1", "mod2", "mod3"))
 
@@ -60,7 +60,7 @@ summary = hbp.models %>%
 ```{r heart, warning = F, message = F, echo = F}
 rm(list = setdiff(ls(), "summary"))
 
-load(here("meta output/heart_cross_mods.Rdata"))
+load(here("chronic/meta output/heart_cross_mods.Rdata"))
 
 heart.models = data.frame(model = c("mod1", "mod2", "mod3"))
 

@@ -25,7 +25,7 @@ library(here)
 
 
 ```{r load_data, echo = F}
-load(here("meta output/hbp_cross_age.Rdata"))
+load(here("chronic/meta output/hbp_cross_age.Rdata"))
 meta.cross.hbp = meta.int.mod3
 lowc_30_ci.hbp = meta_lowc_30_ci_mod3
 hghc_30_ci.hbp = meta_hghc_30_ci_mod3
@@ -34,7 +34,7 @@ hghc_50_ci.hbp = meta_hghc_50_ci_mod3
 lowc_70_ci.hbp = meta_lowc_70_ci_mod3
 hghc_70_ci.hbp = meta_hghc_70_ci_mod3
 
-load(here("meta output/diabetes_cross_age.Rdata"))
+load(here("chronic/meta output/diabetes_cross_age.Rdata"))
 meta.cross.diabetes = meta.int.mod3
 lowc_30_ci.diab = meta_lowc_30_ci_mod3
 hghc_30_ci.diab = meta_hghc_30_ci_mod3
@@ -43,7 +43,7 @@ hghc_50_ci.diab = meta_hghc_50_ci_mod3
 lowc_70_ci.diab = meta_lowc_70_ci_mod3
 hghc_70_ci.diab = meta_hghc_70_ci_mod3
 
-load(here("meta output/heart_cross_age.Rdata"))
+load(here("chronic/meta output/heart_cross_age.Rdata"))
 meta.cross.heart = meta.int.mod3
 lowc_30_ci.heart = meta_lowc_30_ci_mod3
 hghc_30_ci.heart = meta_hghc_30_ci_mod3

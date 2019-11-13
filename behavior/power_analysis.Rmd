@@ -56,7 +56,7 @@ tau = seq(0, .5, .01) # possible values of the standard deviation of effect size
 # Smoking
 
 ```{r smoker, echo = F}
-load(here("created data/meta_smoker_intr.Rdata"))
+load(here("behavior/created data/meta_smoker_intr.Rdata"))
 
 power_smoker = power_curve(smoker.intr.rma, tau, level = .95)
 obs = power_curve(smoker.intr.rma, power_smoker$obs_tau, level =.95)$power[1,2]
@@ -98,7 +98,7 @@ power_smoker$power %>%
 # Alcohol consumption
 
 ```{r drinker, echo = F}
-load(here("created data/meta_drinker_intr.Rdata"))
+load(here("behavior/created data/meta_drinker_intr.Rdata"))
 
 power_drinker = power_curve(drinker.intr.rma, tau, level = .95)
 obs = power_curve(drinker.intr.rma, power_drinker$obs_tau, level =.95)$power[1,2]
@@ -140,7 +140,7 @@ power_drinker$power %>%
 # Physical activity
 
 ```{r active, echo = F}
-load(here("created data/meta_active_intr.Rdata"))
+load(here("behavior/created data/meta_active_intr.Rdata"))
 
 power_active = power_curve(active.intr.rma, tau, level = .95)
 obs = power_curve(active.intr.rma, power_active$obs_tau, level =.95)$power[1,2]

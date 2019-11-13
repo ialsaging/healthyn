@@ -22,17 +22,14 @@ library(papaja)
 library(tidyverse)
 library(knitr)
 library(kableExtra)
-```
-
-```{r data_path, echo = F}
-data.path = c("../study output/")
+library(here)
 ```
 
 
 ```{r study_names, results = 'hide', echo = F}
 study.names = c("EAS", "HRS", "LBC", "LBLS", "MAP", "MAS", "MIDUS", "NAS", "OATS", "ROS", "SLS", "WLS")
 
-lapply(paste0(data.path, study.names, "_survival_output.Rdata"), load, .GlobalEnv)
+lapply(here(paste0("study output/", study.names, "_survival_output.Rdata")), load, .GlobalEnv)
 ```
 
 ```{r reliability, echo = F}
@@ -66,10 +63,6 @@ describe.df = lapply(X = paste0(study.names, "_survival_output"),
   # select rows representing variables used in analyses
   filter(var %in% c("age", "edu", 
                     "neur", "con", "extra", "agree", "open"))
-```
-
-```{r, echo = FALSE}
-save(describe.df, file = "../created data/describe_tab.Rdata")
 ```
 
 ```{r rows, echo = F}
@@ -128,10 +121,6 @@ kable(gender.tab, booktabs = T, escape = F, digits = 2, format = "html") %>%
   kable_styling()
 ```
 
-```{r, echo = FALSE}
-save(gender.tab, file = "../created data/gender_table.Rdata")
-```
-
 # Code
 
 The following packages were used to generate this table: 
@@ -139,7 +128,7 @@ The following packages were used to generate this table:
 ```{r ref.label = "load_packages", eval = FALSE}
 ```
 
-Specify the location of the study analysis objects. The first author stored these in a Box Sync folder, but you may have downloaded these to a different location. The files needed for this table are available at [osf.io/mzfu9](https://osf.io/mzfu9/) in the Individual Study Output folder.
+The files needed for this table are available at [osf.io/mzfu9](https://osf.io/mzfu9/) in the Individual Study Output folder.
 
 ```{r ref.label = "data_path", eval = F}
 ```

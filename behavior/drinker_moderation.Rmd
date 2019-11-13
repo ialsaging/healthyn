@@ -24,7 +24,7 @@ library(here)
 ```
 
 ```{r load_data, echo = F}
-load(here("created data/mods_drinker.Rdata"))
+load(here("behavior/created data/mods_drinker.Rdata"))
 ```
 
 ```{r table, echo = F}

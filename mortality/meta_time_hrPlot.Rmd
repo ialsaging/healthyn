@@ -1,6 +1,11 @@
 ---
-title: "meta_time"
-output: html_document
+title: "Hazard ratio by study (months since baseline as time metric)"
+output: 
+  html_document:
+    toc: TRUE
+    toc_depth: 2
+    toc_float: TRUE
+    theme: cosmo
 ---
 This document contains the hazard ratio plots of the surivival models, using time since baseline as the metric of interest and neuroticism by conscientiousness as the predictor of interest.
 
@@ -9,32 +14,24 @@ knitr::opts_chunk$set(echo = TRUE)
 options(knitr.kable.NA = '')
 ```
 
-The following packages were used to generate this table: 
 
-```{r load_packages, warning = FALSE, message = FALSE, results = 'hide'}
+```{r load_packages, warning = FALSE, message = FALSE, results = 'hide', echo = F}
 library(papaja)
 library(tidyverse)
 library(knitr)
 library(kableExtra)
+library(here)
 ```
 
-Specify the location of the study analysis objects. The first author stored these in a Box Sync folder, but you may have downloaded these to a different location. The files needed for this table are available at [osf.io/mzfu9](https://osf.io/mzfu9/) in the Individual Study Output folder.
 
-```{r}
-data.path = c("../study output/")
-```
-
-First we load the individual study analysis objects.
-
-```{r, results = 'hide'}
+```{r load_data, warning = FALSE, message = FALSE, echo = F, results = 'hide'}
 study.names = c("EAS", "HRS", "LBC", "LBLS", "MAP", "MAS", "MIDUS", "NAS", "OATS", "ROS", "SLS", "WLS")
 
-lapply(paste0(data.path, study.names, "_survival_output.Rdata"), load, .GlobalEnv)
+lapply(here(paste0("study output/", study.names, "_survival_output.Rdata")), load, .GlobalEnv)
 ```
 
-Next we extract the predicted values from each object.
 
-```{r}
+```{r extract, warning = FALSE, message = FALSE,  echo = F}
 plottime = lapply(paste0(study.names, "_survival_output"), 
                   FUN = function(x) get(x)$plotdata$time) %>%
   map2_df(., study.names, ~ mutate(.x, study = .y))
@@ -47,9 +44,8 @@ plottime = plottime %>%
   full_join(plot_n)
 ```
 
-Finally, we plot individual values, as well as the overall weighted line. 
 
-```{r}
+```{r plot, warning = FALSE, message = FALSE, echo = F}
 plottime %>%
   mutate(study = gsub("LBC", "LBC1936", study)) %>%
   ggplot(aes(x = z.neur, y = fit)) +
@@ -65,6 +61,31 @@ plottime %>%
   theme_bw() + 
   theme(legend.position = "bottom")
 ggsave(file = "mortalityplot.pdf", width = 6, height = 4)
+```
+
+
+# Code
+
+
+The following packages were used to generate this table: 
+
+```{r load_packages, warning = FALSE, message = FALSE, results = 'hide', eval = F}
+```
+The files needed for this table are available at [osf.io/mzfu9](https://osf.io/mzfu9/) in the Individual Study Output folder.
+
+First we load the individual study analysis objects.
+
+```{r load_data, eval = F, results = 'hide'}
+```
+
+Next we extract the predicted values from each object.
+
+```{r extract, eval = F}
+```
+
+Finally, we plot individual values, as well as the overall weighted line. 
+
+```{r plot, eval = F}
 ```
 
 

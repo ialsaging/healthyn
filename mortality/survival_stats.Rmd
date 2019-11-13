@@ -1,6 +1,11 @@
 ---
-title: "Surival Statistics"
-output: html_document
+title: "Surival statistics by study"
+output: 
+  html_document:
+    toc: TRUE
+    toc_depth: 2
+    toc_float: TRUE
+    theme: cosmo
 ---
 This document contains information on survival in the studies used in this coordinated analysis. Specifically, we count the number of participants who survived and who died, the surival time for those who died, and the survival time for those who lived. 
 
@@ -9,31 +14,23 @@ knitr::opts_chunk$set(echo = TRUE)
 options(knitr.kable.NA = '')
 ```
 
-The following packages were used to generate this table: 
 
-```{r load_packages, warning = FALSE, message = FALSE, results = 'hide'}
+```{r load_packages, echo = F, warning = FALSE, message = FALSE, results = 'hide'}
 library(papaja)
 library(tidyverse)
 library(knitr)
 library(kableExtra)
+library(here)
 ```
 
-Specify the location of the study analysis objects. The first author stored these in a Box Sync folder, but you may have downloaded these to a different location. The files needed for this table are available at [osf.io/mzfu9](https://osf.io/mzfu9/) in the Individual Study Output folder.
 
-```{r}
-data.path = c("../study output/")
-```
-
-First we load the individual study analysis objects.
-
-```{r, results = 'hide'}
+```{r load_data, echo = F, results = 'hide'}
 study.names = c("EAS", "HRS", "LBC", "LBLS", "MAP", "MAS", "MIDUS", "NAS", "OATS", "ROS", "SLS", "WLS")
-lapply(paste0(data.path, study.names, "_survival_output.Rdata"), load, .GlobalEnv)
+lapply(here(paste0("study output/", study.names, "_survival_output.Rdata")), load, .GlobalEnv)
 ```
 
-Next we extract the relevant statistics for each study. 
 
-```{r, results='asis'}
+```{r extract, echo = F, results='asis'}
 survival.df = data.frame(study = study.names)
 
 survival.df$full = lapply(X = paste0(study.names, "_survival_output"), 
@@ -51,14 +48,7 @@ survival.df = survival.df %>%
   ungroup()
 ```
 
-```{r, echo = FALSE}
-save(survival.df, file = "../created data/survival_tab.Rdata")
-```
-
-
-We identify the rows for each variable.
-
-```{r}
+```{r rows, echo = F}
 rows.EAS = which(survival.df$study == "EAS"); rows.EAS = c(min(rows.EAS), max(rows.EAS))
 rows.HRS = which(survival.df$study == "HRS"); rows.HRS = c(min(rows.HRS), max(rows.HRS))
 rows.LBC = which(survival.df$study == "LBC"); rows.LBC = c(min(rows.LBC), max(rows.LBC))
@@ -73,7 +63,7 @@ rows.SLS = which(survival.df$study == "SLS"); rows.SLS = c(min(rows.SLS), max(ro
 rows.WLS = which(survival.df$study == "WLS"); rows.WLS = c(min(rows.WLS), max(rows.WLS))
 ```
 
-```{r, results='asis'}
+```{r table, echo = F, results='asis'}
 survival.df %>%
   dplyr::select(-study) %>%
   kable(., booktabs = TRUE, escape = F, digits = 2, format = "html", 
@@ -93,5 +83,33 @@ survival.df %>%
   group_rows("ROS", rows.ROS[1], rows.ROS[2]) %>%
   group_rows("SLS", rows.SLS[1], rows.SLS[2]) %>%
   group_rows("WLS", rows.WLS[1], rows.WLS[2]) 
+```
+
+# Code
+
+The following packages were used to generate this table: 
+
+```{r load_packages, warning = FALSE, message = FALSE, results = 'hide'}
+```
+
+The files needed for this table are available at [osf.io/mzfu9](https://osf.io/mzfu9/) in the Individual Study Output folder.
+
+First we load the individual study analysis objects.
+
+```{r load_data, eval = F, results = 'hide'}
+```
+
+Next we extract the relevant statistics for each study. 
+
+```{r extract, eval = F, results='asis'}
+```
+
+
+We identify the rows for each variable.
+
+```{r rows, eval = F}
+```
+
+```{r table, eval = F, results='asis'}
 ```
 

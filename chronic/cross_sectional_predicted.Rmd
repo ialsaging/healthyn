@@ -23,11 +23,11 @@ library(here)
 
 ```{r load_data, warning = FALSE, message = FALSE, echo = F}
 
-load(here("meta output/hbp_cross.Rdata"))
+load(here("chronic/meta output/hbp_cross.Rdata"))
 weighted.cross.hbp <- weighted.vals
-load(here("meta output/diabetes_cross.Rdata"))
+load(here("chronic/meta output/diabetes_cross.Rdata"))
 weighted.cross.diab <- weighted.vals
-load(here("meta output/heart_cross.Rdata"))
+load(here("chronic/meta output/heart_cross.Rdata"))
 weighted.cross.heart <- weighted.vals
 
 rm(weighted.vals)

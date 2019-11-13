@@ -31,7 +31,7 @@ study.names = c("BASEII", "EAS","ELSA", "HRS", "ILSE", "LBC",
                 "LBLS", "MAP", "MAS","MIDUS","NAS", "OATS", 
                 "ROS","SLS","WLS")
 
-lapply(here(paste0(study.names, "_behavior.Rdata")), load, .GlobalEnv)
+lapply(here(paste0("behavior/", study.names, "_behavior.Rdata")), load, .GlobalEnv)
 ```
 
 ```{r identify, echo = F}

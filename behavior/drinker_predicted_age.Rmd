@@ -23,7 +23,7 @@ library(here)
 ```
 
 ```{r load_data, echo = F}
-load(here("created data/plot_drinker_age.Rdata"))
+load(here("behavior/created data/plot_drinker_age.Rdata"))
 ```
 
 
@@ -50,7 +50,7 @@ The following packages were used to generate this figure:
 
 The files needed for this table are available at [osf.io/mzfu9](https://osf.io/mzfu9/) in the Meta Analysis Output folder.
 
-First we load the meta-analysis objects. To see how these objects were created, see the meta-analysis scripts titled XXXXX that are available at [osf.io/XXXX](https://osf.io/XXXX/).
+First we load the meta-analysis objects. To see how these objects were created, see the meta-analysis script titled `drinker_meta-analysis.R` that are available at [osf.io/kb9e8](https://osf.io/kb9e8/).
 
 ```{r ref.label = "load_data", eval = F}
 ```

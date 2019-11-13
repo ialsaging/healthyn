@@ -23,11 +23,11 @@ library(here)
 ```
 
 ```{r load_data, echo = F}
-load(here("meta output/hbp_long.Rdata"))
+load(here("chronic/meta output/hbp_long.Rdata"))
 weighted.long.hbp <- weighted.vals
-load(here("meta output/diabetes_long.Rdata"))
+load(here("chronic/meta output/diabetes_long.Rdata"))
 weighted.long.diab <- weighted.vals
-load(here("meta output/heart_long.Rdata"))
+load(here("chronic/meta output/heart_long.Rdata"))
 weighted.long.heart <- weighted.vals
 
 rm(weighted.vals)

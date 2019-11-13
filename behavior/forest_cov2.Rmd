@@ -23,9 +23,9 @@ library(here)
 ```
 
 ```{r load_data, echo = F}
-load(here("created data/meta_smoker_cov2.Rdata"))
-load(here("created data/meta_drinker_cov2.Rdata"))
-load(here("created data/meta_active_cov2.Rdata"))
+load(here("behavior/created data/meta_smoker_cov2.Rdata"))
+load(here("behavior/created data/meta_drinker_cov2.Rdata"))
+load(here("behavior/created data/meta_active_cov2.Rdata"))
 ```
 
 ```{r merge, warning = F, message = F, echo = F}

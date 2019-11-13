@@ -61,7 +61,7 @@ tau = seq(0, .5, .01) # possible values of the standard deviation of effect size
 ## Hypertension/high blood pressure
 
 ```{r cross_hbp, echo = F}
-load(here("meta output/hbp_cross.Rdata"))
+load(here("chronic/meta output/hbp_cross.Rdata"))
 
 power_hbp_cross = power_curve(meta.int.mod3, tau, level = .95)
 obs = power_curve(meta.int.mod3, power_hbp_cross$obs_tau, level =.95)$power[1,2]
@@ -104,7 +104,7 @@ power_hbp_cross$power %>%
 ## Diabetes
 
 ```{r cross_diab, echo = F}
-load(here("meta output/diabetes_cross.Rdata"))
+load(here("chronic/meta output/diabetes_cross.Rdata"))
 
 power_diabetes_cross = power_curve(meta.int.mod3, tau, level = .95)
 obs = power_curve(meta.int.mod3, power_diabetes_cross$obs_tau, level =.95)$power[1,2]
@@ -148,7 +148,7 @@ power_diabetes_cross$power %>%
 ## Heart disease
 
 ```{r cross_heart, echo = F}
-load(here("meta output/heart_cross.Rdata"))
+load(here("chronic/meta output/heart_cross.Rdata"))
 
 power_heart_cross = power_curve(meta.int.mod3, tau, level = .95)
 obs = power_curve(meta.int.mod3, power_heart_cross$obs_tau, level =.95)$power[1,2]
@@ -190,7 +190,7 @@ power_heart_cross$power %>%
 ## Hypertension/high blood pressure
 
 ```{r long_hbp, echo = F}
-load(here("meta output/hbp_long.Rdata"))
+load(here("chronic/meta output/hbp_long.Rdata"))
 
 power_hbp_long = power_curve(meta.int.mod3, tau, level = .95)
 obs = power_curve(meta.int.mod3, power_hbp_long$obs_tau, level =.95)$power[1,2]
@@ -233,7 +233,7 @@ power_hbp_long$power %>%
 ## Diabetes
 
 ```{r long_diab, echo = F}
-load(here("meta output/diabetes_long.Rdata"))
+load(here("chronic/meta output/diabetes_long.Rdata"))
 
 power_diabetes_long = power_curve(meta.int.mod3, tau, level = .95)
 obs = power_curve(meta.int.mod3, power_diabetes_long$obs_tau, level =.95)$power[1,2]
@@ -277,7 +277,7 @@ power_diabetes_long$power %>%
 ## Heart disease
 
 ```{r long_heart, echo = F}
-load(here("meta output/heart_long.Rdata"))
+load(here("chronic/meta output/heart_long.Rdata"))
 
 power_heart_long = power_curve(meta.int.mod3, tau, level = .95)
 obs = power_curve(meta.int.mod3, power_heart_long$obs_tau, level =.95)$power[1,2]

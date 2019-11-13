@@ -22,21 +22,21 @@ study.names = c("BASEII", "EAS", "ELSA", "HRS", "ILSE", "LBC",
                 "LBLS","MAP", "MAS", "MIDUS",
                 "NAS", "OATS", "ROS", "SLS", "WLS")
 
-load(here("created data/BASEII_cc_output_nosrh.Rdata"))
-load(here("created data/EAS_cc_nosrh_output.Rdata"))
-load(here("created data/ELSA_cc_output.Rdata"))
-load(here("created data/HRS_cc_output.Rdata"))
-load(here("created data/ILSE_cc_output_nosrh.Rdata"))
-load(here("created data/LBC_cc_output.Rdata"))
-load(here("created data/LBLS_cc_output.Rdata"))
-load(here("created data/MAP_cc_output.Rdata"))
-load(here("created data/MAS_cc_output_nosrh.Rdata"))
-load(here("created data/MIDUS_cc_output_nosrh.Rdata"))
-load(here("created data/nas_cc_output.Rdata"))
-load(here("created data/OATS_cc_output_nosrh.Rdata"))
-load(here("created data/ROS_cc_output.Rdata"))
-load(here("created data/SLS_cc_output.Rdata"))
-load(here("created data/WLS_cc_output.Rdata"))
+load(here("chronic/created data/BASEII_cc_output_nosrh.Rdata"))
+load(here("chronic/created data/EAS_cc_nosrh_output.Rdata"))
+load(here("chronic/created data/ELSA_cc_output.Rdata"))
+load(here("chronic/created data/HRS_cc_output.Rdata"))
+load(here("chronic/created data/ILSE_cc_output_nosrh.Rdata"))
+load(here("chronic/created data/LBC_cc_output.Rdata"))
+load(here("chronic/created data/LBLS_cc_output.Rdata"))
+load(here("chronic/created data/MAP_cc_output.Rdata"))
+load(here("chronic/created data/MAS_cc_output_nosrh.Rdata"))
+load(here("chronic/created data/MIDUS_cc_output_nosrh.Rdata"))
+load(here("chronic/created data/nas_cc_output.Rdata"))
+load(here("chronic/created data/OATS_cc_output_nosrh.Rdata"))
+load(here("chronic/created data/ROS_cc_output.Rdata"))
+load(here("chronic/created data/SLS_cc_output.Rdata"))
+load(here("chronic/created data/WLS_cc_output.Rdata"))
 
 
 NAS_cc_output = nas_cc_output
@@ -171,13 +171,6 @@ meta.long.heart.neur <- metafor::rma(yi = neur_est_heart,
 
 ```
 
-```{r, echo=FALSE}
-#save to output object for manuscript
-save(list = c("data_cross_main", "data_long_main", 
-              "meta.cross.hbp.neur", "meta.cross.diab.neur", "meta.cross.heart.neur",
-              "meta.long.hbp.neur", "meta.long.diab.neur", "meta.long.heart.neur"), 
-     file = "../meta output/main_neuroticism.Rdata")
-```
 
 ```{r forest, fig.height=15, echo = F}
 neur.data = data.frame(study = c(rep(data_cross_main$name, 3),rep(data_long_main$name, 3)),

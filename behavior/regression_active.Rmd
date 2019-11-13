@@ -30,7 +30,7 @@ study.names = c("BASEII", "EAS","ELSA", "HRS", "ILSE", "LBC",
                 "LBLS", "MAP", "MAS","MIDUS","NAS", "OATS", 
                 "ROS","SLS","WLS")
 
-lapply(here(paste0(study.names, "_behavior.Rdata")), load, .GlobalEnv)
+lapply(here(paste0("behavior/", study.names, "_behavior.Rdata")), load, .GlobalEnv)
 ```
 
 
@@ -243,7 +243,7 @@ The following packages were used to generate this table:
 ```{r ref.label = "load_packages", warning = FALSE, message = FALSE, results = 'hide', eval = F}
 ```
 
-Specify the location of the study analysis objects. The first author stored these in a Box Sync folder, but you may have downloaded these to a different location. The files needed for this table are available at [osf.io/mzfu9](https://osf.io/mzfu9/) in the Individual Study Output folder.
+The files needed for this table are available at [osf.io/mzfu9](https://osf.io/mzfu9/) in the Individual Study Output folder.
 
 
 First we load the individual study analysis objects.

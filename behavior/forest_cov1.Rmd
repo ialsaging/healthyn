@@ -24,9 +24,9 @@ library(here)
 
 
 ```{r load_data, echo = F}
-load(here("created data/meta_smoker_cov1.Rdata"))
-load(here("created data/meta_drinker_cov1.Rdata"))
-load(here("created data/meta_active_cov1.Rdata"))
+load(here("behavior/created data/meta_smoker_cov1.Rdata"))
+load(here("behavior/created data/meta_drinker_cov1.Rdata"))
+load(here("behavior/created data/meta_active_cov1.Rdata"))
 ```
 
 

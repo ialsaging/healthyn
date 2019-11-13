@@ -28,21 +28,21 @@ library(here)
 study.names = c("BASEII", "EAS","ELSA", "HRS", "ILSE", "LBC", 
                 "LBLS","MAP", "MAS", "MIDUS", "NAS", "OATS", "ROS", "SLS","WLS")
 
-load(here("created data/BASEII_cc_output_nosrh.Rdata"))
-load(here("created data/EAS_cc_nosrh_output.Rdata"))
-load(here("created data/ELSA_cc_output_nosrh.Rdata"))
-load(here("created data/HRS_cc_output_nosrh.Rdata"))
-load(here("created data/ILSE_cc_output_nosrh.Rdata"))
-load(here("created data/LBC_cc_output.Rdata"))
-load(here("created data/MAP_cc_output.Rdata"))
-load(here("created data/MAS_cc_output_nosrh.Rdata"))
-load(here("created data/MIDUS_cc_output_nosrh.Rdata"))
-load(here("created data/nas_cc_output_nosrh.Rdata"))
-load(here("created data/OATS_cc_output_nosrh.Rdata"))
-load(here("created data/ROS_cc_output.Rdata"))
-load(here("created data/SLS_cc_output_nosrh.Rdata"))
-load(here("created data/WLS_cc_output_nosrh.Rdata"))
-load(here("created data/LBLS_cc_output_nosrh.Rdata"))
+load(here("chronic/created data/BASEII_cc_output_nosrh.Rdata"))
+load(here("chronic/created data/EAS_cc_nosrh_output.Rdata"))
+load(here("chronic/created data/ELSA_cc_output_nosrh.Rdata"))
+load(here("chronic/created data/HRS_cc_output_nosrh.Rdata"))
+load(here("chronic/created data/ILSE_cc_output_nosrh.Rdata"))
+load(here("chronic/created data/LBC_cc_output.Rdata"))
+load(here("chronic/created data/MAP_cc_output.Rdata"))
+load(here("chronic/created data/MAS_cc_output_nosrh.Rdata"))
+load(here("chronic/created data/MIDUS_cc_output_nosrh.Rdata"))
+load(here("chronic/created data/nas_cc_output_nosrh.Rdata"))
+load(here("chronic/created data/OATS_cc_output_nosrh.Rdata"))
+load(here("chronic/created data/ROS_cc_output.Rdata"))
+load(here("chronic/created data/SLS_cc_output_nosrh.Rdata"))
+load(here("chronic/created data/WLS_cc_output_nosrh.Rdata"))
+load(here("chronic/created data/LBLS_cc_output_nosrh.Rdata"))
 
 #these lines of code simply rename the data objects which are in lower case or have years. this allows for aesthetic consistency in graphs and tables
 NAS_cc_output = nas_cc_output
@@ -84,9 +84,6 @@ describe.df = lapply(X = study.names, FUN = function(x) get(paste0(x,"_cc_output
                     "diabetes", "diabetes_diag", "highblood", "highblood_diag", "heart", "heart_diag"))
 ```
 
-```{r, echo = FALSE}
-save(describe.df, file = here("output/describe.Rdata"))
-```
 
 ```{r rows, echo = F}
 rows.BASEII = which(describe.df$study == "BASEII"); rows.BASEII = c(min(rows.BASEII), max(rows.BASEII))

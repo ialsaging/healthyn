@@ -184,7 +184,7 @@ power_mortality$power %>%
 
 ## Packages
 
-```{r ref.label="load_packages"}
+```{r ref.label="load_packages", eval = F}
 ```
 
 ## Function
@@ -199,18 +199,18 @@ We set the following vector of $\tau$ values to estimate.
 
 ## Main effect: neuroticism
 
-```{r, ref.label="neur_main"}
+```{r, ref.label="neur_main", eval = F}
 ```
 
 
 ## Main effect: concsientiousness
 
-```{r, ref.label="con_main"}
+```{r, ref.label="con_main", eval = F}
 ```
 
 ## Interaction
 
-```{r, ref.label="interaction"}
+```{r, ref.label="interaction", eval = F}
 ```
 
 

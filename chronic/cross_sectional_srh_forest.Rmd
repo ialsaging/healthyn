@@ -23,17 +23,17 @@ library(here)
 ```
 
 ```{r load_data, echo = F}
-load(here("meta output/hbp_cross_srh.Rdata"))
+load(here("chronic/meta output/hbp_cross_srh.Rdata"))
 meta.cross.hbp = meta.int.mod3
 lowc_cross_ci.hbp = meta_lowc_ci_mod3
 hghc_cross_ci.hbp = meta_hghc_ci_mod3
 
-load(here("meta output/diabetes_cross_srh.Rdata"))
+load(here("chronic/meta output/diabetes_cross_srh.Rdata"))
 meta.cross.diabetes = meta.int.mod3
 lowc_cross_ci.diabetes = meta_lowc_ci_mod3
 hghc_cross_ci.diabetes = meta_hghc_ci_mod3
 
-load(here("meta output/heart_cross_srh.Rdata"))
+load(here("chronic/meta output/heart_cross_srh.Rdata"))
 meta.cross.heart = meta.int.mod3
 lowc_cross_ci.heart = meta_lowc_ci_mod3
 hghc_cross_ci.heart = meta_hghc_ci_mod3

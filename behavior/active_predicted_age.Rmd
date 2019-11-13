@@ -22,7 +22,7 @@ library(here)
 ```
 
 ```{r load_data, echo = F}
-load(here("created data/plot_active_age.Rdata"))
+load(here("behavior/created data/plot_active_age.Rdata"))
 ```
 
 ```{r plot, fig.height= 9, echo = F}
@@ -49,7 +49,7 @@ The following packages were used to generate this figure:
 
 The files needed for this table are available at [osf.io/mzfu9](https://osf.io/mzfu9/) in the Meta Analysis Output folder.
 
-First we load the meta-analysis objects. To see how these objects were created, see the meta-analysis scripts titled XXXXX that are available at [osf.io/XXXX](https://osf.io/XXXX/).
+First we load the meta-analysis objects. To see how these objects were created, see the meta-analysis scripts titled `active_meta-analysis.R` that are available at [osf.io/zvsfb](https://osf.io/zvsfb/).
 
 ```{r ref.label = "load_data", eval = F}
 ```

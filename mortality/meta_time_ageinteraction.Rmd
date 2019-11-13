@@ -1,6 +1,11 @@
 ---
-title: "Supplementary: Neuroticism by conscientiousness by age (time since baseline as metric)"
-output: html_document
+title: "Neuroticism by conscientiousness by age (time since baseline as metric)"
+output: 
+  html_document:
+    toc: TRUE
+    toc_depth: 2
+    toc_float: TRUE
+    theme: cosmo
 ---
 This document contains the meta-analysis of the surivival models, using time.age since baseline as the metric of interest and neuroticism by conscientiousness as the predictor of interest.
 
@@ -9,32 +14,24 @@ knitr::opts_chunk$set(echo = TRUE)
 options(knitr.kable.NA = '')
 ```
 
-The following packages were used to generate this table: 
 
-```{r load_packages, warning = FALSE, message = FALSE, results = 'hide'}
+```{r load_packages, warning = FALSE, message = FALSE, results = 'hide', echo = F}
 library(papaja)
 library(tidyverse)
 library(metafor)
 library(knitr)
 library(kableExtra)
+library(here)
 ```
 
-Specify the location of the study analysis objects. The first author stored these in a Box Sync folder, but you may have downloaded these to a different location. The files needed for this table are available at [osf.io/mzfu9](https://osf.io/mzfu9/) in the Individual Study Output folder.
 
-```{r}
-data.path = c("../study output/")
-```
-
-First we load the individual study analysis objects.
-
-```{r, results = 'hide'}
+```{r load_data, echo = F, results = 'hide'}
 study.names = c("EAS", "HRS", "LBC", "LBLS", "MAP", "MAS", "MIDUS", "NAS", "OATS", "ROS", "SLS", "WLS")
 
-lapply(paste0(data.path, study.names, "_survival_output.Rdata"), load, .GlobalEnv)
+lapply(here(paste0("study output/", study.names, "_survival_output.Rdata")), load, .GlobalEnv)
 ```
 
-
-```{r}
+```{r extract, echo = F}
 meta.data.time.age <- data.frame()
 n <- 0
 
@@ -89,7 +86,7 @@ meta.results.time.age <- rma(yi = coef,
                     data = meta.data.time.age)
 ```
 
-```{r}
+```{r meta_analysis, echo = F}
 #meta-analyze HR at low and high c
 
 meta.low30.time.age <- rma(yi = low.c_30.est, 
@@ -170,7 +167,8 @@ meta_hgh.c_70_ci_mod1 = paste0(meta_est_hgh.c_70_mod1, " [",
                            meta_upr_hgh.c_70_mod1, "]")
 
 ```
-```{r, fig.width=8}
+
+```{r forest, echo = F, fig.width=8}
 #forest plot
 
 meta.data.time.age$study = gsub("LBC", "LBC1936", meta.data.time.age$study)
@@ -223,4 +221,27 @@ text(lower.mod1, -2, pos=4, cex=cex.set,
      "; ", I^2, " = ",
      .(formatC(meta.results.time.age$I2, digits=1, format="f")), "%)")))
 
+```
+
+# Code
+
+The following packages were used to generate this table: 
+
+```{r load_packages, warning = FALSE, message = FALSE, results = 'hide', eval = F}
+```
+
+The files needed for this table are available at [osf.io/mzfu9](https://osf.io/mzfu9/) in the Individual Study Output folder.
+
+First we load the individual study analysis objects.
+
+```{r load_data, eval = F, results = 'hide'}
+```
+
+```{r extract, eval = F}
+```
+
+```{r meta_analysis, eval = F}
+```
+
+```{r forest, eval = F, fig.width=8}
 ```
