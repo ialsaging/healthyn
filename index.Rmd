@@ -58,7 +58,7 @@ Here you will find the supplementary analyses and information relevant to each o
 
 ## IALSA coordinators
 
-- Dan K. Mroczek
+- Daniel K. Mroczek
 - Andrea M. Piccinin
 - Graciela Muniz-Terrera
 - Scott M. Hofer
