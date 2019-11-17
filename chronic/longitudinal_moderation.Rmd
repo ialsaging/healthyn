@@ -1,5 +1,5 @@
 ---
-title: 'Forest Plot: Cross Sectional Moderation'
+title: 'Forest Plot: Longitudinal Moderation'
 output: 
   html_document:
     toc: TRUE
