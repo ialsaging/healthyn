@@ -1,0 +1,175 @@
+---
+title: "Meta analysis of interaction (age as metric)"
+output: 
+  html_document:
+    toc: TRUE
+    toc_depth: 2
+    toc_float: TRUE
+    theme: cosmo
+---
+This document contains the meta-analysis of the surivival models, using age in years as the metric of interest and neuroticism by conscientiousness as the predictor of interest.
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+options(knitr.kable.NA = '')
+```
+
+
+```{r load_packages, warning = FALSE, message = FALSE, results = 'hide', echo = F}
+library(papaja)
+library(tidyverse)
+library(metafor)
+library(knitr)
+library(kableExtra)
+library(here)
+```
+
+
+
+```{r load_data, echo = F, results = 'hide'}
+study.names = c("EAS", "HRS", "LBC", "LBLS", "MAP", "MAS", "MIDUS", "NAS", "OATS", "ROS", "SLS", "WLS")
+lapply(here(paste0("mortality/study output/", study.names, "_survival_output.Rdata")), load, .GlobalEnv)
+```
+
+
+```{r bounds, echo = F}
+meta.data.age <- data.frame()
+n <- 0
+
+for(i in study.names){
+  n <- n+1
+  x <- get(paste0(i, "_survival_output"))
+  meta.data.age[n, "study"] <- i
+  meta.data.age[n, "coef"] <- x$age$model2$coef["z.neur:z.con", "coef"]
+  meta.data.age[n, "se"] <- x$age$model2$coef["z.neur:z.con", "se(coef)"]
+  meta.data.age[n, "n"] <- x$age$model2$ntotal
+  
+  meta.data.age[n, "lowC.est"] <- x$HR.N$age$LowC$est
+  meta.data.age[n, "lowC.se"] <- x$HR.N$age$LowC$se
+  meta.data.age[n, "hghC.est"] <- x$HR.N$age$HghC$est
+  meta.data.age[n, "hghC.se"] <- x$HR.N$age$HghC$se
+  
+  #calculate hazard ratios at low and high C
+  lowC.HR <- exp(x$HR.N$age$LowC$est)
+  lowC.HR.lwr <- exp(x$HR.N$age$LowC$est - 1.96*x$HR.N$age$LowC$se)
+  lowC.HR.upr <- exp(x$HR.N$age$LowC$est + 1.96*x$HR.N$age$LowC$se)
+  meta.data.age[n, "lowC.CI"] <- paste0(printnum(lowC.HR)," [",printnum(lowC.HR.lwr),", ",printnum(lowC.HR.upr),"]")
+
+  hghC.HR <- exp(x$HR.N$age$HghC$est)
+  hghC.HR.lwr <- exp(x$HR.N$age$HghC$est - 1.96*x$HR.N$age$HghC$se)
+  hghC.HR.upr <- exp(x$HR.N$age$HghC$est + 1.96*x$HR.N$age$HghC$se)
+  meta.data.age[n, "hghC.CI"] <- paste0(printnum(hghC.HR)," [",printnum(hghC.HR.lwr),", ",printnum(hghC.HR.upr),"]")
+
+}
+
+meta.results.age <- rma(yi = coef, 
+                    sei = se, 
+                    ni = n,  
+                    measure = "RR",
+                    slab = study, 
+                    data = meta.data.age)
+```
+
+```{r meta_analysis, echo = F}
+#meta-analyze HR at low and high c
+
+meta.low.age <- rma(yi = lowC.est, 
+                    sei = lowC.se, 
+                    ni = n,  
+                    measure = "RR",
+                    slab = study, 
+                    data = meta.data.age)
+
+meta.hgh.age <- rma(yi = hghC.est, 
+                    sei = hghC.se, 
+                    ni = n,  
+                    measure = "RR",
+                    slab = study, 
+                    data = meta.data.age)
+
+
+#find plot limits
+max.ci.mod1 = max(exp(meta.data.age$coef+1.96*meta.data.age$se))
+min.ci.mod1 = min(exp(meta.data.age$coef-1.96*meta.data.age$se))
+range.mod1 = max.ci.mod1-min.ci.mod1
+
+lower.mod1 = min.ci.mod1-(range.mod1*2.5)
+upper.mod1 = max.ci.mod1+(range.mod1)
+
+cex.set = .7
+
+#estimate position of extra information
+pos.mod1 = min.ci.mod1-lower.mod1
+pos.mod1 = pos.mod1/11
+pos.mod1 = c(lower.mod1+3*pos.mod1,
+             lower.mod1+6*pos.mod1,
+             lower.mod1+9*pos.mod1)
+
+#extract weighted values at -1 and +1 sd
+meta_est_lowc_mod1 = printnum(exp(meta.low.age$b))
+meta_lwr_lowc_mod1 = printnum(exp(meta.low.age$ci.lb))
+meta_upr_lowc_mod1 = printnum(exp(meta.low.age$ci.ub))
+meta_lowc_ci_mod1 = paste0(meta_est_lowc_mod1, " [",
+                           meta_lwr_lowc_mod1, ", ",
+                           meta_upr_lowc_mod1, "]")
+
+meta_est_hghc_mod1 = printnum(exp(meta.hgh.age$b))
+meta_lwr_hghc_mod1 = printnum(exp(meta.hgh.age$ci.lb))
+meta_upr_hghc_mod1 = printnum(exp(meta.hgh.age$ci.ub))
+meta_hghc_ci_mod1 = paste0(meta_est_hghc_mod1, " [",
+                           meta_lwr_hghc_mod1, ", ",
+                           meta_upr_hghc_mod1, "]")
+
+meta.data.age$study = gsub("LBC", "LBC1936", meta.data.age$study)
+
+#forest plot
+forest(meta.results.age,
+       xlim = c(lower.mod1, upper.mod1),
+       slab = meta.data.age$study,
+       cex = cex.set,
+       transf=exp,
+       refline = 1,
+       ilab = meta.data.age[,c("n",
+                                "lowC.CI",
+                                "hghC.CI")],
+       ilab.xpos = pos.mod1)
+
+#additional text
+text(c(pos.mod1), length(study.names)+1.5,
+     c("N", "-1SD Con", "+1SD Con"), cex = cex.set)
+text((pos.mod1[2]+pos.mod1[3])/2, length(study.names)+2.5,
+     "Neuroticism Hazard Ratio", cex = cex.set)
+text(lower.mod1, length(study.names)+1.5,
+     "Study", cex = cex.set, pos = 4)
+text(upper.mod1, length(study.names)+1.5,
+     "Interaction Hazard Ratio [95% CI]", cex = cex.set, pos=2)
+text(pos.mod1[2:3], -1,
+     c(meta_lowc_ci_mod1, meta_hghc_ci_mod1), cex = cex.set)
+text(lower.mod1, -2, pos=4, cex=cex.set, 
+     bquote(paste("(Q = ",
+     .(formatC(meta.results.age$QE, digits=2, format="f")), ", df = ", .(meta.results.age$k - meta.results.age$p),
+     ", p = ", .(formatC(meta.results.age$QEp, digits=2, format="f")), "; ", I^2, " = ",
+     .(formatC(meta.results.age$I2, digits=1, format="f")), "%)")))
+
+```
+
+# Code
+
+The following packages were used to generate this table: 
+
+```{r load_packages, warning = FALSE, message = FALSE, results = 'hide', eval = F}
+```
+
+The files needed for this table are available at [osf.io/mzfu9](https://osf.io/mzfu9/) in the Individual Study Output folder.
+
+First we load the individual study analysis objects.
+
+```{r load_data, eval = F, results = 'hide'}
+```
+
+
+```{r bounds, eval = F}
+```
+
+```{r meta_analysis, eval = F}
+```

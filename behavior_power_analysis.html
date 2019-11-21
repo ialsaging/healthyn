@@ -11,7 +11,7 @@
 
 
 
-<title>Healthy Neuroticism IDA</title>
+<title>Power analysis for heterogeneity in meta-analysis</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -621,70 +621,185 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Healthy Neuroticism IDA</h1>
-<h3 class="subtitle">Coordinated analysis project</h3>
+<h1 class="title toc-ignore">Power analysis for heterogeneity in meta-analysis</h1>
 
 </div>
 
 
-<p>This website contains the supplemental material for the three-study series investigating the two-way interaction of neuroticism and conscientiousness in relationship to health outcomes. These three studies examined mortality, the prevelance and onset of chronic health conditions, and engagement in health behaviors across more than a dozen longitudinal datasets.</p>
-<div id="background-information" class="section level1">
-<h1>Background information</h1>
-<p>This two-way interaction is the most popular operationalization of the “healthy neuroticism” theory (<a href="https://onlinelibrary.wiley.com/doi/abs/10.1111/1467-6494.00127?casa_token=-oILrBaXLQcAAAAA:f2aHtZekRCpwhREgSJZCk3XMU5YkZ4DZwP3jb4IfltRAeaiM6075bPVBpXf2JvcHQOq1B23W8n-ar_U">Friedman, 2000</a>) and has been shown to predict lower levels of smoking (<a href="https://www.researchgate.net/profile/Margarete_Vollrath/publication/222131832_Who_takes_health_risks_A_probe_into_8_personality_types/links/5a1c02b5aca272df080f48e9/Who-takes-health-risks-A-probe-into-8-personality-types.pdf">Vollrath &amp; Torgersen, 2002</a>; <a href="https://onlinelibrary.wiley.com/doi/full/10.1111/j.1360-0443.2004.00687.x?casa_token=Xnz0prV8whkAAAAA:wrHEureYLAT6CtIzVlG9Y8FNAP8-zKLMnYGZgpUEUwFxsbeNnjwhxYyLhT1vu5bSBclBzZitf1WlKcE">Terracciano &amp; Costa, 2004</a>; <a href="https://s3.amazonaws.com/academia.edu.documents/46661299/Identification_of_the_healthy_neurotic_P20160620-8552-139py8l.pdf?response-content-disposition=inline%3B%20filename%3DIdentification_of_the_healthy_neurotic_P.pdf&amp;X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAIWOWYYGZ2Y53UL3A%2F20191113%2Fus-east-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20191113T025800Z&amp;X-Amz-Expires=3600&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Signature=96a987726ed7f39c745b54b77ea953b304694f9707be33990e55161d40a9e558">Weston &amp; Jackson, 2015</a>), alcohol consumption (<a href="https://www.ncbi.nlm.nih.gov/pubmed/22773867">Turiano, Whiteman, Hampson, Roberts, 142 &amp; Mroczek, 2012</a>), lower levels of IL-6 (<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3545072/">Turiano et al., 2013</a>), and lower rates of mortality (<a href="https://www.ncbi.nlm.nih.gov/pubmed/20433617">Friedman, Kern, &amp; Reynolds, 2010</a>). However, there is reason to believe the file drawer for these analyses is large, and that results are mixed.</p>
+<p>This document contains the power analysis for the primary models of interest. For each model, we display the power to detect significant <span class="math inline">\(\tau\)</span> values, or different standard deviations of between-study effects (reported in the metric of odds ratios). We also mark the level of <span class="math inline">\(tau\)</span> estimated by our model and the power to detect this effect. We note here that we are well powered to detect between-study variability that is commonly found in psychology (<a href="https://openpsychologydata.metajnl.com/articles/10.5334/jopd.33/">van Erp, Verhagen, Grasman, &amp; Wagenmakers, 2017</a>).</p>
+<p>Many thanks to Brenton Wiernik, who developed the code to calculate power based on our analyses!</p>
+<div id="smoking" class="section level1">
+<h1>Smoking</h1>
+<p><img src="behavior_power_analysis_files/figure-html/smoker-1.png" width="672" /></p>
 </div>
-<div id="the-current-project" class="section level1">
-<h1>The current project</h1>
-<p>To estimate the population effect size of the healthy neuroticism interaction, we used a multi-study coordinated analysis. While healthy neuroticism has been broadly defined to include interactions with age, gender, and self-rated health, we focused on the moderation by conscientiousness to limit the scope of the project and to interrogate the most popular theory. Study sites in the Integrative Analysis of Longitudinal Study of Aging and Dementia (IALSA) network were invited to participate provided they had measures of conscientiousness, neuroticism and at least one health variable of interest assessed concurrently.</p>
+<div id="alcohol-consumption" class="section level1">
+<h1>Alcohol consumption</h1>
+<p><img src="behavior_power_analysis_files/figure-html/drinker-1.png" width="672" /></p>
 </div>
-<div id="coordinating-analyses" class="section level1">
-<h1>Coordinating analyses</h1>
-<p>Some datasets in the IALSA network are controlled by data-sharing agreements that prohibit sending data to analysts outside the organization. Consequently, a master data analyst wrote template scripts that would conduct identical (or near identical) analyses across all datasets. Individual study sites assigned study-specific data analysts to prepare the data for analysis, including ensuring data were appropriately structured and that variables were named to match the analysis template. All data analysts met in Chicago, IL USA in January 2018, where study-analysts downloaded the template scripts and analyzed their data. These scripts aggregate summary statistics, which were uploaded to the Open Science Framework. The master data analyst downloaded these output files and analyzed them using a separate script, which conducted the meta-analysis.</p>
-<p>All scripts, including the template script, the study-specific scripts (which were sometimes adjusted to include appropriate covariates and outcomes), the study-output files, and the meta-analytic files and outputs are all available on OSF. A table of contents for those files is included for each study on this website.</p>
+<div id="physical-activity" class="section level1">
+<h1>Physical activity</h1>
+<p><img src="behavior_power_analysis_files/figure-html/active-1.png" width="672" /></p>
 </div>
-<div id="this-website" class="section level1">
-<h1>This website</h1>
-<p>Here you will find the supplementary analyses and information relevant to each of the three healthy neuroticism projects. These files have been formatted to allow for quick assessment of the information. In addition, all code used to generate these files is available.</p>
+<div id="code" class="section level1">
+<h1>Code</h1>
+<div id="packages" class="section level2">
+<h2>Packages</h2>
+<pre class="r"><code>library(tidyverse)
+library(metafor)
+library(papaja)
+library(here)</code></pre>
 </div>
-<div id="key-researchers" class="section level1">
-<h1>Key researchers</h1>
-<div id="project-leaders" class="section level2">
-<h2>Project leaders</h2>
-<ul>
-<li>Eileen K. Graham</li>
-<li>Nicholas A. Turiano</li>
-<li>Sara J. Weston</li>
-</ul>
+<div id="function" class="section level2">
+<h2>Function</h2>
+<pre class="r"><code># Based on methods described by Hedges and Pigott, https://doi.org/10.1037/1082-989X.9.4.426, p. 438
+# Written 2019-10-25 by Brenton M. Wiernik
+# Licensed GPL v3.0
+
+power_curve &lt;- function(object, tau, level = .95) {
+  if (! inherits(object, &quot;rma.uni&quot;)) stop(&quot;&#39;object&#39; must be an object of class &#39;rma.uni&#39;&quot;)
+  tau2 &lt;- tau^2
+  obs_tau2 &lt;- object$tau2
+  obs_tau &lt;- sqrt(obs_tau2)
+  obs_H2 &lt;- object$H2
+  s2 &lt;- obs_tau2 / (obs_H2 - 1)
+  df &lt;- object$k - object$p
+  crit &lt;- qchisq(.95, df)
+  wi &lt;- 1 / object$vi
+  a &lt;- sum(wi) - sum(wi^2) / sum(wi)
+  mu_q &lt;- function(tau2) a * tau2 + df
+  b &lt;- function(tau2) df + 2 * a * tau2 + 
+    (sum(wi^2) - 2 * sum(wi^3) / sum(wi) + 
+       sum(wi^2)^2 / sum(wi)^2) * tau2^2
+  var_q &lt;- function(tau2) 2 * b(tau2)
+  r &lt;- function(tau2) var_q(tau2) / (2 * mu_q(tau2))
+  s &lt;- function(tau2) 2 * mu_q(tau2)^2 / var_q(tau2)
+  H &lt;- function(tau2) pchisq(crit / r(tau2), s(tau2))
+  power &lt;- 1 - H(tau2)
+  out &lt;- list(obs_tau = obs_tau, power = data.frame(tau = tau, power = power))
+  return(out)
+}</code></pre>
+<p>We set a vector of <span class="math inline">\(\tau\)</span> values to evaluate.</p>
+<pre class="r"><code>tau = seq(0, .5, .01) # possible values of the standard deviation of effect sizes</code></pre>
 </div>
-<div id="master-data-analyst" class="section level2">
-<h2>Master data analyst</h2>
-<ul>
-<li>Sara J. Weston</li>
-</ul>
+<div id="smoking-1" class="section level2">
+<h2>Smoking</h2>
+<pre class="r"><code>load(here(&quot;behavior/created data/meta_smoker_intr.Rdata&quot;))
+
+power_smoker = power_curve(smoker.intr.rma, tau, level = .95)
+obs = power_curve(smoker.intr.rma, power_smoker$obs_tau, level =.95)$power[1,2]
+
+#for which tau are we powered?
+pwr.95=.95
+pwr.99=.99
+tau.95 = which(abs(power_smoker$power$power-pwr.95)==min(abs(power_smoker$power$power-pwr.95)))
+pwr.95 = power_smoker$power$power[tau.95]
+tau.95 = power_smoker$power$tau[tau.95]
+tau.99 = which(abs(power_smoker$power$power-pwr.99)==min(abs(power_smoker$power$power-pwr.99)))
+pwr.99 = power_smoker$power$power[tau.99]
+tau.99 = power_smoker$power$tau[tau.99]
+
+
+power_smoker$power %&gt;%
+  mutate(tau_d = tau/(pi/sqrt(3))) %&gt;%
+  ggplot(aes(x = tau_d, y = power)) +
+  geom_point()+
+  geom_line()+
+  geom_vline(aes(xintercept = power_smoker$obs_tau/(pi/sqrt(3))), color = &quot;red&quot;) +
+  geom_vline(aes(xintercept = tau.95/(pi/sqrt(3))), color = &quot;red&quot;) +
+  geom_vline(aes(xintercept = tau.99/(pi/sqrt(3))), color = &quot;red&quot;) +
+  geom_label(aes(x = power_smoker$obs_tau/(pi/sqrt(3)), y = obs, 
+                 label = paste(&quot;power =&quot;, round(obs, 3), 
+                               &quot;\ntau = &quot;, round( power_smoker$obs_tau/(pi/sqrt(3)), 3))), hjust = &quot;inward&quot;)+
+  geom_label(aes(x = tau.95/(pi/sqrt(3)), y = pwr.95-.3, 
+                 label = paste(&quot;power =&quot;, round(pwr.95, 3), 
+                               &quot;\ntau = &quot;, round( tau.95/(pi/sqrt(3)), 3))), hjust = &quot;inward&quot;)+
+  geom_label(aes(x = tau.99/(pi/sqrt(3)), y = pwr.99-.15, 
+                 label = paste(&quot;power =&quot;, round(pwr.99, 3), 
+                               &quot;\ntau = &quot;, round( tau.99/(pi/sqrt(3)), 3))), hjust = &quot;inward&quot;)+
+  labs(x = &quot;Standard deviation of Odds Ratios between studies&quot;, 
+       y = &quot;Power | alpha = .05&quot;,
+       title = &quot;Power analyses interaction term in smoking models&quot;) +
+  theme_bw()</code></pre>
 </div>
-<div id="study-specific-data-analysts" class="section level2">
-<h2>Study specific data analysts</h2>
-<ul>
-<li>Damaris Aschwanden</li>
-<li>Tom Booth</li>
-<li>Fleur Harrison</li>
-<li>Bryan D. James</li>
-<li>Nathan A. Lewis</li>
-<li>Steven R. Makkar</li>
-<li>Swantje Mueller</li>
-<li>Avron Spiro</li>
-<li>Kristi M. Wisniewski</li>
-<li>Tomiko Yoneda</li>
-<li>Ruixue Zhaoyang</li>
-</ul>
+<div id="alcohol-consumption-1" class="section level2">
+<h2>Alcohol consumption</h2>
+<pre class="r"><code>load(here(&quot;behavior/created data/meta_drinker_intr.Rdata&quot;))
+
+power_drinker = power_curve(drinker.intr.rma, tau, level = .95)
+obs = power_curve(drinker.intr.rma, power_drinker$obs_tau, level =.95)$power[1,2]
+
+#for which tau are we powered?
+pwr.95=.95
+pwr.99=.99
+tau.95 = which(abs(power_drinker$power$power-pwr.95)==min(abs(power_drinker$power$power-pwr.95)))
+pwr.95 = power_drinker$power$power[tau.95]
+tau.95 = power_drinker$power$tau[tau.95]
+tau.99 = which(abs(power_drinker$power$power-pwr.99)==min(abs(power_drinker$power$power-pwr.99)))
+pwr.99 = power_drinker$power$power[tau.99]
+tau.99 = power_drinker$power$tau[tau.99]
+
+
+power_drinker$power %&gt;%
+  mutate(tau_d = tau/(pi/sqrt(3))) %&gt;%
+  ggplot(aes(x = tau_d, y = power)) +
+  geom_point()+
+  geom_line()+
+  geom_vline(aes(xintercept = power_drinker$obs_tau/(pi/sqrt(3))), color = &quot;red&quot;) +
+  geom_vline(aes(xintercept = tau.95/(pi/sqrt(3))), color = &quot;red&quot;) +
+  geom_vline(aes(xintercept = tau.99/(pi/sqrt(3))), color = &quot;red&quot;) +
+  geom_label(aes(x = power_drinker$obs_tau/(pi/sqrt(3)), y = obs, 
+                 label = paste(&quot;power =&quot;, round(obs, 3), 
+                               &quot;\ntau = &quot;, round( power_drinker$obs_tau/(pi/sqrt(3)), 3))), hjust = &quot;inward&quot;)+
+  geom_label(aes(x = tau.95/(pi/sqrt(3)), y = pwr.95-.3, 
+                 label = paste(&quot;power =&quot;, round(pwr.95, 3), 
+                               &quot;\ntau = &quot;, round( tau.95/(pi/sqrt(3)), 3))), hjust = &quot;inward&quot;)+
+  geom_label(aes(x = tau.99/(pi/sqrt(3)), y = pwr.99-.15, 
+                 label = paste(&quot;power =&quot;, round(pwr.99, 3), 
+                               &quot;\ntau = &quot;, round( tau.99/(pi/sqrt(3)), 3))), hjust = &quot;inward&quot;)+
+  labs(x = &quot;Standard deviation of Odds Ratios between studies&quot;, 
+       y = &quot;Power | alpha = .05&quot;,
+       title = &quot;Power analyses interaction term in alcohol consumption models&quot;) +
+  theme_bw()</code></pre>
 </div>
-<div id="ialsa-coordinators" class="section level2">
-<h2>IALSA coordinators</h2>
-<ul>
-<li>Daniel K. Mroczek</li>
-<li>Andrea M. Piccinin</li>
-<li>Graciela Muniz-Terrera</li>
-<li>Scott M. Hofer</li>
-</ul>
+<div id="phsyical-activity" class="section level2">
+<h2>Phsyical activity</h2>
+<pre class="r"><code>load(here(&quot;behavior/created data/meta_active_intr.Rdata&quot;))
+
+power_active = power_curve(active.intr.rma, tau, level = .95)
+obs = power_curve(active.intr.rma, power_active$obs_tau, level =.95)$power[1,2]
+
+#for which tau are we powered?
+pwr.95=.95
+pwr.99=.99
+tau.95 = which(abs(power_active$power$power-pwr.95)==min(abs(power_active$power$power-pwr.95)))
+pwr.95 = power_active$power$power[tau.95]
+tau.95 = power_active$power$tau[tau.95]
+tau.99 = which(abs(power_active$power$power-pwr.99)==min(abs(power_active$power$power-pwr.99)))
+pwr.99 = power_active$power$power[tau.99]
+tau.99 = power_active$power$tau[tau.99]
+
+
+power_active$power %&gt;%
+  mutate(tau_d = tau/(pi/sqrt(3))) %&gt;%
+  ggplot(aes(x = tau_d, y = power)) +
+  geom_point()+
+  geom_line()+
+  geom_vline(aes(xintercept = power_active$obs_tau/(pi/sqrt(3))), color = &quot;red&quot;) +
+  geom_vline(aes(xintercept = tau.95/(pi/sqrt(3))), color = &quot;red&quot;) +
+  geom_vline(aes(xintercept = tau.99/(pi/sqrt(3))), color = &quot;red&quot;) +
+  geom_label(aes(x = power_active$obs_tau/(pi/sqrt(3)), y = obs, 
+                 label = paste(&quot;power =&quot;, round(obs, 3), 
+                               &quot;\ntau = &quot;, round( power_active$obs_tau/(pi/sqrt(3)), 3))), hjust = &quot;inward&quot;)+
+  geom_label(aes(x = tau.95/(pi/sqrt(3)), y = pwr.95-.3, 
+                 label = paste(&quot;power =&quot;, round(pwr.95, 3), 
+                               &quot;\ntau = &quot;, round( tau.95/(pi/sqrt(3)), 3))), hjust = &quot;inward&quot;)+
+  geom_label(aes(x = tau.99/(pi/sqrt(3)), y = pwr.99-.15, 
+                 label = paste(&quot;power =&quot;, round(pwr.99, 3), 
+                               &quot;\ntau = &quot;, round( tau.99/(pi/sqrt(3)), 3))), hjust = &quot;inward&quot;)+
+  labs(x = &quot;Standard deviation of Odds Ratios between studies&quot;, 
+       y = &quot;Power | alpha = .05&quot;,
+       title = &quot;Power analyses interaction term in physical activity models&quot;) +
+  theme_bw()</code></pre>
 </div>
 </div>
 

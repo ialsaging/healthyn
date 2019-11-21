@@ -1,0 +1,3099 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>R Package Information</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">IALSA: Healthy Neuroticism</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Mortality
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="mortality_descriptives.html">Descriptive statistics</a>
+    </li>
+    <li>
+      <a href="mortality_survival_stats.html">Survival statistics</a>
+    </li>
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Survival since baseline (published)</a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="mortality_meta_time.html">Forest plot of interaction</a>
+        </li>
+        <li>
+          <a href="mortality_meta_time_maineffects.html">Main effects of personality</a>
+        </li>
+        <li>
+          <a href="mortality_meta_time_hrPlot.html">Hazard ratio plot</a>
+        </li>
+        <li>
+          <a href="mortality_meta_time_survivalPlot.html">Surival plot</a>
+        </li>
+        <li>
+          <a href="mortality_moderation.html">Moderation by study properties</a>
+        </li>
+        <li>
+          <a href="mortality_meta_time_gender.html">Moderated by gender</a>
+        </li>
+        <li>
+          <a href="mortality_meta_time_ageinteraction.html">Moderated by age</a>
+        </li>
+        <li>
+          <a href="mortality_power_analysis.html">Power analysis</a>
+        </li>
+      </ul>
+    </li>
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Survival by age</a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="mortality_meta_age.html">Forest plot of interaction</a>
+        </li>
+        <li>
+          <a href="mortality_meta_age_hrPlot.html">Hazard ratio plot</a>
+        </li>
+        <li>
+          <a href="mortality_meta_age_gender">Moderated by gender</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Chronic Conditions
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="chronic_descriptive_statistics.html">Descriptive statistics</a>
+    </li>
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Main effects</a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="chronic_main_neuroticism.html">Neuroticism</a>
+        </li>
+        <li>
+          <a href="chronic_main_conscientiousness.html">Conscientiousness</a>
+        </li>
+      </ul>
+    </li>
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Cross-sectional analyses</a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="chronic_cross_sectional_forest.html">Forest plot (published)</a>
+        </li>
+        <li>
+          <a href="chronic_cross_sectional_predicted.html">Prediced values by study</a>
+        </li>
+        <li>
+          <a href="chronic_cross_sectional_age_forest.html">Moderated by age</a>
+        </li>
+        <li>
+          <a href="chronic_cross_sectional_srh_forest.html">Controlling for self-rated health</a>
+        </li>
+        <li>
+          <a href="chronic_cross_sectional_moderation.html">Moderation by study variables</a>
+        </li>
+      </ul>
+    </li>
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Longitudinal analyses</a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="chronic_longitudinal_forest.html">Forest plot (published)</a>
+        </li>
+        <li>
+          <a href="chronic_longitudinal_predicted.html">Prediced values by study</a>
+        </li>
+        <li>
+          <a href="chronic_longitudinal_age_forest.html">Moderated by age</a>
+        </li>
+        <li>
+          <a href="chronic_longitudinal_srh_forest.html">Controlling for self-rated health</a>
+        </li>
+        <li>
+          <a href="chronic_longitudinal_moderation.html">Moderation by study variables</a>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <a href="chronic_power_analysis.html">Power analysis</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Health Behavior
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="behavior_descriptive_statistics.html">Descriptive statistics</a>
+    </li>
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Forest plots</a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="behavior_forest_cov2.html">Interaction (published)</a>
+        </li>
+        <li>
+          <a href="behavior_forest_cov1.html">Interaction (only controlling for demographics)</a>
+        </li>
+        <li>
+          <a href="behavior_forest_intr.html">Interaction (no covariates)</a>
+        </li>
+        <li>
+          <a href="behavior_forest_main_n.html">Main effect of neuroticism</a>
+        </li>
+        <li>
+          <a href="behavior_forest_main_c.html">Main effect of conscientiousness</a>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <a href="behavior_power_analysis.html">Power analysis</a>
+    </li>
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Outcome: Smoking</a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="behavior_regression_smoker.html">Regression models by study</a>
+        </li>
+        <li>
+          <a href="behavior_smoker_predicted.html">Predicted values from regressions</a>
+        </li>
+        <li>
+          <a href="behavior_smoker_predicted_age.html">Predicted values from three-way interaction with age</a>
+        </li>
+        <li>
+          <a href="behavior_smoker_moderation.html">Moderation by personality scale</a>
+        </li>
+      </ul>
+    </li>
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Outcome: Alcohol consumption</a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="behavior_regression_drinker.html">Regression models by study</a>
+        </li>
+        <li>
+          <a href="behavior_drinker_predicted.html">Predicted values from regressions</a>
+        </li>
+        <li>
+          <a href="behavior_drinker_predicted_age.html">Predicted values from three-way interaction with age</a>
+        </li>
+        <li>
+          <a href="behavior_drinker_moderation.html">Moderation by personality scale</a>
+        </li>
+      </ul>
+    </li>
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Outcome: Physical activity</a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="behavior_regression_active.html">Regression models by study</a>
+        </li>
+        <li>
+          <a href="behavior_active_predicted.html">Predicted values from regressions</a>
+        </li>
+        <li>
+          <a href="behavior_active_predicted_age.html">Predicted values from three-way interaction with age</a>
+        </li>
+        <li>
+          <a href="behavior_active_moderation.html">Moderation by personality scale</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    All
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="chronic_packages.html">R Packages Used</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/ilsaging/healthyn">
+    <span class="fa fa-github"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">R Package Information</h1>
+
+</div>
+
+
+<p>This document contains the R package information for the analyses performed for the chronic conditions study.</p>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+study
+</th>
+<th style="text-align:left;">
+collate
+</th>
+<th style="text-align:left;">
+date
+</th>
+<th style="text-align:left;">
+language
+</th>
+<th style="text-align:left;">
+system
+</th>
+<th style="text-align:left;">
+tz
+</th>
+<th style="text-align:left;">
+ui
+</th>
+<th style="text-align:left;">
+version
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+meta
+</td>
+<td style="text-align:left;">
+en_US.UTF-8
+</td>
+<td style="text-align:left;">
+2019-11-20
+</td>
+<td style="text-align:left;">
+(EN)
+</td>
+<td style="text-align:left;">
+x86_64, darwin15.6.0
+</td>
+<td style="text-align:left;">
+America/Los_Angeles
+</td>
+<td style="text-align:left;">
+X11
+</td>
+<td style="text-align:left;">
+R version 3.6.1 (2019-07-05)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+BASEII
+</td>
+<td style="text-align:left;">
+German_Germany.1252
+</td>
+<td style="text-align:left;">
+2018-02-03
+</td>
+<td style="text-align:left;">
+(EN)
+</td>
+<td style="text-align:left;">
+x86_64, mingw32
+</td>
+<td style="text-align:left;">
+Europe/Berlin
+</td>
+<td style="text-align:left;">
+RStudio (1.0.153)
+</td>
+<td style="text-align:left;">
+R version 3.4.3 (2017-11-30)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+EAS
+</td>
+<td style="text-align:left;">
+English_United States.1252
+</td>
+<td style="text-align:left;">
+2018-01-15
+</td>
+<td style="text-align:left;">
+(EN)
+</td>
+<td style="text-align:left;">
+x86_64, mingw32
+</td>
+<td style="text-align:left;">
+America/Chicago
+</td>
+<td style="text-align:left;">
+RStudio (1.1.383)
+</td>
+<td style="text-align:left;">
+R version 3.4.3 (2017-11-30)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+ELSA
+</td>
+<td style="text-align:left;">
+English_Canada.1252
+</td>
+<td style="text-align:left;">
+2018-01-31
+</td>
+<td style="text-align:left;">
+(EN)
+</td>
+<td style="text-align:left;">
+x86_64, mingw32
+</td>
+<td style="text-align:left;">
+America/Los_Angeles
+</td>
+<td style="text-align:left;">
+RStudio (1.1.383)
+</td>
+<td style="text-align:left;">
+R version 3.4.3 (2017-11-30)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+HRS
+</td>
+<td style="text-align:left;">
+en_US.UTF-8
+</td>
+<td style="text-align:left;">
+2018-02-08
+</td>
+<td style="text-align:left;">
+(EN)
+</td>
+<td style="text-align:left;">
+x86_64, darwin15.6.0
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+RStudio (1.1.383)
+</td>
+<td style="text-align:left;">
+R version 3.4.2 (2017-09-28)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+ILSE
+</td>
+<td style="text-align:left;">
+English_United States.1252
+</td>
+<td style="text-align:left;">
+2018-02-01
+</td>
+<td style="text-align:left;">
+(EN)
+</td>
+<td style="text-align:left;">
+x86_64, mingw32
+</td>
+<td style="text-align:left;">
+Europe/Berlin
+</td>
+<td style="text-align:left;">
+RStudio (1.1.419)
+</td>
+<td style="text-align:left;">
+R version 3.4.3 (2017-11-30)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+LBC
+</td>
+<td style="text-align:left;">
+English_United Kingdom.1252
+</td>
+<td style="text-align:left;">
+2018-10-19
+</td>
+<td style="text-align:left;">
+(EN)
+</td>
+<td style="text-align:left;">
+x86_64, mingw32
+</td>
+<td style="text-align:left;">
+Europe/London
+</td>
+<td style="text-align:left;">
+RStudio (1.1.456)
+</td>
+<td style="text-align:left;">
+R version 3.5.1 (2018-07-02)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+LBLS
+</td>
+<td style="text-align:left;">
+en_US.UTF-8
+</td>
+<td style="text-align:left;">
+2018-02-06
+</td>
+<td style="text-align:left;">
+(EN)
+</td>
+<td style="text-align:left;">
+x86_64, darwin13.4.0
+</td>
+<td style="text-align:left;">
+America/Los_Angeles
+</td>
+<td style="text-align:left;">
+RStudio (1.0.143)
+</td>
+<td style="text-align:left;">
+R version 3.3.2 (2016-10-31)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+MAP
+</td>
+<td style="text-align:left;">
+English_United States.1252
+</td>
+<td style="text-align:left;">
+2018-02-07
+</td>
+<td style="text-align:left;">
+(EN)
+</td>
+<td style="text-align:left;">
+x86_64, mingw32
+</td>
+<td style="text-align:left;">
+America/Chicago
+</td>
+<td style="text-align:left;">
+RStudio (1.1.383)
+</td>
+<td style="text-align:left;">
+R version 3.4.3 (2017-11-30)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+MAS
+</td>
+<td style="text-align:left;">
+English_Australia.1252
+</td>
+<td style="text-align:left;">
+2018-03-04
+</td>
+<td style="text-align:left;">
+(EN)
+</td>
+<td style="text-align:left;">
+x86_64, mingw32
+</td>
+<td style="text-align:left;">
+Australia/Sydney
+</td>
+<td style="text-align:left;">
+RStudio (1.1.383)
+</td>
+<td style="text-align:left;">
+R version 3.4.3 (2017-11-30)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+MIDUS
+</td>
+<td style="text-align:left;">
+en_US.UTF-8
+</td>
+<td style="text-align:left;">
+2018-04-27
+</td>
+<td style="text-align:left;">
+(EN)
+</td>
+<td style="text-align:left;">
+x86_64, darwin15.6.0
+</td>
+<td style="text-align:left;">
+America/Chicago
+</td>
+<td style="text-align:left;">
+RStudio (1.1.442)
+</td>
+<td style="text-align:left;">
+R version 3.4.4 (2018-03-15)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+NAS
+</td>
+<td style="text-align:left;">
+en_US.UTF-8
+</td>
+<td style="text-align:left;">
+2018-01-26
+</td>
+<td style="text-align:left;">
+(EN)
+</td>
+<td style="text-align:left;">
+x86_64, darwin15.6.0
+</td>
+<td style="text-align:left;">
+America/Chicago
+</td>
+<td style="text-align:left;">
+RStudio (1.1.383)
+</td>
+<td style="text-align:left;">
+R version 3.4.3 (2017-11-30)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+OATS
+</td>
+<td style="text-align:left;">
+English_Australia.1252
+</td>
+<td style="text-align:left;">
+2018-02-01
+</td>
+<td style="text-align:left;">
+(EN)
+</td>
+<td style="text-align:left;">
+x86_64, mingw32
+</td>
+<td style="text-align:left;">
+America/New_York
+</td>
+<td style="text-align:left;">
+RStudio (1.1.383)
+</td>
+<td style="text-align:left;">
+R version 3.4.3 (2017-11-30)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+ROS
+</td>
+<td style="text-align:left;">
+English_United States.1252
+</td>
+<td style="text-align:left;">
+2018-02-02
+</td>
+<td style="text-align:left;">
+(EN)
+</td>
+<td style="text-align:left;">
+x86_64, mingw32
+</td>
+<td style="text-align:left;">
+America/Chicago
+</td>
+<td style="text-align:left;">
+RStudio (1.1.383)
+</td>
+<td style="text-align:left;">
+R version 3.4.3 (2017-11-30)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+SLS
+</td>
+<td style="text-align:left;">
+German_Germany.1252
+</td>
+<td style="text-align:left;">
+2018-07-12
+</td>
+<td style="text-align:left;">
+(EN)
+</td>
+<td style="text-align:left;">
+x86_64, mingw32
+</td>
+<td style="text-align:left;">
+Europe/Berlin
+</td>
+<td style="text-align:left;">
+RStudio (1.0.153)
+</td>
+<td style="text-align:left;">
+R version 3.4.3 (2017-11-30)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+WLS
+</td>
+<td style="text-align:left;">
+English_Canada.1252
+</td>
+<td style="text-align:left;">
+2018-02-03
+</td>
+<td style="text-align:left;">
+(EN)
+</td>
+<td style="text-align:left;">
+x86_64, mingw32
+</td>
+<td style="text-align:left;">
+America/Los_Angeles
+</td>
+<td style="text-align:left;">
+RStudio (1.0.153)
+</td>
+<td style="text-align:left;">
+R version 3.4.3 (2017-11-30)
+</td>
+</tr>
+</tbody>
+</table>
+<pre><code>## Joining, by = c(&quot;package&quot;, &quot;*&quot;, &quot;version&quot;, &quot;study&quot;)</code></pre>
+<table class="table" style="font-size: 9px; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+package
+</th>
+<th style="text-align:left;">
+meta
+</th>
+<th style="text-align:left;">
+BASEII
+</th>
+<th style="text-align:left;">
+EAS
+</th>
+<th style="text-align:left;">
+ELSA
+</th>
+<th style="text-align:left;">
+HRS
+</th>
+<th style="text-align:left;">
+ILSE
+</th>
+<th style="text-align:left;">
+LBC
+</th>
+<th style="text-align:left;">
+LBLS
+</th>
+<th style="text-align:left;">
+MAP
+</th>
+<th style="text-align:left;">
+MAS
+</th>
+<th style="text-align:left;">
+MIDUS
+</th>
+<th style="text-align:left;">
+NAS
+</th>
+<th style="text-align:left;">
+OATS
+</th>
+<th style="text-align:left;">
+ROS
+</th>
+<th style="text-align:left;">
+SLS
+</th>
+<th style="text-align:left;">
+WLS
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+apaTables
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+1.5.1
+</td>
+<td style="text-align:left;">
+1.5.1
+</td>
+<td style="text-align:left;">
+1.5.1
+</td>
+<td style="text-align:left;">
+1.5.1
+</td>
+<td style="text-align:left;">
+1.5.1
+</td>
+<td style="text-align:left;">
+2.0.5
+</td>
+<td style="text-align:left;">
+1.5.1
+</td>
+<td style="text-align:left;">
+1.5.1
+</td>
+<td style="text-align:left;">
+1.5.1
+</td>
+<td style="text-align:left;">
+2.0.2
+</td>
+<td style="text-align:left;">
+1.5.1
+</td>
+<td style="text-align:left;">
+1.5.1
+</td>
+<td style="text-align:left;">
+1.5.1
+</td>
+<td style="text-align:left;">
+1.5.1
+</td>
+<td style="text-align:left;">
+1.5.1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+arm
+</td>
+<td style="text-align:left;">
+1.10-1
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+base
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+3.4.3
+</td>
+<td style="text-align:left;">
+3.4.3
+</td>
+<td style="text-align:left;">
+3.4.3
+</td>
+<td style="text-align:left;">
+3.4.2
+</td>
+<td style="text-align:left;">
+3.4.3
+</td>
+<td style="text-align:left;">
+3.5.1
+</td>
+<td style="text-align:left;">
+3.3.2
+</td>
+<td style="text-align:left;">
+3.4.3
+</td>
+<td style="text-align:left;">
+3.4.3
+</td>
+<td style="text-align:left;">
+3.4.4
+</td>
+<td style="text-align:left;">
+3.4.3
+</td>
+<td style="text-align:left;">
+3.4.3
+</td>
+<td style="text-align:left;">
+3.4.3
+</td>
+<td style="text-align:left;">
+3.4.3
+</td>
+<td style="text-align:left;">
+3.4.3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+bindrcpp
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+0.2
+</td>
+<td style="text-align:left;">
+0.2
+</td>
+<td style="text-align:left;">
+0.2
+</td>
+<td style="text-align:left;">
+0.2
+</td>
+<td style="text-align:left;">
+0.2
+</td>
+<td style="text-align:left;">
+0.2.2
+</td>
+<td style="text-align:left;">
+0.2
+</td>
+<td style="text-align:left;">
+0.2
+</td>
+<td style="text-align:left;">
+0.2
+</td>
+<td style="text-align:left;">
+0.2.2
+</td>
+<td style="text-align:left;">
+0.2
+</td>
+<td style="text-align:left;">
+0.2
+</td>
+<td style="text-align:left;">
+0.2
+</td>
+<td style="text-align:left;">
+0.2
+</td>
+<td style="text-align:left;">
+0.2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+data.table
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+1.10.4-3
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+datasets
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+3.4.3
+</td>
+<td style="text-align:left;">
+3.4.3
+</td>
+<td style="text-align:left;">
+3.4.3
+</td>
+<td style="text-align:left;">
+3.4.2
+</td>
+<td style="text-align:left;">
+3.4.3
+</td>
+<td style="text-align:left;">
+3.5.1
+</td>
+<td style="text-align:left;">
+3.3.2
+</td>
+<td style="text-align:left;">
+3.4.3
+</td>
+<td style="text-align:left;">
+3.4.3
+</td>
+<td style="text-align:left;">
+3.4.4
+</td>
+<td style="text-align:left;">
+3.4.3
+</td>
+<td style="text-align:left;">
+3.4.3
+</td>
+<td style="text-align:left;">
+3.4.3
+</td>
+<td style="text-align:left;">
+3.4.3
+</td>
+<td style="text-align:left;">
+3.4.3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+devtools
+</td>
+<td style="text-align:left;">
+2.0.2
+</td>
+<td style="text-align:left;">
+1.13.4
+</td>
+<td style="text-align:left;">
+1.13.4
+</td>
+<td style="text-align:left;">
+1.13.4
+</td>
+<td style="text-align:left;">
+1.13.4
+</td>
+<td style="text-align:left;">
+1.13.4
+</td>
+<td style="text-align:left;">
+1.13.6
+</td>
+<td style="text-align:left;">
+1.13.4
+</td>
+<td style="text-align:left;">
+1.13.4
+</td>
+<td style="text-align:left;">
+1.13.4
+</td>
+<td style="text-align:left;">
+1.13.5
+</td>
+<td style="text-align:left;">
+1.13.4
+</td>
+<td style="text-align:left;">
+1.13.4
+</td>
+<td style="text-align:left;">
+1.13.4
+</td>
+<td style="text-align:left;">
+1.13.4
+</td>
+<td style="text-align:left;">
+1.13.4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+dplyr
+</td>
+<td style="text-align:left;">
+0.8.3
+</td>
+<td style="text-align:left;">
+0.7.4
+</td>
+<td style="text-align:left;">
+0.7.4
+</td>
+<td style="text-align:left;">
+0.7.4
+</td>
+<td style="text-align:left;">
+0.7.4
+</td>
+<td style="text-align:left;">
+0.7.4
+</td>
+<td style="text-align:left;">
+0.7.6
+</td>
+<td style="text-align:left;">
+0.7.4
+</td>
+<td style="text-align:left;">
+0.7.4
+</td>
+<td style="text-align:left;">
+0.7.4
+</td>
+<td style="text-align:left;">
+0.7.4
+</td>
+<td style="text-align:left;">
+0.7.4
+</td>
+<td style="text-align:left;">
+0.7.4
+</td>
+<td style="text-align:left;">
+0.7.4
+</td>
+<td style="text-align:left;">
+0.7.4
+</td>
+<td style="text-align:left;">
+0.7.4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+forcats
+</td>
+<td style="text-align:left;">
+0.4.0
+</td>
+<td style="text-align:left;">
+0.2.0
+</td>
+<td style="text-align:left;">
+0.2.0
+</td>
+<td style="text-align:left;">
+0.2.0
+</td>
+<td style="text-align:left;">
+0.2.0
+</td>
+<td style="text-align:left;">
+0.2.0
+</td>
+<td style="text-align:left;">
+0.3.0
+</td>
+<td style="text-align:left;">
+0.2.0
+</td>
+<td style="text-align:left;">
+0.2.0
+</td>
+<td style="text-align:left;">
+0.2.0
+</td>
+<td style="text-align:left;">
+0.3.0
+</td>
+<td style="text-align:left;">
+0.2.0
+</td>
+<td style="text-align:left;">
+0.2.0
+</td>
+<td style="text-align:left;">
+0.2.0
+</td>
+<td style="text-align:left;">
+0.2.0
+</td>
+<td style="text-align:left;">
+0.2.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+foreign
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+0.8-69
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+0.8-69
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+0.8-69
+</td>
+<td style="text-align:left;">
+0.8-71
+</td>
+<td style="text-align:left;">
+0.8-69
+</td>
+<td style="text-align:left;">
+0.8-69
+</td>
+<td style="text-align:left;">
+0.8-69
+</td>
+<td style="text-align:left;">
+0.8-70
+</td>
+<td style="text-align:left;">
+0.8-69
+</td>
+<td style="text-align:left;">
+0.8-69
+</td>
+<td style="text-align:left;">
+0.8-69
+</td>
+<td style="text-align:left;">
+0.8-69
+</td>
+<td style="text-align:left;">
+0.8-69
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+ggplot2
+</td>
+<td style="text-align:left;">
+3.2.1
+</td>
+<td style="text-align:left;">
+2.2.1
+</td>
+<td style="text-align:left;">
+2.2.1
+</td>
+<td style="text-align:left;">
+2.2.1
+</td>
+<td style="text-align:left;">
+2.2.1
+</td>
+<td style="text-align:left;">
+2.2.1
+</td>
+<td style="text-align:left;">
+3.0.0
+</td>
+<td style="text-align:left;">
+2.2.1
+</td>
+<td style="text-align:left;">
+2.2.1
+</td>
+<td style="text-align:left;">
+2.2.1
+</td>
+<td style="text-align:left;">
+2.2.1
+</td>
+<td style="text-align:left;">
+2.2.1
+</td>
+<td style="text-align:left;">
+2.2.1
+</td>
+<td style="text-align:left;">
+2.2.1
+</td>
+<td style="text-align:left;">
+2.2.1
+</td>
+<td style="text-align:left;">
+2.2.1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+GPArotation
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+2014.11-1
+</td>
+<td style="text-align:left;">
+2014.11-1
+</td>
+<td style="text-align:left;">
+2014.11-1
+</td>
+<td style="text-align:left;">
+2014.11-1
+</td>
+<td style="text-align:left;">
+2014.11-1
+</td>
+<td style="text-align:left;">
+2014.11-1
+</td>
+<td style="text-align:left;">
+2014.11-1
+</td>
+<td style="text-align:left;">
+2014.11-1
+</td>
+<td style="text-align:left;">
+2014.11-1
+</td>
+<td style="text-align:left;">
+2014.11-1
+</td>
+<td style="text-align:left;">
+2014.11-1
+</td>
+<td style="text-align:left;">
+2014.11-1
+</td>
+<td style="text-align:left;">
+2014.11-1
+</td>
+<td style="text-align:left;">
+2014.11-1
+</td>
+<td style="text-align:left;">
+2014.11-1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+graphics
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+3.4.3
+</td>
+<td style="text-align:left;">
+3.4.3
+</td>
+<td style="text-align:left;">
+3.4.3
+</td>
+<td style="text-align:left;">
+3.4.2
+</td>
+<td style="text-align:left;">
+3.4.3
+</td>
+<td style="text-align:left;">
+3.5.1
+</td>
+<td style="text-align:left;">
+3.3.2
+</td>
+<td style="text-align:left;">
+3.4.3
+</td>
+<td style="text-align:left;">
+3.4.3
+</td>
+<td style="text-align:left;">
+3.4.4
+</td>
+<td style="text-align:left;">
+3.4.3
+</td>
+<td style="text-align:left;">
+3.4.3
+</td>
+<td style="text-align:left;">
+3.4.3
+</td>
+<td style="text-align:left;">
+3.4.3
+</td>
+<td style="text-align:left;">
+3.4.3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+grDevices
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+3.4.3
+</td>
+<td style="text-align:left;">
+3.4.3
+</td>
+<td style="text-align:left;">
+3.4.3
+</td>
+<td style="text-align:left;">
+3.4.2
+</td>
+<td style="text-align:left;">
+3.4.3
+</td>
+<td style="text-align:left;">
+3.5.1
+</td>
+<td style="text-align:left;">
+3.3.2
+</td>
+<td style="text-align:left;">
+3.4.3
+</td>
+<td style="text-align:left;">
+3.4.3
+</td>
+<td style="text-align:left;">
+3.4.4
+</td>
+<td style="text-align:left;">
+3.4.3
+</td>
+<td style="text-align:left;">
+3.4.3
+</td>
+<td style="text-align:left;">
+3.4.3
+</td>
+<td style="text-align:left;">
+3.4.3
+</td>
+<td style="text-align:left;">
+3.4.3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+haven
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+1.1.0
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+here
+</td>
+<td style="text-align:left;">
+0.1
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+kableExtra
+</td>
+<td style="text-align:left;">
+1.1.0
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+knitr
+</td>
+<td style="text-align:left;">
+1.24
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+lme4
+</td>
+<td style="text-align:left;">
+1.1-21
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+MASS
+</td>
+<td style="text-align:left;">
+7.3-51.4
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Matrix
+</td>
+<td style="text-align:left;">
+1.2-17
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+merTools
+</td>
+<td style="text-align:left;">
+0.5.0
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+metafor
+</td>
+<td style="text-align:left;">
+2.1-0
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+methods
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+3.4.3
+</td>
+<td style="text-align:left;">
+3.4.3
+</td>
+<td style="text-align:left;">
+3.4.3
+</td>
+<td style="text-align:left;">
+3.4.2
+</td>
+<td style="text-align:left;">
+3.4.3
+</td>
+<td style="text-align:left;">
+3.5.1
+</td>
+<td style="text-align:left;">
+3.3.2
+</td>
+<td style="text-align:left;">
+3.4.3
+</td>
+<td style="text-align:left;">
+3.4.3
+</td>
+<td style="text-align:left;">
+3.4.4
+</td>
+<td style="text-align:left;">
+3.4.3
+</td>
+<td style="text-align:left;">
+3.4.3
+</td>
+<td style="text-align:left;">
+3.4.3
+</td>
+<td style="text-align:left;">
+3.4.3
+</td>
+<td style="text-align:left;">
+3.4.3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+papaja
+</td>
+<td style="text-align:left;">
+0.1.0.9842
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+psych
+</td>
+<td style="text-align:left;">
+1.8.12
+</td>
+<td style="text-align:left;">
+1.7.8
+</td>
+<td style="text-align:left;">
+1.7.8
+</td>
+<td style="text-align:left;">
+1.7.8
+</td>
+<td style="text-align:left;">
+1.7.8
+</td>
+<td style="text-align:left;">
+1.7.8
+</td>
+<td style="text-align:left;">
+1.8.4
+</td>
+<td style="text-align:left;">
+1.7.8
+</td>
+<td style="text-align:left;">
+1.7.8
+</td>
+<td style="text-align:left;">
+1.7.8
+</td>
+<td style="text-align:left;">
+1.8.3.3
+</td>
+<td style="text-align:left;">
+1.7.8
+</td>
+<td style="text-align:left;">
+1.7.8
+</td>
+<td style="text-align:left;">
+1.7.8
+</td>
+<td style="text-align:left;">
+1.7.8
+</td>
+<td style="text-align:left;">
+1.7.8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+purrr
+</td>
+<td style="text-align:left;">
+0.3.2
+</td>
+<td style="text-align:left;">
+0.2.4
+</td>
+<td style="text-align:left;">
+0.2.4
+</td>
+<td style="text-align:left;">
+0.2.4
+</td>
+<td style="text-align:left;">
+0.2.4
+</td>
+<td style="text-align:left;">
+0.2.4
+</td>
+<td style="text-align:left;">
+0.2.5
+</td>
+<td style="text-align:left;">
+0.2.4
+</td>
+<td style="text-align:left;">
+0.2.4
+</td>
+<td style="text-align:left;">
+0.2.4
+</td>
+<td style="text-align:left;">
+0.2.4
+</td>
+<td style="text-align:left;">
+0.2.4
+</td>
+<td style="text-align:left;">
+0.2.4
+</td>
+<td style="text-align:left;">
+0.2.4
+</td>
+<td style="text-align:left;">
+0.2.4
+</td>
+<td style="text-align:left;">
+0.2.4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+readr
+</td>
+<td style="text-align:left;">
+1.3.1
+</td>
+<td style="text-align:left;">
+1.1.1
+</td>
+<td style="text-align:left;">
+1.1.1
+</td>
+<td style="text-align:left;">
+1.1.1
+</td>
+<td style="text-align:left;">
+1.1.1
+</td>
+<td style="text-align:left;">
+1.1.1
+</td>
+<td style="text-align:left;">
+1.1.1
+</td>
+<td style="text-align:left;">
+1.1.1
+</td>
+<td style="text-align:left;">
+1.1.1
+</td>
+<td style="text-align:left;">
+1.1.1
+</td>
+<td style="text-align:left;">
+1.1.1
+</td>
+<td style="text-align:left;">
+1.1.1
+</td>
+<td style="text-align:left;">
+1.1.1
+</td>
+<td style="text-align:left;">
+1.1.1
+</td>
+<td style="text-align:left;">
+1.1.1
+</td>
+<td style="text-align:left;">
+1.1.1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+readstata13
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+0.9.0
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+sas7bdat
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+0.5
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+sjPlot
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+2.4.0
+</td>
+<td style="text-align:left;">
+2.4.0
+</td>
+<td style="text-align:left;">
+2.4.0
+</td>
+<td style="text-align:left;">
+2.4.0
+</td>
+<td style="text-align:left;">
+2.4.0
+</td>
+<td style="text-align:left;">
+2.6.0
+</td>
+<td style="text-align:left;">
+2.4.0
+</td>
+<td style="text-align:left;">
+2.4.0
+</td>
+<td style="text-align:left;">
+2.4.0
+</td>
+<td style="text-align:left;">
+2.4.1
+</td>
+<td style="text-align:left;">
+2.4.0
+</td>
+<td style="text-align:left;">
+2.4.0
+</td>
+<td style="text-align:left;">
+2.4.0
+</td>
+<td style="text-align:left;">
+2.4.0
+</td>
+<td style="text-align:left;">
+2.4.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+stargazer
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+5.2.1
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+5.2.1
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+stats
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+3.4.3
+</td>
+<td style="text-align:left;">
+3.4.3
+</td>
+<td style="text-align:left;">
+3.4.3
+</td>
+<td style="text-align:left;">
+3.4.2
+</td>
+<td style="text-align:left;">
+3.4.3
+</td>
+<td style="text-align:left;">
+3.5.1
+</td>
+<td style="text-align:left;">
+3.3.2
+</td>
+<td style="text-align:left;">
+3.4.3
+</td>
+<td style="text-align:left;">
+3.4.3
+</td>
+<td style="text-align:left;">
+3.4.4
+</td>
+<td style="text-align:left;">
+3.4.3
+</td>
+<td style="text-align:left;">
+3.4.3
+</td>
+<td style="text-align:left;">
+3.4.3
+</td>
+<td style="text-align:left;">
+3.4.3
+</td>
+<td style="text-align:left;">
+3.4.3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+stringr
+</td>
+<td style="text-align:left;">
+1.4.0
+</td>
+<td style="text-align:left;">
+1.2.0
+</td>
+<td style="text-align:left;">
+1.2.0
+</td>
+<td style="text-align:left;">
+1.2.0
+</td>
+<td style="text-align:left;">
+1.2.0
+</td>
+<td style="text-align:left;">
+1.2.0
+</td>
+<td style="text-align:left;">
+1.3.1
+</td>
+<td style="text-align:left;">
+1.2.0
+</td>
+<td style="text-align:left;">
+1.2.0
+</td>
+<td style="text-align:left;">
+1.2.0
+</td>
+<td style="text-align:left;">
+1.3.0
+</td>
+<td style="text-align:left;">
+1.2.0
+</td>
+<td style="text-align:left;">
+1.2.0
+</td>
+<td style="text-align:left;">
+1.2.0
+</td>
+<td style="text-align:left;">
+1.2.0
+</td>
+<td style="text-align:left;">
+1.2.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+survival
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+2.41-3
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+2.41-3
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+tibble
+</td>
+<td style="text-align:left;">
+2.1.3
+</td>
+<td style="text-align:left;">
+1.4.1
+</td>
+<td style="text-align:left;">
+1.4.1
+</td>
+<td style="text-align:left;">
+1.4.1
+</td>
+<td style="text-align:left;">
+1.3.4
+</td>
+<td style="text-align:left;">
+1.4.2
+</td>
+<td style="text-align:left;">
+1.4.2
+</td>
+<td style="text-align:left;">
+1.4.1
+</td>
+<td style="text-align:left;">
+1.4.2
+</td>
+<td style="text-align:left;">
+1.4.1
+</td>
+<td style="text-align:left;">
+1.4.2
+</td>
+<td style="text-align:left;">
+1.3.4
+</td>
+<td style="text-align:left;">
+1.4.1
+</td>
+<td style="text-align:left;">
+1.4.2
+</td>
+<td style="text-align:left;">
+1.4.1
+</td>
+<td style="text-align:left;">
+1.4.1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+tidyr
+</td>
+<td style="text-align:left;">
+0.8.3
+</td>
+<td style="text-align:left;">
+0.7.2
+</td>
+<td style="text-align:left;">
+0.7.2
+</td>
+<td style="text-align:left;">
+0.7.2
+</td>
+<td style="text-align:left;">
+0.7.2
+</td>
+<td style="text-align:left;">
+0.8.0
+</td>
+<td style="text-align:left;">
+0.8.1
+</td>
+<td style="text-align:left;">
+0.7.2
+</td>
+<td style="text-align:left;">
+0.8.0
+</td>
+<td style="text-align:left;">
+0.7.2
+</td>
+<td style="text-align:left;">
+0.8.0
+</td>
+<td style="text-align:left;">
+0.7.2
+</td>
+<td style="text-align:left;">
+0.7.2
+</td>
+<td style="text-align:left;">
+0.8.0
+</td>
+<td style="text-align:left;">
+0.7.2
+</td>
+<td style="text-align:left;">
+0.7.2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+tidyverse
+</td>
+<td style="text-align:left;">
+1.2.1
+</td>
+<td style="text-align:left;">
+1.2.1
+</td>
+<td style="text-align:left;">
+1.2.1
+</td>
+<td style="text-align:left;">
+1.2.1
+</td>
+<td style="text-align:left;">
+1.2.1
+</td>
+<td style="text-align:left;">
+1.2.1
+</td>
+<td style="text-align:left;">
+1.2.1
+</td>
+<td style="text-align:left;">
+1.2.1
+</td>
+<td style="text-align:left;">
+1.2.1
+</td>
+<td style="text-align:left;">
+1.2.1
+</td>
+<td style="text-align:left;">
+1.2.1
+</td>
+<td style="text-align:left;">
+1.2.1
+</td>
+<td style="text-align:left;">
+1.2.1
+</td>
+<td style="text-align:left;">
+1.2.1
+</td>
+<td style="text-align:left;">
+1.2.1
+</td>
+<td style="text-align:left;">
+1.2.1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+usethis
+</td>
+<td style="text-align:left;">
+1.5.0
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+utils
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+3.4.3
+</td>
+<td style="text-align:left;">
+3.4.3
+</td>
+<td style="text-align:left;">
+3.4.3
+</td>
+<td style="text-align:left;">
+3.4.2
+</td>
+<td style="text-align:left;">
+3.4.3
+</td>
+<td style="text-align:left;">
+3.5.1
+</td>
+<td style="text-align:left;">
+3.3.2
+</td>
+<td style="text-align:left;">
+3.4.3
+</td>
+<td style="text-align:left;">
+3.4.3
+</td>
+<td style="text-align:left;">
+3.4.4
+</td>
+<td style="text-align:left;">
+3.4.3
+</td>
+<td style="text-align:left;">
+3.4.3
+</td>
+<td style="text-align:left;">
+3.4.3
+</td>
+<td style="text-align:left;">
+3.4.3
+</td>
+<td style="text-align:left;">
+3.4.3
+</td>
+</tr>
+</tbody>
+</table>
+<div id="code" class="section level1">
+<h1>Code</h1>
+<pre class="r"><code>library(devtools)
+library(knitr)
+library(kableExtra)
+library(lme4)
+library(merTools)
+library(tidyverse)
+library(metafor)
+library(papaja)
+library(here)</code></pre>
+<pre class="r"><code>study.names = c(&quot;BASEII&quot;, &quot;EAS&quot;, &quot;ELSA&quot;, &quot;HRS&quot;, &quot;ILSE&quot;, &quot;LBC&quot;,
+                &quot;LBLS&quot;,&quot;MAP&quot;, &quot;MAS&quot;, &quot;MIDUS&quot;,
+                &quot;NAS&quot;, &quot;OATS&quot;, &quot;ROS&quot;, &quot;SLS&quot;, &quot;WLS&quot;)
+
+load(here(&quot;chronic/created data/BASEII_cc_output_nosrh.Rdata&quot;))
+load(here(&quot;chronic/created data/EAS_cc_output_nosrh.Rdata&quot;))
+load(here(&quot;chronic/created data/ELSA_cc_output.Rdata&quot;))
+load(here(&quot;chronic/created data/HRS_cc_output.Rdata&quot;))
+load(here(&quot;chronic/created data/ILSE_cc_output_nosrh.Rdata&quot;))
+load(here(&quot;chronic/created data/LBC_cc_output.Rdata&quot;))
+load(here(&quot;chronic/created data/LBLS_cc_output.Rdata&quot;))
+load(here(&quot;chronic/created data/MAP_cc_output.Rdata&quot;))
+load(here(&quot;chronic/created data/MAS_cc_output_nosrh.Rdata&quot;))
+load(here(&quot;chronic/created data/MIDUS_cc_output_nosrh.Rdata&quot;))
+load(here(&quot;chronic/created data/nas_cc_output.Rdata&quot;))
+load(here(&quot;chronic/created data/OATS_cc_output_nosrh.Rdata&quot;))
+load(here(&quot;chronic/created data/ROS_cc_output.Rdata&quot;))
+load(here(&quot;chronic/created data/SLS_cc_output.Rdata&quot;))
+load(here(&quot;chronic/created data/WLS_cc_output.Rdata&quot;))
+
+NAS_cc_output = nas_cc_output
+EAS_cc_output= eas_cc_output
+rm(nas_cc_output)
+rm(eas_cc_output)</code></pre>
+<pre class="r"><code>s &lt;- session_info()
+meta_cc_output = list(session_info = s)
+meta_cc_output$session_info$platform$os = NULL
+meta_cc_output$session_info$platform$ctype = NULL</code></pre>
+<pre class="r"><code>platform_info = lapply(c(&quot;meta&quot;, study.names), function(x) get(paste0(x, &quot;_cc_output&quot;)))
+names(platform_info) = c(&quot;meta&quot;, study.names)
+
+platform_info %&gt;%
+  map(&quot;session_info&quot;) %&gt;%
+  map(&quot;platform&quot;) %&gt;%
+  map_df(~unlist(.)) %&gt;%
+  mutate(var = names(meta_cc_output$session_info$platform)) %&gt;%
+  gather(&quot;study&quot;, &quot;value&quot;, -var) %&gt;%
+  spread(&quot;var&quot;, &quot;value&quot;) %&gt;%
+  mutate(study = factor(study, levels = c(&quot;meta&quot;, study.names))) %&gt;%
+  arrange(study) %&gt;%
+  kable(., booktabs = TRUE) %&gt;%
+  kable_styling()</code></pre>
+<pre class="r"><code>package_info = lapply(c(study.names), function(x) get(paste0(x, &quot;_cc_output&quot;)))
+names(package_info) = c(study.names)
+
+meta_packages = meta_cc_output$session_info$packages
+meta_packages = meta_packages %&gt;%
+  mutate(study = &quot;meta&quot;) %&gt;%
+  mutate(version = loadedversion,
+         `*` = attached) %&gt;%
+  dplyr::select(study, package, version, `*`) %&gt;%
+  mutate(`*` = ifelse(`*`, &quot;*&quot;, &quot;&quot;))
+
+package_info %&gt;%
+  map(&quot;session_info&quot;) %&gt;%
+  map(&quot;packages&quot;) %&gt;%
+  map2_df(., c(study.names), ~ mutate(.x, study = .y)) %&gt;%
+  full_join(meta_packages) %&gt;%
+  filter(`*` == &quot;*&quot;) %&gt;%
+  dplyr::select(study, package, version) %&gt;%
+  spread(study, version) %&gt;%
+  dplyr::select(c(package, &quot;meta&quot;, study.names)) %&gt;%
+  kable(., booktabs = TRUE) %&gt;%
+  kable_styling(font_size = 9)</code></pre>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

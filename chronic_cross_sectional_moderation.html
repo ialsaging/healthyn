@@ -11,7 +11,7 @@
 
 
 
-<title>Healthy Neuroticism IDA</title>
+<title>Cross Sectional Moderation by study variables</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -25,6 +25,7 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
@@ -621,71 +622,782 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Healthy Neuroticism IDA</h1>
-<h3 class="subtitle">Coordinated analysis project</h3>
+<h1 class="title toc-ignore">Cross Sectional Moderation by study variables</h1>
 
 </div>
 
 
-<p>This website contains the supplemental material for the three-study series investigating the two-way interaction of neuroticism and conscientiousness in relationship to health outcomes. These three studies examined mortality, the prevelance and onset of chronic health conditions, and engagement in health behaviors across more than a dozen longitudinal datasets.</p>
-<div id="background-information" class="section level1">
-<h1>Background information</h1>
-<p>This two-way interaction is the most popular operationalization of the “healthy neuroticism” theory (<a href="https://onlinelibrary.wiley.com/doi/abs/10.1111/1467-6494.00127?casa_token=-oILrBaXLQcAAAAA:f2aHtZekRCpwhREgSJZCk3XMU5YkZ4DZwP3jb4IfltRAeaiM6075bPVBpXf2JvcHQOq1B23W8n-ar_U">Friedman, 2000</a>) and has been shown to predict lower levels of smoking (<a href="https://www.researchgate.net/profile/Margarete_Vollrath/publication/222131832_Who_takes_health_risks_A_probe_into_8_personality_types/links/5a1c02b5aca272df080f48e9/Who-takes-health-risks-A-probe-into-8-personality-types.pdf">Vollrath &amp; Torgersen, 2002</a>; <a href="https://onlinelibrary.wiley.com/doi/full/10.1111/j.1360-0443.2004.00687.x?casa_token=Xnz0prV8whkAAAAA:wrHEureYLAT6CtIzVlG9Y8FNAP8-zKLMnYGZgpUEUwFxsbeNnjwhxYyLhT1vu5bSBclBzZitf1WlKcE">Terracciano &amp; Costa, 2004</a>; <a href="https://s3.amazonaws.com/academia.edu.documents/46661299/Identification_of_the_healthy_neurotic_P20160620-8552-139py8l.pdf?response-content-disposition=inline%3B%20filename%3DIdentification_of_the_healthy_neurotic_P.pdf&amp;X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAIWOWYYGZ2Y53UL3A%2F20191113%2Fus-east-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20191113T025800Z&amp;X-Amz-Expires=3600&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Signature=96a987726ed7f39c745b54b77ea953b304694f9707be33990e55161d40a9e558">Weston &amp; Jackson, 2015</a>), alcohol consumption (<a href="https://www.ncbi.nlm.nih.gov/pubmed/22773867">Turiano, Whiteman, Hampson, Roberts, 142 &amp; Mroczek, 2012</a>), lower levels of IL-6 (<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3545072/">Turiano et al., 2013</a>), and lower rates of mortality (<a href="https://www.ncbi.nlm.nih.gov/pubmed/20433617">Friedman, Kern, &amp; Reynolds, 2010</a>). However, there is reason to believe the file drawer for these analyses is large, and that results are mixed.</p>
+<p>This document summarizes the analyses which test for between study moderation.</p>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="border-bottom:hidden" colspan="1">
+</th>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="4">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Model 1
 </div>
-<div id="the-current-project" class="section level1">
-<h1>The current project</h1>
-<p>To estimate the population effect size of the healthy neuroticism interaction, we used a multi-study coordinated analysis. While healthy neuroticism has been broadly defined to include interactions with age, gender, and self-rated health, we focused on the moderation by conscientiousness to limit the scope of the project and to interrogate the most popular theory. Study sites in the Integrative Analysis of Longitudinal Study of Aging and Dementia (IALSA) network were invited to participate provided they had measures of conscientiousness, neuroticism and at least one health variable of interest assessed concurrently.</p>
+</th>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="4">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Model 2
 </div>
-<div id="coordinating-analyses" class="section level1">
-<h1>Coordinating analyses</h1>
-<p>Some datasets in the IALSA network are controlled by data-sharing agreements that prohibit sending data to analysts outside the organization. Consequently, a master data analyst wrote template scripts that would conduct identical (or near identical) analyses across all datasets. Individual study sites assigned study-specific data analysts to prepare the data for analysis, including ensuring data were appropriately structured and that variables were named to match the analysis template. All data analysts met in Chicago, IL USA in January 2018, where study-analysts downloaded the template scripts and analyzed their data. These scripts aggregate summary statistics, which were uploaded to the Open Science Framework. The master data analyst downloaded these output files and analyzed them using a separate script, which conducted the meta-analysis.</p>
-<p>All scripts, including the template script, the study-specific scripts (which were sometimes adjusted to include appropriate covariates and outcomes), the study-output files, and the meta-analytic files and outputs are all available on OSF. A table of contents for those files is included for each study on this website.</p>
+</th>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="4">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Model 3
 </div>
-<div id="this-website" class="section level1">
-<h1>This website</h1>
-<p>Here you will find the supplementary analyses and information relevant to each of the three healthy neuroticism projects. These files have been formatted to allow for quick assessment of the information. In addition, all code used to generate these files is available.</p>
-</div>
-<div id="key-researchers" class="section level1">
-<h1>Key researchers</h1>
-<div id="project-leaders" class="section level2">
-<h2>Project leaders</h2>
-<ul>
-<li>Eileen K. Graham</li>
-<li>Nicholas A. Turiano</li>
-<li>Sara J. Weston</li>
-</ul>
-</div>
-<div id="master-data-analyst" class="section level2">
-<h2>Master data analyst</h2>
-<ul>
-<li>Sara J. Weston</li>
-</ul>
-</div>
-<div id="study-specific-data-analysts" class="section level2">
-<h2>Study specific data analysts</h2>
-<ul>
-<li>Damaris Aschwanden</li>
-<li>Tom Booth</li>
-<li>Fleur Harrison</li>
-<li>Bryan D. James</li>
-<li>Nathan A. Lewis</li>
-<li>Steven R. Makkar</li>
-<li>Swantje Mueller</li>
-<li>Avron Spiro</li>
-<li>Kristi M. Wisniewski</li>
-<li>Tomiko Yoneda</li>
-<li>Ruixue Zhaoyang</li>
-</ul>
-</div>
-<div id="ialsa-coordinators" class="section level2">
-<h2>IALSA coordinators</h2>
-<ul>
-<li>Daniel K. Mroczek</li>
-<li>Andrea M. Piccinin</li>
-<li>Graciela Muniz-Terrera</li>
-<li>Scott M. Hofer</li>
-</ul>
-</div>
+</th>
+</tr>
+<tr>
+<th style="text-align:left;">
+Variable
+</th>
+<th style="text-align:right;">
+b
+</th>
+<th style="text-align:right;">
+CI_l
+</th>
+<th style="text-align:right;">
+CI_u
+</th>
+<th style="text-align:left;">
+p
+</th>
+<th style="text-align:right;">
+b
+</th>
+<th style="text-align:right;">
+CI_l
+</th>
+<th style="text-align:right;">
+CI_u
+</th>
+<th style="text-align:left;">
+p
+</th>
+<th style="text-align:right;">
+b
+</th>
+<th style="text-align:right;">
+CI_l
+</th>
+<th style="text-align:right;">
+CI_u
+</th>
+<th style="text-align:left;">
+p
+</th>
+</tr>
+</thead>
+<tbody>
+<tr grouplength="5">
+<td colspan="13" style="border-bottom: 1px solid;">
+<strong>Diabetes</strong>
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+intrcpt
+</td>
+<td style="text-align:right;">
+-0.04
+</td>
+<td style="text-align:right;">
+-0.14
+</td>
+<td style="text-align:right;">
+0.05
+</td>
+<td style="text-align:left;">
+.354
+</td>
+<td style="text-align:right;">
+-0.01
+</td>
+<td style="text-align:right;">
+-0.11
+</td>
+<td style="text-align:right;">
+0.09
+</td>
+<td style="text-align:left;">
+.800
+</td>
+<td style="text-align:right;">
+-0.02
+</td>
+<td style="text-align:right;">
+-0.12
+</td>
+<td style="text-align:right;">
+0.08
+</td>
+<td style="text-align:left;">
+.668
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+personality_q
+</td>
+<td style="text-align:right;">
+0.01
+</td>
+<td style="text-align:right;">
+-0.13
+</td>
+<td style="text-align:right;">
+0.16
+</td>
+<td style="text-align:left;">
+.846
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+-0.15
+</td>
+<td style="text-align:right;">
+0.16
+</td>
+<td style="text-align:left;">
+.952
+</td>
+<td style="text-align:right;">
+0.02
+</td>
+<td style="text-align:right;">
+-0.14
+</td>
+<td style="text-align:right;">
+0.18
+</td>
+<td style="text-align:left;">
+.833
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+personality_qBFI
+</td>
+<td style="text-align:right;">
+0.05
+</td>
+<td style="text-align:right;">
+-0.07
+</td>
+<td style="text-align:right;">
+0.17
+</td>
+<td style="text-align:left;">
+.401
+</td>
+<td style="text-align:right;">
+0.03
+</td>
+<td style="text-align:right;">
+-0.09
+</td>
+<td style="text-align:right;">
+0.16
+</td>
+<td style="text-align:left;">
+.598
+</td>
+<td style="text-align:right;">
+0.04
+</td>
+<td style="text-align:right;">
+-0.09
+</td>
+<td style="text-align:right;">
+0.17
+</td>
+<td style="text-align:left;">
+.512
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+personality_qMIDI
+</td>
+<td style="text-align:right;">
+0.06
+</td>
+<td style="text-align:right;">
+-0.03
+</td>
+<td style="text-align:right;">
+0.16
+</td>
+<td style="text-align:left;">
+.189
+</td>
+<td style="text-align:right;">
+0.03
+</td>
+<td style="text-align:right;">
+-0.07
+</td>
+<td style="text-align:right;">
+0.14
+</td>
+<td style="text-align:left;">
+.548
+</td>
+<td style="text-align:right;">
+0.04
+</td>
+<td style="text-align:right;">
+-0.06
+</td>
+<td style="text-align:right;">
+0.15
+</td>
+<td style="text-align:left;">
+.421
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+personality_qNEO-FFI
+</td>
+<td style="text-align:right;">
+0.01
+</td>
+<td style="text-align:right;">
+-0.12
+</td>
+<td style="text-align:right;">
+0.14
+</td>
+<td style="text-align:left;">
+.880
+</td>
+<td style="text-align:right;">
+-0.01
+</td>
+<td style="text-align:right;">
+-0.15
+</td>
+<td style="text-align:right;">
+0.13
+</td>
+<td style="text-align:left;">
+.885
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+-0.14
+</td>
+<td style="text-align:right;">
+0.14
+</td>
+<td style="text-align:left;">
+.969
+</td>
+</tr>
+<tr grouplength="5">
+<td colspan="13" style="border-bottom: 1px solid;">
+<strong>Hypertension</strong>
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+intrcpt
+</td>
+<td style="text-align:right;">
+-0.04
+</td>
+<td style="text-align:right;">
+-0.11
+</td>
+<td style="text-align:right;">
+0.02
+</td>
+<td style="text-align:left;">
+.196
+</td>
+<td style="text-align:right;">
+-0.03
+</td>
+<td style="text-align:right;">
+-0.10
+</td>
+<td style="text-align:right;">
+0.04
+</td>
+<td style="text-align:left;">
+.407
+</td>
+<td style="text-align:right;">
+-0.03
+</td>
+<td style="text-align:right;">
+-0.10
+</td>
+<td style="text-align:right;">
+0.04
+</td>
+<td style="text-align:left;">
+.406
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+personality_q
+</td>
+<td style="text-align:right;">
+-0.02
+</td>
+<td style="text-align:right;">
+-0.14
+</td>
+<td style="text-align:right;">
+0.11
+</td>
+<td style="text-align:left;">
+.779
+</td>
+<td style="text-align:right;">
+-0.03
+</td>
+<td style="text-align:right;">
+-0.16
+</td>
+<td style="text-align:right;">
+0.10
+</td>
+<td style="text-align:left;">
+.663
+</td>
+<td style="text-align:right;">
+-0.04
+</td>
+<td style="text-align:right;">
+-0.16
+</td>
+<td style="text-align:right;">
+0.09
+</td>
+<td style="text-align:left;">
+.578
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+personality_qBFI
+</td>
+<td style="text-align:right;">
+0.10
+</td>
+<td style="text-align:right;">
+0.01
+</td>
+<td style="text-align:right;">
+0.20
+</td>
+<td style="text-align:left;">
+.027
+</td>
+<td style="text-align:right;">
+0.09
+</td>
+<td style="text-align:right;">
+-0.01
+</td>
+<td style="text-align:right;">
+0.19
+</td>
+<td style="text-align:left;">
+.065
+</td>
+<td style="text-align:right;">
+0.09
+</td>
+<td style="text-align:right;">
+-0.01
+</td>
+<td style="text-align:right;">
+0.18
+</td>
+<td style="text-align:left;">
+.064
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+personality_qMIDI
+</td>
+<td style="text-align:right;">
+0.05
+</td>
+<td style="text-align:right;">
+-0.03
+</td>
+<td style="text-align:right;">
+0.13
+</td>
+<td style="text-align:left;">
+.258
+</td>
+<td style="text-align:right;">
+0.02
+</td>
+<td style="text-align:right;">
+-0.07
+</td>
+<td style="text-align:right;">
+0.10
+</td>
+<td style="text-align:left;">
+.680
+</td>
+<td style="text-align:right;">
+0.02
+</td>
+<td style="text-align:right;">
+-0.07
+</td>
+<td style="text-align:right;">
+0.10
+</td>
+<td style="text-align:left;">
+.700
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+personality_qNEO-FFI
+</td>
+<td style="text-align:right;">
+0.06
+</td>
+<td style="text-align:right;">
+-0.04
+</td>
+<td style="text-align:right;">
+0.16
+</td>
+<td style="text-align:left;">
+.224
+</td>
+<td style="text-align:right;">
+0.05
+</td>
+<td style="text-align:right;">
+-0.05
+</td>
+<td style="text-align:right;">
+0.15
+</td>
+<td style="text-align:left;">
+.357
+</td>
+<td style="text-align:right;">
+0.05
+</td>
+<td style="text-align:right;">
+-0.05
+</td>
+<td style="text-align:right;">
+0.14
+</td>
+<td style="text-align:left;">
+.361
+</td>
+</tr>
+<tr grouplength="5">
+<td colspan="13" style="border-bottom: 1px solid;">
+<strong>Heart Disease</strong>
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+intrcpt
+</td>
+<td style="text-align:right;">
+-0.09
+</td>
+<td style="text-align:right;">
+-0.17
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:left;">
+.047
+</td>
+<td style="text-align:right;">
+-0.08
+</td>
+<td style="text-align:right;">
+-0.18
+</td>
+<td style="text-align:right;">
+0.01
+</td>
+<td style="text-align:left;">
+.093
+</td>
+<td style="text-align:right;">
+-0.09
+</td>
+<td style="text-align:right;">
+-0.19
+</td>
+<td style="text-align:right;">
+0.01
+</td>
+<td style="text-align:left;">
+.070
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+personality_q
+</td>
+<td style="text-align:right;">
+0.16
+</td>
+<td style="text-align:right;">
+0.03
+</td>
+<td style="text-align:right;">
+0.29
+</td>
+<td style="text-align:left;">
+.019
+</td>
+<td style="text-align:right;">
+0.16
+</td>
+<td style="text-align:right;">
+0.02
+</td>
+<td style="text-align:right;">
+0.30
+</td>
+<td style="text-align:left;">
+.023
+</td>
+<td style="text-align:right;">
+0.18
+</td>
+<td style="text-align:right;">
+0.04
+</td>
+<td style="text-align:right;">
+0.32
+</td>
+<td style="text-align:left;">
+.011
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+personality_qBFI
+</td>
+<td style="text-align:right;">
+0.04
+</td>
+<td style="text-align:right;">
+-0.07
+</td>
+<td style="text-align:right;">
+0.15
+</td>
+<td style="text-align:left;">
+.498
+</td>
+<td style="text-align:right;">
+0.03
+</td>
+<td style="text-align:right;">
+-0.08
+</td>
+<td style="text-align:right;">
+0.15
+</td>
+<td style="text-align:left;">
+.579
+</td>
+<td style="text-align:right;">
+0.04
+</td>
+<td style="text-align:right;">
+-0.07
+</td>
+<td style="text-align:right;">
+0.16
+</td>
+<td style="text-align:left;">
+.463
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+personality_qMIDI
+</td>
+<td style="text-align:right;">
+0.10
+</td>
+<td style="text-align:right;">
+0.01
+</td>
+<td style="text-align:right;">
+0.19
+</td>
+<td style="text-align:left;">
+.034
+</td>
+<td style="text-align:right;">
+0.08
+</td>
+<td style="text-align:right;">
+-0.02
+</td>
+<td style="text-align:right;">
+0.18
+</td>
+<td style="text-align:left;">
+.122
+</td>
+<td style="text-align:right;">
+0.09
+</td>
+<td style="text-align:right;">
+-0.01
+</td>
+<td style="text-align:right;">
+0.19
+</td>
+<td style="text-align:left;">
+.083
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+personality_qNEO-FFI
+</td>
+<td style="text-align:right;">
+0.07
+</td>
+<td style="text-align:right;">
+-0.04
+</td>
+<td style="text-align:right;">
+0.19
+</td>
+<td style="text-align:left;">
+.223
+</td>
+<td style="text-align:right;">
+0.08
+</td>
+<td style="text-align:right;">
+-0.05
+</td>
+<td style="text-align:right;">
+0.20
+</td>
+<td style="text-align:left;">
+.238
+</td>
+<td style="text-align:right;">
+0.08
+</td>
+<td style="text-align:right;">
+-0.05
+</td>
+<td style="text-align:right;">
+0.21
+</td>
+<td style="text-align:left;">
+.218
+</td>
+</tr>
+</tbody>
+</table>
+<div id="code" class="section level1">
+<h1>Code</h1>
+<p>The following packages were used to generate this table:</p>
+<pre class="r"><code>library(tidyverse)
+library(metafor)
+library(knitr)
+library(kableExtra)
+library(papaja)
+library(here)</code></pre>
+<p>First we load and summarize the diabetes data.</p>
+<pre class="r"><code>load(here(&quot;chronic/meta output/diabetes_cross_mods.Rdata&quot;))
+
+diabetes.models = data.frame(model = c(&quot;mod1&quot;, &quot;mod2&quot;, &quot;mod3&quot;))
+
+diabetes.models$output = list(mods.p.mod1, mods.p.mod2, mods.p.mod3)
+
+summary = diabetes.models %&gt;%
+  mutate(summary = map(output, function(x) coef(summary(x)))) %&gt;%
+  mutate(summary = map(summary, ~mutate(., var = rownames(.)))) %&gt;%
+  dplyr::select(-output) %&gt;%
+  unnest() %&gt;%
+  mutate(outcome = &quot;diabetes&quot;)</code></pre>
+<p>Next we load and summarize the high blood pressure data.</p>
+<pre class="r"><code>rm(list = setdiff(ls(), &quot;summary&quot;))
+
+load(here(&quot;chronic/meta output/hbp_cross_mods.Rdata&quot;))
+
+hbp.models = data.frame(model = c(&quot;mod1&quot;, &quot;mod2&quot;, &quot;mod3&quot;))
+
+hbp.models$output = list(mods.p.mod1, mods.p.mod2, mods.p.mod3)
+
+summary = hbp.models %&gt;%
+  mutate(summary = map(output, function(x) coef(summary(x)))) %&gt;%
+  mutate(summary = map(summary, ~mutate(., var = rownames(.)))) %&gt;%
+  dplyr::select(-output) %&gt;%
+  unnest() %&gt;%
+  mutate(outcome = &quot;hbp&quot;) %&gt;%
+  full_join(summary)</code></pre>
+<p>Finally we load and summarize the heart condition data.</p>
+<pre class="r"><code>rm(list = setdiff(ls(), &quot;summary&quot;))
+
+load(here(&quot;chronic/meta output/heart_cross_mods.Rdata&quot;))
+
+heart.models = data.frame(model = c(&quot;mod1&quot;, &quot;mod2&quot;, &quot;mod3&quot;))
+
+heart.models$output = list(mods.p.mod1, mods.p.mod2, mods.p.mod3)
+
+summary = heart.models %&gt;%
+  mutate(summary = map(output, function(x) coef(summary(x)))) %&gt;%
+  mutate(summary = map(summary, ~mutate(., var = rownames(.)))) %&gt;%
+  dplyr::select(-output) %&gt;%
+  unnest() %&gt;%
+  mutate(outcome = &quot;heart&quot;) %&gt;%
+  full_join(summary)</code></pre>
+<pre class="r"><code>summary %&gt;%
+  dplyr::select(-se, -zval) %&gt;%
+  gather(&quot;key&quot;, &quot;value&quot;, -model, -var, -outcome) %&gt;%
+  unite(&quot;key&quot;, &quot;model&quot;, &quot;key&quot;, sep=&quot;_&quot;) %&gt;%
+  spread(&quot;key&quot;, &quot;value&quot;) %&gt;%
+  arrange(outcome, var) %&gt;%
+  dplyr::select(var, 
+                mod1_estimate, mod1_ci.lb, mod1_ci.ub, mod1_pval,
+                mod2_estimate, mod2_ci.lb, mod2_ci.ub, mod2_pval,
+                mod3_estimate, mod3_ci.lb, mod3_ci.ub, mod3_pval) %&gt;%
+  mutate(mod1_pval = printp(mod1_pval),
+         mod2_pval = printp(mod2_pval),
+         mod3_pval = printp(mod3_pval)) %&gt;%
+  kable(., digits = 2, booktabs = T, escape = FALSE, 
+        col.names = c(&quot;Variable&quot;, rep(c(&quot;b&quot;, &quot;CI_l&quot;, &quot;CI_u&quot;, &quot;p&quot;), 3))) %&gt;%
+  kable_styling() %&gt;%
+  add_header_above(c(&quot; &quot; = 1, &quot;Model 1&quot; = 4, &quot;Model 2&quot; = 4, &quot;Model 3&quot; = 4)) %&gt;%
+  group_rows(&quot;Diabetes&quot;, 1, 5) %&gt;%
+  group_rows(&quot;Hypertension&quot;, 6, 10) %&gt;%
+  group_rows(&quot;Heart Disease&quot;, 11, 15)</code></pre>
 </div>
 
 

@@ -1,0 +1,4448 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>Descriptive Statistics</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">IALSA: Healthy Neuroticism</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Mortality
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="mortality_descriptives.html">Descriptive statistics</a>
+    </li>
+    <li>
+      <a href="mortality_survival_stats.html">Survival statistics</a>
+    </li>
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Survival since baseline (published)</a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="mortality_meta_time.html">Forest plot of interaction</a>
+        </li>
+        <li>
+          <a href="mortality_meta_time_maineffects.html">Main effects of personality</a>
+        </li>
+        <li>
+          <a href="mortality_meta_time_hrPlot.html">Hazard ratio plot</a>
+        </li>
+        <li>
+          <a href="mortality_meta_time_survivalPlot.html">Surival plot</a>
+        </li>
+        <li>
+          <a href="mortality_moderation.html">Moderation by study properties</a>
+        </li>
+        <li>
+          <a href="mortality_meta_time_gender.html">Moderated by gender</a>
+        </li>
+        <li>
+          <a href="mortality_meta_time_ageinteraction.html">Moderated by age</a>
+        </li>
+        <li>
+          <a href="mortality_power_analysis.html">Power analysis</a>
+        </li>
+      </ul>
+    </li>
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Survival by age</a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="mortality_meta_age.html">Forest plot of interaction</a>
+        </li>
+        <li>
+          <a href="mortality_meta_age_hrPlot.html">Hazard ratio plot</a>
+        </li>
+        <li>
+          <a href="mortality_meta_age_gender">Moderated by gender</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Chronic Conditions
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="chronic_descriptive_statistics.html">Descriptive statistics</a>
+    </li>
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Main effects</a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="chronic_main_neuroticism.html">Neuroticism</a>
+        </li>
+        <li>
+          <a href="chronic_main_conscientiousness.html">Conscientiousness</a>
+        </li>
+      </ul>
+    </li>
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Cross-sectional analyses</a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="chronic_cross_sectional_forest.html">Forest plot (published)</a>
+        </li>
+        <li>
+          <a href="chronic_cross_sectional_predicted.html">Prediced values by study</a>
+        </li>
+        <li>
+          <a href="chronic_cross_sectional_age_forest.html">Moderated by age</a>
+        </li>
+        <li>
+          <a href="chronic_cross_sectional_srh_forest.html">Controlling for self-rated health</a>
+        </li>
+        <li>
+          <a href="chronic_cross_sectional_moderation.html">Moderation by study variables</a>
+        </li>
+      </ul>
+    </li>
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Longitudinal analyses</a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="chronic_longitudinal_forest.html">Forest plot (published)</a>
+        </li>
+        <li>
+          <a href="chronic_longitudinal_predicted.html">Prediced values by study</a>
+        </li>
+        <li>
+          <a href="chronic_longitudinal_age_forest.html">Moderated by age</a>
+        </li>
+        <li>
+          <a href="chronic_longitudinal_srh_forest.html">Controlling for self-rated health</a>
+        </li>
+        <li>
+          <a href="chronic_longitudinal_moderation.html">Moderation by study variables</a>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <a href="chronic_power_analysis.html">Power analysis</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Health Behavior
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="behavior_descriptive_statistics.html">Descriptive statistics</a>
+    </li>
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Forest plots</a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="behavior_forest_cov2.html">Interaction (published)</a>
+        </li>
+        <li>
+          <a href="behavior_forest_cov1.html">Interaction (only controlling for demographics)</a>
+        </li>
+        <li>
+          <a href="behavior_forest_intr.html">Interaction (no covariates)</a>
+        </li>
+        <li>
+          <a href="behavior_forest_main_n.html">Main effect of neuroticism</a>
+        </li>
+        <li>
+          <a href="behavior_forest_main_c.html">Main effect of conscientiousness</a>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <a href="behavior_power_analysis.html">Power analysis</a>
+    </li>
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Outcome: Smoking</a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="behavior_regression_smoker.html">Regression models by study</a>
+        </li>
+        <li>
+          <a href="behavior_smoker_predicted.html">Predicted values from regressions</a>
+        </li>
+        <li>
+          <a href="behavior_smoker_predicted_age.html">Predicted values from three-way interaction with age</a>
+        </li>
+        <li>
+          <a href="behavior_smoker_moderation.html">Moderation by personality scale</a>
+        </li>
+      </ul>
+    </li>
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Outcome: Alcohol consumption</a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="behavior_regression_drinker.html">Regression models by study</a>
+        </li>
+        <li>
+          <a href="behavior_drinker_predicted.html">Predicted values from regressions</a>
+        </li>
+        <li>
+          <a href="behavior_drinker_predicted_age.html">Predicted values from three-way interaction with age</a>
+        </li>
+        <li>
+          <a href="behavior_drinker_moderation.html">Moderation by personality scale</a>
+        </li>
+      </ul>
+    </li>
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Outcome: Physical activity</a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="behavior_regression_active.html">Regression models by study</a>
+        </li>
+        <li>
+          <a href="behavior_active_predicted.html">Predicted values from regressions</a>
+        </li>
+        <li>
+          <a href="behavior_active_predicted_age.html">Predicted values from three-way interaction with age</a>
+        </li>
+        <li>
+          <a href="behavior_active_moderation.html">Moderation by personality scale</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    All
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="chronic_packages.html">R Packages Used</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/ilsaging/healthyn">
+    <span class="fa fa-github"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Descriptive Statistics</h1>
+
+</div>
+
+
+<p>This document contains the descriptive statistics (number of non-missing observations, mean, standard deviation, minimum value, maximum value and internal reliablity, where relevant) of the variables used in the current coordinated analyses. We provide the code used to generate this table, which calls upon our analysis summary objects (also provided).</p>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Variable
+</th>
+<th style="text-align:right;">
+N Valid
+</th>
+<th style="text-align:right;">
+Mean
+</th>
+<th style="text-align:right;">
+SD
+</th>
+<th style="text-align:right;">
+Min
+</th>
+<th style="text-align:right;">
+Max
+</th>
+<th style="text-align:right;">
+<span class="math inline">\(\alpha\)</span>
+</th>
+</tr>
+</thead>
+<tbody>
+<tr grouplength="11">
+<td colspan="7" style="border-bottom: 1px solid;">
+<strong>BASEII</strong>
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+age
+</td>
+<td style="text-align:right;">
+1613
+</td>
+<td style="text-align:right;">
+61.56
+</td>
+<td style="text-align:right;">
+16.58
+</td>
+<td style="text-align:right;">
+22.00
+</td>
+<td style="text-align:right;">
+87.00
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+gender
+</td>
+<td style="text-align:right;">
+1613
+</td>
+<td style="text-align:right;">
+0.50
+</td>
+<td style="text-align:right;">
+0.50
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+edu
+</td>
+<td style="text-align:right;">
+1613
+</td>
+<td style="text-align:right;">
+14.42
+</td>
+<td style="text-align:right;">
+2.89
+</td>
+<td style="text-align:right;">
+7.00
+</td>
+<td style="text-align:right;">
+18.00
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+neur
+</td>
+<td style="text-align:right;">
+1613
+</td>
+<td style="text-align:right;">
+3.71
+</td>
+<td style="text-align:right;">
+1.28
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+7.00
+</td>
+<td style="text-align:right;">
+0.68
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+con
+</td>
+<td style="text-align:right;">
+1613
+</td>
+<td style="text-align:right;">
+5.59
+</td>
+<td style="text-align:right;">
+0.99
+</td>
+<td style="text-align:right;">
+1.67
+</td>
+<td style="text-align:right;">
+7.00
+</td>
+<td style="text-align:right;">
+0.61
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+extra
+</td>
+<td style="text-align:right;">
+1613
+</td>
+<td style="text-align:right;">
+4.77
+</td>
+<td style="text-align:right;">
+1.17
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+7.00
+</td>
+<td style="text-align:right;">
+0.69
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+agree
+</td>
+<td style="text-align:right;">
+1613
+</td>
+<td style="text-align:right;">
+5.21
+</td>
+<td style="text-align:right;">
+0.98
+</td>
+<td style="text-align:right;">
+1.33
+</td>
+<td style="text-align:right;">
+7.00
+</td>
+<td style="text-align:right;">
+0.46
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+open
+</td>
+<td style="text-align:right;">
+1613
+</td>
+<td style="text-align:right;">
+5.32
+</td>
+<td style="text-align:right;">
+0.98
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+7.00
+</td>
+<td style="text-align:right;">
+0.67
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+smoker
+</td>
+<td style="text-align:right;">
+1608
+</td>
+<td style="text-align:right;">
+0.12
+</td>
+<td style="text-align:right;">
+0.32
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+drinker
+</td>
+<td style="text-align:right;">
+620
+</td>
+<td style="text-align:right;">
+0.03
+</td>
+<td style="text-align:right;">
+0.16
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+active
+</td>
+<td style="text-align:right;">
+1564
+</td>
+<td style="text-align:right;">
+0.68
+</td>
+<td style="text-align:right;">
+0.47
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr grouplength="11">
+<td colspan="7" style="border-bottom: 1px solid;">
+<strong>EAS</strong>
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+edu
+</td>
+<td style="text-align:right;">
+799
+</td>
+<td style="text-align:right;">
+14.40
+</td>
+<td style="text-align:right;">
+3.36
+</td>
+<td style="text-align:right;">
+3.00
+</td>
+<td style="text-align:right;">
+24.00
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+gender
+</td>
+<td style="text-align:right;">
+799
+</td>
+<td style="text-align:right;">
+0.61
+</td>
+<td style="text-align:right;">
+0.49
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+age
+</td>
+<td style="text-align:right;">
+799
+</td>
+<td style="text-align:right;">
+79.01
+</td>
+<td style="text-align:right;">
+5.36
+</td>
+<td style="text-align:right;">
+69.00
+</td>
+<td style="text-align:right;">
+99.00
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+neur
+</td>
+<td style="text-align:right;">
+799
+</td>
+<td style="text-align:right;">
+3.85
+</td>
+<td style="text-align:right;">
+0.65
+</td>
+<td style="text-align:right;">
+1.80
+</td>
+<td style="text-align:right;">
+5.00
+</td>
+<td style="text-align:right;">
+0.75
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+con
+</td>
+<td style="text-align:right;">
+799
+</td>
+<td style="text-align:right;">
+3.81
+</td>
+<td style="text-align:right;">
+0.65
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+5.00
+</td>
+<td style="text-align:right;">
+0.79
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+extra
+</td>
+<td style="text-align:right;">
+799
+</td>
+<td style="text-align:right;">
+3.34
+</td>
+<td style="text-align:right;">
+0.64
+</td>
+<td style="text-align:right;">
+1.20
+</td>
+<td style="text-align:right;">
+4.90
+</td>
+<td style="text-align:right;">
+0.76
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+agree
+</td>
+<td style="text-align:right;">
+799
+</td>
+<td style="text-align:right;">
+4.04
+</td>
+<td style="text-align:right;">
+0.53
+</td>
+<td style="text-align:right;">
+2.00
+</td>
+<td style="text-align:right;">
+5.00
+</td>
+<td style="text-align:right;">
+0.70
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+open
+</td>
+<td style="text-align:right;">
+799
+</td>
+<td style="text-align:right;">
+3.67
+</td>
+<td style="text-align:right;">
+0.63
+</td>
+<td style="text-align:right;">
+1.80
+</td>
+<td style="text-align:right;">
+5.00
+</td>
+<td style="text-align:right;">
+0.70
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+smoker
+</td>
+<td style="text-align:right;">
+797
+</td>
+<td style="text-align:right;">
+0.04
+</td>
+<td style="text-align:right;">
+0.20
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+drinker
+</td>
+<td style="text-align:right;">
+798
+</td>
+<td style="text-align:right;">
+0.76
+</td>
+<td style="text-align:right;">
+0.43
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+active
+</td>
+<td style="text-align:right;">
+727
+</td>
+<td style="text-align:right;">
+0.67
+</td>
+<td style="text-align:right;">
+0.47
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr grouplength="11">
+<td colspan="7" style="border-bottom: 1px solid;">
+<strong>ELSA</strong>
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+age
+</td>
+<td style="text-align:right;">
+8832
+</td>
+<td style="text-align:right;">
+66.31
+</td>
+<td style="text-align:right;">
+9.52
+</td>
+<td style="text-align:right;">
+29.00
+</td>
+<td style="text-align:right;">
+99.00
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+gender
+</td>
+<td style="text-align:right;">
+8832
+</td>
+<td style="text-align:right;">
+0.56
+</td>
+<td style="text-align:right;">
+0.50
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+edu
+</td>
+<td style="text-align:right;">
+8832
+</td>
+<td style="text-align:right;">
+4.12
+</td>
+<td style="text-align:right;">
+2.24
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+7.00
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+neur
+</td>
+<td style="text-align:right;">
+8832
+</td>
+<td style="text-align:right;">
+2.10
+</td>
+<td style="text-align:right;">
+0.60
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+4.00
+</td>
+<td style="text-align:right;">
+0.68
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+con
+</td>
+<td style="text-align:right;">
+8832
+</td>
+<td style="text-align:right;">
+3.29
+</td>
+<td style="text-align:right;">
+0.50
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+4.00
+</td>
+<td style="text-align:right;">
+0.67
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+extra
+</td>
+<td style="text-align:right;">
+8831
+</td>
+<td style="text-align:right;">
+3.15
+</td>
+<td style="text-align:right;">
+0.56
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+4.00
+</td>
+<td style="text-align:right;">
+0.75
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+agree
+</td>
+<td style="text-align:right;">
+8829
+</td>
+<td style="text-align:right;">
+3.51
+</td>
+<td style="text-align:right;">
+0.48
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+4.00
+</td>
+<td style="text-align:right;">
+0.80
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+open
+</td>
+<td style="text-align:right;">
+8819
+</td>
+<td style="text-align:right;">
+2.88
+</td>
+<td style="text-align:right;">
+0.56
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+4.00
+</td>
+<td style="text-align:right;">
+0.79
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+smoker
+</td>
+<td style="text-align:right;">
+8832
+</td>
+<td style="text-align:right;">
+0.12
+</td>
+<td style="text-align:right;">
+0.33
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+drinker
+</td>
+<td style="text-align:right;">
+8647
+</td>
+<td style="text-align:right;">
+0.01
+</td>
+<td style="text-align:right;">
+0.11
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+active
+</td>
+<td style="text-align:right;">
+8832
+</td>
+<td style="text-align:right;">
+0.94
+</td>
+<td style="text-align:right;">
+0.24
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr grouplength="11">
+<td colspan="7" style="border-bottom: 1px solid;">
+<strong>HRS</strong>
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+gender
+</td>
+<td style="text-align:right;">
+19242
+</td>
+<td style="text-align:right;">
+0.59
+</td>
+<td style="text-align:right;">
+0.49
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+edu
+</td>
+<td style="text-align:right;">
+19242
+</td>
+<td style="text-align:right;">
+12.65
+</td>
+<td style="text-align:right;">
+3.13
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+17.00
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+age
+</td>
+<td style="text-align:right;">
+19242
+</td>
+<td style="text-align:right;">
+66.27
+</td>
+<td style="text-align:right;">
+11.16
+</td>
+<td style="text-align:right;">
+25.00
+</td>
+<td style="text-align:right;">
+105.00
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+neur
+</td>
+<td style="text-align:right;">
+19242
+</td>
+<td style="text-align:right;">
+2.07
+</td>
+<td style="text-align:right;">
+0.63
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+4.00
+</td>
+<td style="text-align:right;">
+0.71
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+con
+</td>
+<td style="text-align:right;">
+19242
+</td>
+<td style="text-align:right;">
+3.35
+</td>
+<td style="text-align:right;">
+0.49
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+4.00
+</td>
+<td style="text-align:right;">
+0.66
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+extra
+</td>
+<td style="text-align:right;">
+19242
+</td>
+<td style="text-align:right;">
+3.19
+</td>
+<td style="text-align:right;">
+0.56
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+4.00
+</td>
+<td style="text-align:right;">
+0.74
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+agree
+</td>
+<td style="text-align:right;">
+19241
+</td>
+<td style="text-align:right;">
+3.52
+</td>
+<td style="text-align:right;">
+0.49
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+4.00
+</td>
+<td style="text-align:right;">
+0.78
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+open
+</td>
+<td style="text-align:right;">
+19212
+</td>
+<td style="text-align:right;">
+2.94
+</td>
+<td style="text-align:right;">
+0.57
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+4.00
+</td>
+<td style="text-align:right;">
+0.79
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+smoker
+</td>
+<td style="text-align:right;">
+19125
+</td>
+<td style="text-align:right;">
+0.15
+</td>
+<td style="text-align:right;">
+0.36
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+drinker
+</td>
+<td style="text-align:right;">
+19206
+</td>
+<td style="text-align:right;">
+0.06
+</td>
+<td style="text-align:right;">
+0.25
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+active
+</td>
+<td style="text-align:right;">
+19238
+</td>
+<td style="text-align:right;">
+0.94
+</td>
+<td style="text-align:right;">
+0.24
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr grouplength="11">
+<td colspan="7" style="border-bottom: 1px solid;">
+<strong>ILSE</strong>
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+age
+</td>
+<td style="text-align:right;">
+482
+</td>
+<td style="text-align:right;">
+62.51
+</td>
+<td style="text-align:right;">
+0.96
+</td>
+<td style="text-align:right;">
+60.00
+</td>
+<td style="text-align:right;">
+64.00
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+gender
+</td>
+<td style="text-align:right;">
+482
+</td>
+<td style="text-align:right;">
+0.52
+</td>
+<td style="text-align:right;">
+0.50
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+edu
+</td>
+<td style="text-align:right;">
+482
+</td>
+<td style="text-align:right;">
+2.43
+</td>
+<td style="text-align:right;">
+1.03
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+4.00
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+neur
+</td>
+<td style="text-align:right;">
+482
+</td>
+<td style="text-align:right;">
+2.56
+</td>
+<td style="text-align:right;">
+0.58
+</td>
+<td style="text-align:right;">
+1.08
+</td>
+<td style="text-align:right;">
+4.33
+</td>
+<td style="text-align:right;">
+0.76
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+con
+</td>
+<td style="text-align:right;">
+482
+</td>
+<td style="text-align:right;">
+3.94
+</td>
+<td style="text-align:right;">
+0.43
+</td>
+<td style="text-align:right;">
+2.45
+</td>
+<td style="text-align:right;">
+4.92
+</td>
+<td style="text-align:right;">
+0.73
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+extra
+</td>
+<td style="text-align:right;">
+482
+</td>
+<td style="text-align:right;">
+3.35
+</td>
+<td style="text-align:right;">
+0.47
+</td>
+<td style="text-align:right;">
+1.67
+</td>
+<td style="text-align:right;">
+4.67
+</td>
+<td style="text-align:right;">
+0.70
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+agree
+</td>
+<td style="text-align:right;">
+482
+</td>
+<td style="text-align:right;">
+3.70
+</td>
+<td style="text-align:right;">
+0.39
+</td>
+<td style="text-align:right;">
+2.58
+</td>
+<td style="text-align:right;">
+4.75
+</td>
+<td style="text-align:right;">
+0.62
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+open
+</td>
+<td style="text-align:right;">
+482
+</td>
+<td style="text-align:right;">
+3.36
+</td>
+<td style="text-align:right;">
+0.40
+</td>
+<td style="text-align:right;">
+2.00
+</td>
+<td style="text-align:right;">
+4.58
+</td>
+<td style="text-align:right;">
+0.48
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+smoker
+</td>
+<td style="text-align:right;">
+480
+</td>
+<td style="text-align:right;">
+0.21
+</td>
+<td style="text-align:right;">
+0.41
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+active
+</td>
+<td style="text-align:right;">
+477
+</td>
+<td style="text-align:right;">
+0.50
+</td>
+<td style="text-align:right;">
+0.50
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+drinker
+</td>
+<td style="text-align:right;">
+351
+</td>
+<td style="text-align:right;">
+0.25
+</td>
+<td style="text-align:right;">
+0.44
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr grouplength="11">
+<td colspan="7" style="border-bottom: 1px solid;">
+<strong>LBC</strong>
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+gender
+</td>
+<td style="text-align:right;">
+962
+</td>
+<td style="text-align:right;">
+1.51
+</td>
+<td style="text-align:right;">
+0.50
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+2.00
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+edu
+</td>
+<td style="text-align:right;">
+962
+</td>
+<td style="text-align:right;">
+10.77
+</td>
+<td style="text-align:right;">
+1.12
+</td>
+<td style="text-align:right;">
+8.00
+</td>
+<td style="text-align:right;">
+14.00
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+age
+</td>
+<td style="text-align:right;">
+962
+</td>
+<td style="text-align:right;">
+69.50
+</td>
+<td style="text-align:right;">
+0.84
+</td>
+<td style="text-align:right;">
+67.61
+</td>
+<td style="text-align:right;">
+71.30
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+neur
+</td>
+<td style="text-align:right;">
+962
+</td>
+<td style="text-align:right;">
+1.43
+</td>
+<td style="text-align:right;">
+0.64
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+3.92
+</td>
+<td style="text-align:right;">
+0.87
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+con
+</td>
+<td style="text-align:right;">
+962
+</td>
+<td style="text-align:right;">
+2.89
+</td>
+<td style="text-align:right;">
+0.50
+</td>
+<td style="text-align:right;">
+0.92
+</td>
+<td style="text-align:right;">
+4.00
+</td>
+<td style="text-align:right;">
+0.86
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+extra
+</td>
+<td style="text-align:right;">
+962
+</td>
+<td style="text-align:right;">
+2.25
+</td>
+<td style="text-align:right;">
+0.49
+</td>
+<td style="text-align:right;">
+0.50
+</td>
+<td style="text-align:right;">
+3.58
+</td>
+<td style="text-align:right;">
+0.79
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+agree
+</td>
+<td style="text-align:right;">
+962
+</td>
+<td style="text-align:right;">
+2.76
+</td>
+<td style="text-align:right;">
+0.44
+</td>
+<td style="text-align:right;">
+1.33
+</td>
+<td style="text-align:right;">
+3.92
+</td>
+<td style="text-align:right;">
+0.73
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+open
+</td>
+<td style="text-align:right;">
+962
+</td>
+<td style="text-align:right;">
+2.17
+</td>
+<td style="text-align:right;">
+0.48
+</td>
+<td style="text-align:right;">
+0.75
+</td>
+<td style="text-align:right;">
+3.58
+</td>
+<td style="text-align:right;">
+0.72
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+drinker
+</td>
+<td style="text-align:right;">
+962
+</td>
+<td style="text-align:right;">
+0.87
+</td>
+<td style="text-align:right;">
+0.34
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+smoker
+</td>
+<td style="text-align:right;">
+962
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+-Inf
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+active
+</td>
+<td style="text-align:right;">
+951
+</td>
+<td style="text-align:right;">
+0.69
+</td>
+<td style="text-align:right;">
+0.46
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr grouplength="11">
+<td colspan="7" style="border-bottom: 1px solid;">
+<strong>LBLS</strong>
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+age
+</td>
+<td style="text-align:right;">
+1361
+</td>
+<td style="text-align:right;">
+68.97
+</td>
+<td style="text-align:right;">
+13.35
+</td>
+<td style="text-align:right;">
+30.00
+</td>
+<td style="text-align:right;">
+97.00
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+gender
+</td>
+<td style="text-align:right;">
+1361
+</td>
+<td style="text-align:right;">
+0.54
+</td>
+<td style="text-align:right;">
+0.50
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+edu
+</td>
+<td style="text-align:right;">
+1361
+</td>
+<td style="text-align:right;">
+14.39
+</td>
+<td style="text-align:right;">
+2.80
+</td>
+<td style="text-align:right;">
+4.00
+</td>
+<td style="text-align:right;">
+23.00
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+neur
+</td>
+<td style="text-align:right;">
+1361
+</td>
+<td style="text-align:right;">
+1.80
+</td>
+<td style="text-align:right;">
+0.42
+</td>
+<td style="text-align:right;">
+0.46
+</td>
+<td style="text-align:right;">
+3.40
+</td>
+<td style="text-align:right;">
+0.89
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+con
+</td>
+<td style="text-align:right;">
+1361
+</td>
+<td style="text-align:right;">
+2.16
+</td>
+<td style="text-align:right;">
+0.33
+</td>
+<td style="text-align:right;">
+0.88
+</td>
+<td style="text-align:right;">
+3.50
+</td>
+<td style="text-align:right;">
+0.81
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+extra
+</td>
+<td style="text-align:right;">
+1361
+</td>
+<td style="text-align:right;">
+2.24
+</td>
+<td style="text-align:right;">
+0.32
+</td>
+<td style="text-align:right;">
+1.31
+</td>
+<td style="text-align:right;">
+3.38
+</td>
+<td style="text-align:right;">
+0.79
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+agree
+</td>
+<td style="text-align:right;">
+1361
+</td>
+<td style="text-align:right;">
+1.63
+</td>
+<td style="text-align:right;">
+0.37
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+2.88
+</td>
+<td style="text-align:right;">
+0.86
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+open
+</td>
+<td style="text-align:right;">
+1361
+</td>
+<td style="text-align:right;">
+2.45
+</td>
+<td style="text-align:right;">
+0.34
+</td>
+<td style="text-align:right;">
+1.21
+</td>
+<td style="text-align:right;">
+3.65
+</td>
+<td style="text-align:right;">
+0.84
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+smoker
+</td>
+<td style="text-align:right;">
+1341
+</td>
+<td style="text-align:right;">
+0.09
+</td>
+<td style="text-align:right;">
+0.29
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+drinker
+</td>
+<td style="text-align:right;">
+1143
+</td>
+<td style="text-align:right;">
+0.64
+</td>
+<td style="text-align:right;">
+0.48
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+active
+</td>
+<td style="text-align:right;">
+895
+</td>
+<td style="text-align:right;">
+0.45
+</td>
+<td style="text-align:right;">
+0.50
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr grouplength="9">
+<td colspan="7" style="border-bottom: 1px solid;">
+<strong>MAP</strong>
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+age
+</td>
+<td style="text-align:right;">
+982
+</td>
+<td style="text-align:right;">
+79.85
+</td>
+<td style="text-align:right;">
+7.14
+</td>
+<td style="text-align:right;">
+56.14
+</td>
+<td style="text-align:right;">
+99.81
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+gender
+</td>
+<td style="text-align:right;">
+982
+</td>
+<td style="text-align:right;">
+0.76
+</td>
+<td style="text-align:right;">
+0.43
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+edu
+</td>
+<td style="text-align:right;">
+982
+</td>
+<td style="text-align:right;">
+15.23
+</td>
+<td style="text-align:right;">
+2.98
+</td>
+<td style="text-align:right;">
+4.00
+</td>
+<td style="text-align:right;">
+28.00
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+neur
+</td>
+<td style="text-align:right;">
+982
+</td>
+<td style="text-align:right;">
+2.22
+</td>
+<td style="text-align:right;">
+0.57
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+4.75
+</td>
+<td style="text-align:right;">
+0.85
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+con
+</td>
+<td style="text-align:right;">
+982
+</td>
+<td style="text-align:right;">
+4.80
+</td>
+<td style="text-align:right;">
+0.49
+</td>
+<td style="text-align:right;">
+2.50
+</td>
+<td style="text-align:right;">
+6.00
+</td>
+<td style="text-align:right;">
+0.83
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+extra
+</td>
+<td style="text-align:right;">
+653
+</td>
+<td style="text-align:right;">
+3.66
+</td>
+<td style="text-align:right;">
+0.52
+</td>
+<td style="text-align:right;">
+1.83
+</td>
+<td style="text-align:right;">
+5.00
+</td>
+<td style="text-align:right;">
+0.69
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+smoker
+</td>
+<td style="text-align:right;">
+974
+</td>
+<td style="text-align:right;">
+0.01
+</td>
+<td style="text-align:right;">
+0.10
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+drinker
+</td>
+<td style="text-align:right;">
+982
+</td>
+<td style="text-align:right;">
+0.01
+</td>
+<td style="text-align:right;">
+0.10
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+active
+</td>
+<td style="text-align:right;">
+981
+</td>
+<td style="text-align:right;">
+0.87
+</td>
+<td style="text-align:right;">
+0.33
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr grouplength="9">
+<td colspan="7" style="border-bottom: 1px solid;">
+<strong>MAS</strong>
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+age
+</td>
+<td style="text-align:right;">
+879
+</td>
+<td style="text-align:right;">
+78.71
+</td>
+<td style="text-align:right;">
+4.78
+</td>
+<td style="text-align:right;">
+70.29
+</td>
+<td style="text-align:right;">
+90.80
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+gender
+</td>
+<td style="text-align:right;">
+879
+</td>
+<td style="text-align:right;">
+0.46
+</td>
+<td style="text-align:right;">
+0.50
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+edu
+</td>
+<td style="text-align:right;">
+879
+</td>
+<td style="text-align:right;">
+11.74
+</td>
+<td style="text-align:right;">
+3.55
+</td>
+<td style="text-align:right;">
+3.00
+</td>
+<td style="text-align:right;">
+24.00
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+neur
+</td>
+<td style="text-align:right;">
+879
+</td>
+<td style="text-align:right;">
+3.32
+</td>
+<td style="text-align:right;">
+0.79
+</td>
+<td style="text-align:right;">
+0.92
+</td>
+<td style="text-align:right;">
+5.00
+</td>
+<td style="text-align:right;">
+0.89
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+con
+</td>
+<td style="text-align:right;">
+879
+</td>
+<td style="text-align:right;">
+2.96
+</td>
+<td style="text-align:right;">
+0.51
+</td>
+<td style="text-align:right;">
+1.50
+</td>
+<td style="text-align:right;">
+4.75
+</td>
+<td style="text-align:right;">
+0.78
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+open
+</td>
+<td style="text-align:right;">
+879
+</td>
+<td style="text-align:right;">
+2.82
+</td>
+<td style="text-align:right;">
+0.62
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+4.42
+</td>
+<td style="text-align:right;">
+0.75
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+smoker
+</td>
+<td style="text-align:right;">
+874
+</td>
+<td style="text-align:right;">
+0.04
+</td>
+<td style="text-align:right;">
+0.19
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+drinker
+</td>
+<td style="text-align:right;">
+879
+</td>
+<td style="text-align:right;">
+0.88
+</td>
+<td style="text-align:right;">
+0.32
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+active
+</td>
+<td style="text-align:right;">
+879
+</td>
+<td style="text-align:right;">
+0.84
+</td>
+<td style="text-align:right;">
+0.37
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr grouplength="11">
+<td colspan="7" style="border-bottom: 1px solid;">
+<strong>MIDUS</strong>
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+age
+</td>
+<td style="text-align:right;">
+4009
+</td>
+<td style="text-align:right;">
+56.19
+</td>
+<td style="text-align:right;">
+12.37
+</td>
+<td style="text-align:right;">
+30.00
+</td>
+<td style="text-align:right;">
+84.00
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+gender
+</td>
+<td style="text-align:right;">
+4009
+</td>
+<td style="text-align:right;">
+0.55
+</td>
+<td style="text-align:right;">
+0.50
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+edu
+</td>
+<td style="text-align:right;">
+4009
+</td>
+<td style="text-align:right;">
+7.26
+</td>
+<td style="text-align:right;">
+2.54
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+12.00
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+neur
+</td>
+<td style="text-align:right;">
+4009
+</td>
+<td style="text-align:right;">
+2.07
+</td>
+<td style="text-align:right;">
+0.63
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+4.00
+</td>
+<td style="text-align:right;">
+0.74
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+con
+</td>
+<td style="text-align:right;">
+4009
+</td>
+<td style="text-align:right;">
+3.46
+</td>
+<td style="text-align:right;">
+0.45
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+4.00
+</td>
+<td style="text-align:right;">
+0.58
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+extra
+</td>
+<td style="text-align:right;">
+4008
+</td>
+<td style="text-align:right;">
+3.11
+</td>
+<td style="text-align:right;">
+0.57
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+4.00
+</td>
+<td style="text-align:right;">
+0.76
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+agree
+</td>
+<td style="text-align:right;">
+4008
+</td>
+<td style="text-align:right;">
+3.45
+</td>
+<td style="text-align:right;">
+0.50
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+4.00
+</td>
+<td style="text-align:right;">
+0.80
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+open
+</td>
+<td style="text-align:right;">
+4007
+</td>
+<td style="text-align:right;">
+2.90
+</td>
+<td style="text-align:right;">
+0.54
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+4.00
+</td>
+<td style="text-align:right;">
+0.77
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+smoker
+</td>
+<td style="text-align:right;">
+4009
+</td>
+<td style="text-align:right;">
+0.14
+</td>
+<td style="text-align:right;">
+0.35
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+drinker
+</td>
+<td style="text-align:right;">
+4009
+</td>
+<td style="text-align:right;">
+0.04
+</td>
+<td style="text-align:right;">
+0.19
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+active
+</td>
+<td style="text-align:right;">
+3989
+</td>
+<td style="text-align:right;">
+0.97
+</td>
+<td style="text-align:right;">
+0.16
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr grouplength="11">
+<td colspan="7" style="border-bottom: 1px solid;">
+<strong>NAS</strong>
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+edu
+</td>
+<td style="text-align:right;">
+899
+</td>
+<td style="text-align:right;">
+2.02
+</td>
+<td style="text-align:right;">
+1.12
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+5.00
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+age
+</td>
+<td style="text-align:right;">
+899
+</td>
+<td style="text-align:right;">
+64.45
+</td>
+<td style="text-align:right;">
+7.38
+</td>
+<td style="text-align:right;">
+47.00
+</td>
+<td style="text-align:right;">
+85.00
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+gender
+</td>
+<td style="text-align:right;">
+899
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+neur
+</td>
+<td style="text-align:right;">
+899
+</td>
+<td style="text-align:right;">
+4.34
+</td>
+<td style="text-align:right;">
+0.91
+</td>
+<td style="text-align:right;">
+1.40
+</td>
+<td style="text-align:right;">
+6.90
+</td>
+<td style="text-align:right;">
+0.85
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+con
+</td>
+<td style="text-align:right;">
+899
+</td>
+<td style="text-align:right;">
+6.83
+</td>
+<td style="text-align:right;">
+0.93
+</td>
+<td style="text-align:right;">
+2.65
+</td>
+<td style="text-align:right;">
+9.00
+</td>
+<td style="text-align:right;">
+0.91
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+extra
+</td>
+<td style="text-align:right;">
+899
+</td>
+<td style="text-align:right;">
+5.76
+</td>
+<td style="text-align:right;">
+0.92
+</td>
+<td style="text-align:right;">
+2.70
+</td>
+<td style="text-align:right;">
+8.40
+</td>
+<td style="text-align:right;">
+0.87
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+agree
+</td>
+<td style="text-align:right;">
+899
+</td>
+<td style="text-align:right;">
+6.81
+</td>
+<td style="text-align:right;">
+0.90
+</td>
+<td style="text-align:right;">
+3.10
+</td>
+<td style="text-align:right;">
+9.00
+</td>
+<td style="text-align:right;">
+0.90
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+open
+</td>
+<td style="text-align:right;">
+899
+</td>
+<td style="text-align:right;">
+6.11
+</td>
+<td style="text-align:right;">
+0.91
+</td>
+<td style="text-align:right;">
+2.75
+</td>
+<td style="text-align:right;">
+8.79
+</td>
+<td style="text-align:right;">
+0.88
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+drinker
+</td>
+<td style="text-align:right;">
+683
+</td>
+<td style="text-align:right;">
+0.21
+</td>
+<td style="text-align:right;">
+0.41
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+active
+</td>
+<td style="text-align:right;">
+756
+</td>
+<td style="text-align:right;">
+0.58
+</td>
+<td style="text-align:right;">
+0.49
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+smoker
+</td>
+<td style="text-align:right;">
+899
+</td>
+<td style="text-align:right;">
+0.59
+</td>
+<td style="text-align:right;">
+0.49
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr grouplength="11">
+<td colspan="7" style="border-bottom: 1px solid;">
+<strong>OATS</strong>
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+age
+</td>
+<td style="text-align:right;">
+536
+</td>
+<td style="text-align:right;">
+71.40
+</td>
+<td style="text-align:right;">
+5.54
+</td>
+<td style="text-align:right;">
+65.08
+</td>
+<td style="text-align:right;">
+90.06
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+gender
+</td>
+<td style="text-align:right;">
+536
+</td>
+<td style="text-align:right;">
+0.65
+</td>
+<td style="text-align:right;">
+0.48
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+edu
+</td>
+<td style="text-align:right;">
+536
+</td>
+<td style="text-align:right;">
+11.30
+</td>
+<td style="text-align:right;">
+3.43
+</td>
+<td style="text-align:right;">
+2.00
+</td>
+<td style="text-align:right;">
+26.00
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+neur
+</td>
+<td style="text-align:right;">
+536
+</td>
+<td style="text-align:right;">
+2.34
+</td>
+<td style="text-align:right;">
+0.59
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+4.25
+</td>
+<td style="text-align:right;">
+0.85
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+con
+</td>
+<td style="text-align:right;">
+536
+</td>
+<td style="text-align:right;">
+3.85
+</td>
+<td style="text-align:right;">
+0.44
+</td>
+<td style="text-align:right;">
+2.00
+</td>
+<td style="text-align:right;">
+5.00
+</td>
+<td style="text-align:right;">
+0.81
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+extra
+</td>
+<td style="text-align:right;">
+536
+</td>
+<td style="text-align:right;">
+3.32
+</td>
+<td style="text-align:right;">
+0.48
+</td>
+<td style="text-align:right;">
+1.75
+</td>
+<td style="text-align:right;">
+4.73
+</td>
+<td style="text-align:right;">
+0.77
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+agree
+</td>
+<td style="text-align:right;">
+536
+</td>
+<td style="text-align:right;">
+3.87
+</td>
+<td style="text-align:right;">
+0.42
+</td>
+<td style="text-align:right;">
+2.42
+</td>
+<td style="text-align:right;">
+5.00
+</td>
+<td style="text-align:right;">
+0.75
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+open
+</td>
+<td style="text-align:right;">
+536
+</td>
+<td style="text-align:right;">
+3.33
+</td>
+<td style="text-align:right;">
+0.49
+</td>
+<td style="text-align:right;">
+1.67
+</td>
+<td style="text-align:right;">
+4.75
+</td>
+<td style="text-align:right;">
+0.75
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+smoker
+</td>
+<td style="text-align:right;">
+533
+</td>
+<td style="text-align:right;">
+0.06
+</td>
+<td style="text-align:right;">
+0.23
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+drinker
+</td>
+<td style="text-align:right;">
+535
+</td>
+<td style="text-align:right;">
+0.04
+</td>
+<td style="text-align:right;">
+0.20
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+active
+</td>
+<td style="text-align:right;">
+422
+</td>
+<td style="text-align:right;">
+0.89
+</td>
+<td style="text-align:right;">
+0.31
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr grouplength="11">
+<td colspan="7" style="border-bottom: 1px solid;">
+<strong>ROS</strong>
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+age
+</td>
+<td style="text-align:right;">
+1394
+</td>
+<td style="text-align:right;">
+75.95
+</td>
+<td style="text-align:right;">
+7.47
+</td>
+<td style="text-align:right;">
+55.78
+</td>
+<td style="text-align:right;">
+102.15
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+gender
+</td>
+<td style="text-align:right;">
+1394
+</td>
+<td style="text-align:right;">
+0.71
+</td>
+<td style="text-align:right;">
+0.45
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+edu
+</td>
+<td style="text-align:right;">
+1394
+</td>
+<td style="text-align:right;">
+18.35
+</td>
+<td style="text-align:right;">
+3.30
+</td>
+<td style="text-align:right;">
+3.00
+</td>
+<td style="text-align:right;">
+30.00
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+neur
+</td>
+<td style="text-align:right;">
+1394
+</td>
+<td style="text-align:right;">
+2.39
+</td>
+<td style="text-align:right;">
+0.49
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+4.00
+</td>
+<td style="text-align:right;">
+0.80
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+con
+</td>
+<td style="text-align:right;">
+1394
+</td>
+<td style="text-align:right;">
+3.84
+</td>
+<td style="text-align:right;">
+0.42
+</td>
+<td style="text-align:right;">
+1.92
+</td>
+<td style="text-align:right;">
+5.00
+</td>
+<td style="text-align:right;">
+0.80
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+extra
+</td>
+<td style="text-align:right;">
+1394
+</td>
+<td style="text-align:right;">
+4.16
+</td>
+<td style="text-align:right;">
+0.52
+</td>
+<td style="text-align:right;">
+2.50
+</td>
+<td style="text-align:right;">
+5.67
+</td>
+<td style="text-align:right;">
+0.66
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+agree
+</td>
+<td style="text-align:right;">
+1394
+</td>
+<td style="text-align:right;">
+4.86
+</td>
+<td style="text-align:right;">
+0.34
+</td>
+<td style="text-align:right;">
+3.58
+</td>
+<td style="text-align:right;">
+6.00
+</td>
+<td style="text-align:right;">
+0.67
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+open
+</td>
+<td style="text-align:right;">
+1394
+</td>
+<td style="text-align:right;">
+4.39
+</td>
+<td style="text-align:right;">
+0.45
+</td>
+<td style="text-align:right;">
+2.50
+</td>
+<td style="text-align:right;">
+5.92
+</td>
+<td style="text-align:right;">
+0.69
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+smoker
+</td>
+<td style="text-align:right;">
+1394
+</td>
+<td style="text-align:right;">
+0.02
+</td>
+<td style="text-align:right;">
+0.12
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+drinker
+</td>
+<td style="text-align:right;">
+1394
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.05
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+active
+</td>
+<td style="text-align:right;">
+1394
+</td>
+<td style="text-align:right;">
+0.79
+</td>
+<td style="text-align:right;">
+0.41
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr grouplength="11">
+<td colspan="7" style="border-bottom: 1px solid;">
+<strong>SLS</strong>
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+age
+</td>
+<td style="text-align:right;">
+1194
+</td>
+<td style="text-align:right;">
+66.45
+</td>
+<td style="text-align:right;">
+14.33
+</td>
+<td style="text-align:right;">
+29.00
+</td>
+<td style="text-align:right;">
+101.00
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+gender
+</td>
+<td style="text-align:right;">
+1194
+</td>
+<td style="text-align:right;">
+0.55
+</td>
+<td style="text-align:right;">
+0.50
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+edu
+</td>
+<td style="text-align:right;">
+1194
+</td>
+<td style="text-align:right;">
+15.72
+</td>
+<td style="text-align:right;">
+2.58
+</td>
+<td style="text-align:right;">
+8.00
+</td>
+<td style="text-align:right;">
+20.00
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+neur
+</td>
+<td style="text-align:right;">
+1194
+</td>
+<td style="text-align:right;">
+1.60
+</td>
+<td style="text-align:right;">
+0.45
+</td>
+<td style="text-align:right;">
+0.42
+</td>
+<td style="text-align:right;">
+3.12
+</td>
+<td style="text-align:right;">
+0.93
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+con
+</td>
+<td style="text-align:right;">
+1194
+</td>
+<td style="text-align:right;">
+2.50
+</td>
+<td style="text-align:right;">
+0.37
+</td>
+<td style="text-align:right;">
+1.21
+</td>
+<td style="text-align:right;">
+3.73
+</td>
+<td style="text-align:right;">
+0.90
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+extra
+</td>
+<td style="text-align:right;">
+1194
+</td>
+<td style="text-align:right;">
+2.20
+</td>
+<td style="text-align:right;">
+0.40
+</td>
+<td style="text-align:right;">
+0.90
+</td>
+<td style="text-align:right;">
+3.44
+</td>
+<td style="text-align:right;">
+0.90
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+agree
+</td>
+<td style="text-align:right;">
+1194
+</td>
+<td style="text-align:right;">
+2.71
+</td>
+<td style="text-align:right;">
+0.31
+</td>
+<td style="text-align:right;">
+1.56
+</td>
+<td style="text-align:right;">
+3.81
+</td>
+<td style="text-align:right;">
+0.87
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+open
+</td>
+<td style="text-align:right;">
+1194
+</td>
+<td style="text-align:right;">
+2.41
+</td>
+<td style="text-align:right;">
+0.41
+</td>
+<td style="text-align:right;">
+0.98
+</td>
+<td style="text-align:right;">
+3.67
+</td>
+<td style="text-align:right;">
+0.91
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+smoker
+</td>
+<td style="text-align:right;">
+1189
+</td>
+<td style="text-align:right;">
+0.04
+</td>
+<td style="text-align:right;">
+0.19
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+drinker
+</td>
+<td style="text-align:right;">
+1194
+</td>
+<td style="text-align:right;">
+0.09
+</td>
+<td style="text-align:right;">
+0.29
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+active
+</td>
+<td style="text-align:right;">
+1176
+</td>
+<td style="text-align:right;">
+0.87
+</td>
+<td style="text-align:right;">
+0.34
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr grouplength="11">
+<td colspan="7" style="border-bottom: 1px solid;">
+<strong>WLS</strong>
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+age
+</td>
+<td style="text-align:right;">
+10723
+</td>
+<td style="text-align:right;">
+53.77
+</td>
+<td style="text-align:right;">
+4.52
+</td>
+<td style="text-align:right;">
+33.00
+</td>
+<td style="text-align:right;">
+75.00
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+gender
+</td>
+<td style="text-align:right;">
+10723
+</td>
+<td style="text-align:right;">
+0.54
+</td>
+<td style="text-align:right;">
+0.50
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+edu
+</td>
+<td style="text-align:right;">
+10723
+</td>
+<td style="text-align:right;">
+13.74
+</td>
+<td style="text-align:right;">
+2.40
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+21.00
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+neur
+</td>
+<td style="text-align:right;">
+10723
+</td>
+<td style="text-align:right;">
+3.21
+</td>
+<td style="text-align:right;">
+0.98
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+6.00
+</td>
+<td style="text-align:right;">
+0.77
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+con
+</td>
+<td style="text-align:right;">
+10723
+</td>
+<td style="text-align:right;">
+4.83
+</td>
+<td style="text-align:right;">
+0.70
+</td>
+<td style="text-align:right;">
+1.50
+</td>
+<td style="text-align:right;">
+6.00
+</td>
+<td style="text-align:right;">
+0.65
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+extra
+</td>
+<td style="text-align:right;">
+10716
+</td>
+<td style="text-align:right;">
+3.81
+</td>
+<td style="text-align:right;">
+0.90
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+6.00
+</td>
+<td style="text-align:right;">
+0.76
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+agree
+</td>
+<td style="text-align:right;">
+10719
+</td>
+<td style="text-align:right;">
+4.73
+</td>
+<td style="text-align:right;">
+0.75
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+6.00
+</td>
+<td style="text-align:right;">
+0.69
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+open
+</td>
+<td style="text-align:right;">
+10706
+</td>
+<td style="text-align:right;">
+3.62
+</td>
+<td style="text-align:right;">
+0.80
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+6.00
+</td>
+<td style="text-align:right;">
+0.60
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+smoker
+</td>
+<td style="text-align:right;">
+10723
+</td>
+<td style="text-align:right;">
+0.17
+</td>
+<td style="text-align:right;">
+0.38
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+drinker
+</td>
+<td style="text-align:right;">
+10206
+</td>
+<td style="text-align:right;">
+0.55
+</td>
+<td style="text-align:right;">
+0.50
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
+active
+</td>
+<td style="text-align:right;">
+10587
+</td>
+<td style="text-align:right;">
+0.94
+</td>
+<td style="text-align:right;">
+0.24
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+</tbody>
+</table>
+<div id="code" class="section level1">
+<h1>Code</h1>
+<p>The following packages were used to generate this table:</p>
+<pre class="r"><code>library(papaja)
+library(tidyverse)
+library(knitr)
+library(kableExtra)
+library(here)</code></pre>
+<p>The files needed for this table are available at <a href="https://osf.io/mzfu9/">osf.io/mzfu9</a> in the Individual Study Output folder.</p>
+<p>First we load the individual study analysis objects.</p>
+<pre class="r"><code>study.names = c(&quot;BASEII&quot;, &quot;EAS&quot;,&quot;ELSA&quot;, &quot;HRS&quot;, &quot;ILSE&quot;, &quot;LBC&quot;,
+                &quot;LBLS&quot;, &quot;MAP&quot;, &quot;MAS&quot;,&quot;MIDUS&quot;,&quot;NAS&quot;, &quot;OATS&quot;, 
+                &quot;ROS&quot;,&quot;SLS&quot;,&quot;WLS&quot;)
+
+lapply(here(paste0(&quot;behavior/&quot;, study.names, &quot;_behavior.Rdata&quot;)), load, .GlobalEnv)</code></pre>
+<p>We extract the relevant statistics in a loop. (The first author is just learning how to use the <code>purrr</code> package, and so often resorts to loops when under a time constraint.)</p>
+<p>First we extract the Cronbach’s alpha values from the data objects. These are stored in a dataframe, with each reliability coefficient from each perosnality meausre from each study comprising a single row.</p>
+<pre class="r"><code>alpha.list &lt;- data.frame()
+n = 0
+for(i in study.names){
+  n = n+1
+  x = get(paste0(i,&quot;_behavior&quot;)) # get output object
+  if(!is.null(x$alpha)){
+    y = as.data.frame(unlist(x$alpha))
+    y$study = i
+    alpha.list = rbind(alpha.list, y)
+  }
+}</code></pre>
+<p>The fit statistics had been extracted in long form. This code adds a “variable” variable and then spreads the data frame, so each trait within each study has a single row.</p>
+<pre class="r"><code>alpha.list &lt;- alpha.list %&gt;%
+  mutate(var = rownames(.),
+         var = gsub(&quot;[0-9]&quot;, &quot;&quot;, var)) %&gt;%
+  separate(var, into = c(&quot;statistic&quot;, &quot;var&quot;)) %&gt;%
+  spread(key = statistic, value = `unlist(x$alpha)`)</code></pre>
+<p>Next we extract and wrangle the descriptive statistics (a data frame created using the <code>describe()</code> function in the <code>psych</code> package).</p>
+<pre class="r"><code>describe.df = lapply(X = study.names, FUN = function(x) get(paste0(x,&quot;_behavior&quot;))$descriptives) %&gt;%
+  map2_df(., study.names, ~ mutate(.x, study = .y, var = rownames(.x))) %&gt;%
+  # join the descriptives to the data set containing the reliability statistics
+  full_join(alpha.list) %&gt;%
+  # select the columns we want to include in the table
+  dplyr::select(study, var, n, mean, sd, min, max, alpha) %&gt;%
+  # select rows representing variables used in analyses
+  filter(var %in% c(&quot;age&quot;, &quot;gender&quot;, &quot;edu&quot;, 
+                    &quot;neur&quot;, &quot;con&quot;, &quot;extra&quot;, &quot;agree&quot;, &quot;open&quot;,
+                    &quot;smoker&quot;, &quot;drinker&quot;, &quot;active&quot;))</code></pre>
+<p>We identify the rows corresponding to each data set. We then select the minimum and maximum rows as starting and end points for grouping.</p>
+<pre class="r"><code>rows = sapply(study.names, function(x) which(describe.df$study == x))
+rows = lapply(rows, function(x) c(min(x), max(x)))</code></pre>
+<p>Finally, we pipe the data frame into the <code>kable()</code> function and additional formatting through the <code>kableExtra</code> package. We remove the study column, as this becomes redundant with the grouping headers.</p>
+<pre class="r"><code>describe.df %&gt;%
+  dplyr::select(-study) %&gt;%
+  kable(.,  booktabs = T, escape = F, digits = 2, format = &quot;html&quot;, 
+        col.names = c(&quot;Variable&quot;, &quot;N Valid&quot;, &quot;Mean&quot;, &quot;SD&quot;, &quot;Min&quot;, &quot;Max&quot;, &quot;$\\alpha$&quot;)) %&gt;%
+  kable_styling(full_width = T, latex_options = c(&quot;repeat_header&quot;)) %&gt;%
+  group_rows(names(rows)[1], rows[[1]][1], rows[[1]][2]) %&gt;%
+  group_rows(names(rows)[2], rows[[2]][1], rows[[2]][2]) %&gt;%
+  group_rows(names(rows)[3], rows[[3]][1], rows[[3]][2]) %&gt;%
+  group_rows(names(rows)[4], rows[[4]][1], rows[[4]][2]) %&gt;%
+  group_rows(names(rows)[5], rows[[5]][1], rows[[5]][2]) %&gt;%
+  group_rows(names(rows)[6], rows[[6]][1], rows[[6]][2]) %&gt;%
+  group_rows(names(rows)[7], rows[[7]][1], rows[[7]][2]) %&gt;%
+  group_rows(names(rows)[8], rows[[8]][1], rows[[8]][2]) %&gt;%
+  group_rows(names(rows)[9], rows[[9]][1], rows[[9]][2]) %&gt;%
+  group_rows(names(rows)[10], rows[[10]][1], rows[[10]][2]) %&gt;%
+  group_rows(names(rows)[11], rows[[11]][1], rows[[11]][2]) %&gt;%
+  group_rows(names(rows)[12], rows[[12]][1], rows[[12]][2]) %&gt;%
+  group_rows(names(rows)[13], rows[[13]][1], rows[[13]][2]) %&gt;%
+  group_rows(names(rows)[14], rows[[14]][1], rows[[14]][2]) %&gt;%
+  group_rows(names(rows)[15], rows[[15]][1], rows[[15]][2])</code></pre>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

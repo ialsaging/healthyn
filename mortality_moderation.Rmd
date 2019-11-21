@@ -1,0 +1,107 @@
+---
+title: "Moderation of NxC interaction by personality scales (time since baseline as metric)"
+output: 
+  html_document:
+    toc: TRUE
+    toc_depth: 2
+    toc_float: TRUE
+    theme: cosmo
+---
+This document contains the study-level personality scale moderation in the meta-analysis of the surivival models, using time since baseline as the metric of interest and neuroticism by conscientiousness as the predictor of interest.
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+options(knitr.kable.NA = '')
+```
+
+```{r load_packages, echo = F, warning = FALSE, message = FALSE, results = 'hide'}
+library(papaja)
+library(tidyverse)
+library(metafor)
+library(knitr)
+library(kableExtra)
+library(here)
+```
+
+```{r load_data, echo = F, results = 'hide'}
+study.names = c("EAS", "HRS", "LBC", "LBLS", "MAP", "MAS", "MIDUS", "NAS", "OATS", "ROS", "SLS", "WLS")
+lapply(here(paste0("mortality/study output/", study.names, "_survival_output.Rdata")), load, .GlobalEnv)
+```
+
+```{r extract, echo = F}
+meta.data.time <- data.frame()
+n <- 0
+
+for(i in study.names){
+  n <- n+1
+  x <- get(paste0(i, "_survival_output"))
+  meta.data.time[n, "study"] <- i
+  meta.data.time[n, "coef"] <- x$time$model2$coef["z.neur:z.con", "coef"]
+  meta.data.time[n, "se"] <- x$time$model2$coef["z.neur:z.con", "se(coef)"]
+  meta.data.time[n, "n"] <- x$time$model2$ntotal
+  meta.data.time[n, "n_died"] <- x$descriptives$died.tab["1"]
+  meta.data.time[n, "personality_q"] <- x$metadata$personality_q
+}
+
+# set personality questionnare information.
+# We divide questionnaires into five categories:
+# NEO-PI-R (baseline), NEO-FFI, BFI, IPIP and MIDI.
+# The Normative Aging Study (NAS) was the only to use the Goldberg adjectives; this study was excluded from personality moderations
+# similarly, the EAS was the only one to use the IPIP, and was similarly excluded
+
+neo_pi_r = c("LBLS", "SLS", "OATS", "MAS")
+neo_ffi = c("ILSE", "ROS", "MAP", "LBC")
+ipip = c("EAS")
+
+meta.data.time$personality_q[meta.data.time$study %in% neo_pi_r] = "NEO-PI-R"
+meta.data.time$personality_q[meta.data.time$study %in% neo_ffi] = "NEO-FFI"
+meta.data.time$personality_q[meta.data.time$study %in% ipip] = "IPIP"
+meta.data.time$personality_q = gsub("goldberg", "", meta.data.time$personality_q)
+meta.data.time$personality_q = gsub("IPIP", "", meta.data.time$personality_q)
+
+meta.data.time$personality_q = factor(meta.data.time$personality_q)
+meta.data.time$personality_q = relevel(meta.data.time$personality_q,
+                                        ref = "NEO-PI-R")
+
+meta.data.time$study = gsub("LBC", "LBC1936", meta.data.time$study)
+
+mod.results.time <- rma(yi = coef, 
+                    sei = se, 
+                    ni = n,  
+                    measure = "RR",
+                    slab = study, 
+                    mods = ~personality_q,
+                    data = meta.data.time)
+```
+
+```{r table, echo = F, results = 'asis'}
+coef(summary(mod.results.time)) %>%
+  mutate(pval = printp(pval),
+         var = c("Intercept (NEO-PI-R)", "IPIP or Goldberg", "BFI", "MIDI", "NEO-FFI")) %>%
+  dplyr::select(ncol(.), 1:(ncol(.)-1)) %>%
+  kable(., booktabs = TRUE, escape = FALSE, digits = 2,
+        col.names = c(" ", "Estimate", "SE", "Z", "p", "CI lower", "CI upper"), 
+        row.names = F) %>%
+  kable_styling()
+```
+
+# Code
+
+The following packages were used to generate this table: 
+
+```{r load_packages, eval = F, warning = FALSE, message = FALSE, results = 'hide'}
+```
+
+The files needed for this table are available at [osf.io/mzfu9](https://osf.io/mzfu9/) in the Individual Study Output folder.
+
+First we load the individual study analysis objects.
+
+```{r load_data, eval = F, results = 'hide'}
+```
+
+
+```{r extract, eval = F}
+```
+
+```{r table, eval = F, results = 'asis'}
+```

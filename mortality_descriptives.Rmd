@@ -1,0 +1,182 @@
+---
+title: "Descriptive Statistics"
+output: 
+  html_document:
+    toc: TRUE
+    toc_depth: 2
+    toc_float: TRUE
+    theme: cosmo
+
+---
+This document contains the descriptive statistics (number of non-missing observations, mean, standard deviation, minimum value, maximum value and internal reliablity, where relevant) of the variables used in the current coordinated analyses. We provide the code used to generate this table, which calls upon our analysis summary objects (also provided). 
+
+# Descriptive statistics
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+options(knitr.kable.NA = '')
+```
+
+```{r load_packages, warning = FALSE, message = FALSE, results = 'hide', echo = FALSE}
+library(papaja)
+library(tidyverse)
+library(knitr)
+library(kableExtra)
+library(here)
+```
+
+
+```{r study_names, results = 'hide', echo = F}
+study.names = c("EAS", "HRS", "LBC", "LBLS", "MAP", "MAS", "MIDUS", "NAS", "OATS", "ROS", "SLS", "WLS")
+
+lapply(here(paste0("mortality/study output/", study.names, "_survival_output.Rdata")), load, .GlobalEnv)
+```
+
+```{r reliability, echo = F}
+alpha.list <- data.frame()
+n = 0
+for(i in study.names){
+  n = n+1
+  x = get(paste0(i,"_survival_output")) # get output object
+  if(!is.null(x$alpha)){
+    y = as.data.frame(unlist(x$alpha))
+    y$study = i
+    alpha.list = rbind(alpha.list, y)
+  }
+}
+
+alpha.list <- alpha.list %>%
+  mutate(var = rownames(.),
+         var = gsub("[0-9]", "", var),
+         var = gsub("alpha_", "", var)) %>%
+  rename(alpha = `unlist(x$alpha)`)
+```
+
+```{r describe , message = FALSE, echo = F}
+describe.df = lapply(X = paste0(study.names, "_survival_output"), 
+                     FUN = function(x) get(x)$descriptives$summary) %>%
+  map2_df(., study.names, ~ mutate(.x, study = .y, var = rownames(.x))) %>%
+  #add the alpha values
+  full_join(alpha.list) %>%
+  # select the columns we want to include in the table
+  select(study, var, n, mean, sd, min, max, alpha) %>%
+  # select rows representing variables used in analyses
+  filter(var %in% c("age", "edu", 
+                    "neur", "con", "extra", "agree", "open"))
+```
+
+```{r rows, echo = F}
+rows.EAS = which(describe.df$study == "EAS"); rows.EAS = c(min(rows.EAS), max(rows.EAS))
+rows.LBC = which(describe.df$study == "LBC"); rows.LBC = c(min(rows.LBC), max(rows.LBC))
+rows.LBLS = which(describe.df$study == "LBLS"); rows.LBLS = c(min(rows.LBLS), max(rows.LBLS))
+rows.HRS = which(describe.df$study == "HRS"); rows.HRS = c(min(rows.HRS), max(rows.HRS))
+rows.MAP = which(describe.df$study == "MAP"); rows.MAP = c(min(rows.MAP), max(rows.MAP))
+rows.MAS = which(describe.df$study == "MAS"); rows.MAS = c(min(rows.MAS), max(rows.MAS))
+rows.MIDUS = which(describe.df$study == "MIDUS"); rows.MIDUS = c(min(rows.MIDUS), max(rows.MIDUS))
+rows.NAS = which(describe.df$study == "NAS"); rows.NAS = c(min(rows.NAS), max(rows.NAS))
+rows.OATS = which(describe.df$study == "OATS"); rows.OATS = c(min(rows.OATS), max(rows.OATS))
+rows.ROS = which(describe.df$study == "ROS"); rows.ROS = c(min(rows.ROS), max(rows.ROS))
+rows.SLS = which(describe.df$study == "SLS"); rows.SLS = c(min(rows.SLS), max(rows.SLS))
+rows.WLS = which(describe.df$study == "WLS"); rows.WLS = c(min(rows.WLS), max(rows.WLS))
+```
+
+```{r table, results = 'asis', echo = F}
+describe.df %>%
+  select(-study) %>%
+  kable(.,  booktabs = T, escape = F, digits = 2, format = "html", 
+        col.names = c("Variable", "N Valid", "Mean", "SD", "Min", "Max", "$\\alpha$")) %>%
+  kable_styling(full_width = T, latex_options = c("repeat_header")) %>%
+  group_rows("EAS", rows.EAS[1], rows.EAS[2]) %>%
+  group_rows("HRS", rows.HRS[1], rows.HRS[2]) %>%
+  group_rows("LBC1936", rows.LBC[1], rows.LBC[2]) %>%
+  group_rows("LBLS", rows.LBLS[1], rows.LBLS[2]) %>%
+  group_rows("MAP", rows.MAP[1], rows.MAP[2]) %>%
+  group_rows("MAS", rows.MAS[1], rows.MAS[2]) %>%
+  group_rows("MIDUS", rows.MIDUS[1], rows.MIDUS[2]) %>%
+  group_rows("NAS", rows.NAS[1], rows.NAS[2]) %>%
+  group_rows("OATS", rows.OATS[1], rows.OATS[2]) %>%
+  group_rows("ROS", rows.ROS[1], rows.ROS[2]) %>%
+  group_rows("SLS", rows.SLS[1], rows.SLS[2]) %>%
+  group_rows("WLS", rows.WLS[1], rows.WLS[2]) 
+```
+
+# Gender breakdown 
+
+```{r gender, results="asis", echo = F}
+gender.tab <- data.frame()
+n <- 0
+for(i in study.names){
+  x <- get(paste0(i, "_survival_output"))
+  n <- n+1
+  gender.tab[n, "study"] <- i
+  if(!is.null(x$descriptives$gender.tab)){
+    table <- x$descriptives$gender.tab
+    gender.tab[n, "male"] <- table[which(names(table) == x$descriptives$gender.lab$male)]
+    gender.tab[n, "female"] <- table[which(names(table) == x$descriptives$gender.lab$female)]
+    gender.tab[n, "percent female"] <- gender.tab[n, "female"]/(gender.tab[n, "female"] + 
+                                                                gender.tab[n, "male"])*100}
+}
+
+kable(gender.tab, booktabs = T, escape = F, digits = 2, format = "html") %>%
+  kable_styling()
+```
+
+# Code
+
+The following packages were used to generate this table: 
+
+```{r ref.label = "load_packages", eval = FALSE}
+```
+
+The files needed for this table are available at [osf.io/mzfu9](https://osf.io/mzfu9/) in the Individual Study Output folder.
+
+```{r ref.label = "data_path", eval = F}
+```
+
+First we load the individual study analysis objects.
+
+```{r ref.label="study_names", eval = F}
+```
+
+First we extract the Cronbach's alpha values from the data objects. These are stored in a dataframe, with each reliability coefficient from each perosnality meausre from each study comprising a single row. 
+
+```{r reliability}
+```
+
+We extract and wrangle the descriptive statistics (a data frame created using the `describe()` function in the `psych` package).
+
+```{r ref.label= "describe" , message = FALSE, eval = F}
+```
+
+We identify the rows corresponding to each data set. We then select the minimum and maximum rows as starting and end points for grouping.
+
+```{r ref.label = "rows", eval = F}
+
+```
+
+Finally, we pipe the data frame into the `kable()` function and additional formatting through the `kableExtra` package. We remove the study column, as this becomes redundant with the grouping headers. 
+```{r ref.label="table", results = 'asis', eval = F}
+describe.df %>%
+  select(-study) %>%
+  kable(.,  booktabs = T, escape = F, digits = 2, format = "html", 
+        col.names = c("Variable", "N Valid", "Mean", "SD", "Min", "Max", "$\\alpha$")) %>%
+  kable_styling(full_width = T, latex_options = c("repeat_header")) %>%
+  group_rows("EAS", rows.EAS[1], rows.EAS[2]) %>%
+  group_rows("HRS", rows.HRS[1], rows.HRS[2]) %>%
+  group_rows("LBC1936", rows.LBC[1], rows.LBC[2]) %>%
+  group_rows("LBLS", rows.LBLS[1], rows.LBLS[2]) %>%
+  group_rows("MAP", rows.MAP[1], rows.MAP[2]) %>%
+  group_rows("MAS", rows.MAS[1], rows.MAS[2]) %>%
+  group_rows("MIDUS", rows.MIDUS[1], rows.MIDUS[2]) %>%
+  group_rows("NAS", rows.NAS[1], rows.NAS[2]) %>%
+  group_rows("OATS", rows.OATS[1], rows.OATS[2]) %>%
+  group_rows("ROS", rows.ROS[1], rows.ROS[2]) %>%
+  group_rows("SLS", rows.SLS[1], rows.SLS[2]) %>%
+  group_rows("WLS", rows.WLS[1], rows.WLS[2]) 
+```
+
+The code to calculate gender breakdown is:
+
+```{r ref.label = "gender", results="asis", eval = F}
+
+```
