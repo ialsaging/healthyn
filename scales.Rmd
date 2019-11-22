@@ -1,0 +1,53 @@
+---
+title: "Facets of personality across instrument"
+output: 
+  html_document:
+    toc: TRUE
+    toc_depth: 2
+    toc_float: TRUE
+    theme: cosmo
+---
+
+This page contains a table summarizing the inclusion of specific aspects or facets in the instruments used in the healthy neuroticism coordinated analysis. 
+
+
+|                       | IPIP-50 | IPIP | Goldberg | BFI | BFI-S | NEO-FFI | NEO-PI-R | MIDI |
+|-----------------------|:-------:|:----:|:--------:|:---:|:-----:|:-------:|:--------:|:----:|
+| **Conscientiousness**                                                                      ||
+| Organized             |    x    |   x  |     x    |     |       |         |          |   x  |
+| Responsible           |    x    |   x  |     x    |     |       |         |          |   x  |
+| Reliable              |    x    |   x  |     x    |     |       |         |          |      |
+| Conscientious         |    x    |   x  |     x    |     |       |         |          |      |
+| Practical             |    x    |   x  |     x    |     |       |         |          |      |
+| Thorough              |    x    |   x  |     x    |     |   x   |         |          |      |
+| Hardworking           |    x    |   x  |     x    |     |       |         |          |   x  |
+| Thrifty               |    x    |   x  |     x    |     |       |         |          |      |
+| Cautious              |    x    |   x  |     x    |     |       |         |          |      |
+| Serious               |    x    |   x  |     x    |     |       |         |          |      |
+| Competent             |         |      |          |  x  |       |         |     x    |      |
+| Orderly               |         |      |          |  x  |       |    x    |     x    |      |
+| Dutifulness           |         |      |          |  x  |       |         |     x    |      |
+| Achievement           |         |      |          |  x  |       |         |     x    |      |
+| Self-Discipline       |         |      |          |  x  |   x   |         |     x    |      |
+| Deliberation          |         |      |          |  x  |       |         |     x    |      |
+| Efficient             |         |      |          |     |   x   |         |          |      |
+| Careful               |         |      |          |     |       |         |          |   x  |
+| Goal Striving         |         |      |          |     |       |    x    |          |      |
+| Dependability         |         |      |          |     |       |    x    |          |      |
+| **Neuroticism**       |         |      |          |     |       |         |          |      |
+| Angry                 |    x    |   x  |     x    |  x  |       |         |     x    |      |
+| Tense (Anxious)       |    x    |   x  |     x    |  x  |   x   |    x    |     x    |   x  |
+| Nervous               |    x    |   x  |     x    |     |   x   |         |          |   x  |
+| Envious               |    x    |   x  |     x    |     |       |         |          |      |
+| Unstable              |    x    |   x  |     x    |     |       |         |          |      |
+| Discontented          |    x    |   x  |     x    |     |       |         |          |      |
+| Insecure              |    x    |   x  |     x    |     |       |         |          |      |
+| Emotional             |    x    |   x  |     x    |     |       |         |          |      |
+| Guilt-Ridden          |    x    |   x  |     x    |     |       |         |          |      |
+| Moody                 |    x    |   x  |     x    |     |       |         |          |   x  |
+| Depression            |         |      |          |  x  |       |    x    |     x    |      |
+| Self-Conscious        |         |      |          |  x  |       |         |     x    |      |
+| Vulnerable            |         |      |          |  x  |       |         |     x    |      |
+| Impulsiveness         |         |      |          |  x  |       |         |     x    |      |
+| Worry                 |         |      |          |     |   x   |         |          |   x  |
+| Self-Reproach (Blame) |         |      |          |     |       |    x    |          |      |

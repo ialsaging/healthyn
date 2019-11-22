@@ -123,6 +123,8 @@ navbar:
       menu: 
         - text: "R Packages Used"
           href: "chronic_packages.html"
+        - text: "Personality scale content"
+          href: "scales_html"
   right:
     - icon: fa-github
       href: https://github.com/ilsaging/healthyn
