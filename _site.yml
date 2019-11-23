@@ -121,6 +121,8 @@ navbar:
               href: "behavior_active_moderation.html" 
     - text: "All"
       menu: 
+        - text: "Study Information"
+          href: "study_info.html"
         - text: "R Packages Used"
           href: "chronic_packages.html"
         - text: "Personality scale content"
