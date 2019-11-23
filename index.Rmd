@@ -44,17 +44,21 @@ Here you will find the supplementary analyses and information relevant to each o
 
 ## Study specific data analysts
 
-- Damaris Aschwanden
-- Tom Booth
-- Fleur Harrison
-- Bryan D. James
-- Nathan A. Lewis
-- Steven R. Makkar
-- Swantje Mueller
-- Avron Spiro
-- Kristi M. Wisniewski
-- Tomiko Yoneda
-- Ruixue Zhaoyang
+- Base-II: Swantje Mueller
+- EAS: Ruixue Zhaoyang
+- ELSA: Tomiko Yoneda
+- HRS: Sara J. Weston
+- ILSE: Damaris Aschwanden
+- LBC1936: Tom Booth
+- LBLS: Kristi M. Wisniewski 
+- MIDUS: Nicholas A. Turiano
+- MAP: Bryan D. James
+- MAS: Fleur Harrison
+- NAS: Avron Spiro
+- OATS: Steven R. Makkar
+- ROS: Bryan D. James
+- SLS: Swantje Mueller
+- WLS: Nathan A. Lewis
 
 ## IALSA coordinators
 

@@ -1,0 +1,884 @@
+---
+title: "Study Measures and Items"
+output: 
+  html_document:
+    toc: TRUE
+    toc_depth: 2
+    toc_float: TRUE
+    theme: cosmo
+---
+
+The current document lists the items and measures used in the Healthy Neuroticism coordinated analysis projects.
+
+# Marker Papers and Descriptions 
+
+## Base II
+
+The Berlin Aging Study II (BASE-II) consists of a subsample of younger (20-35 years of age) and a subsample of older adults (60-84 years of age) who were recruited from the greater metropolitan area of Berlin via advertisements in public transportation systems and regional newspapers as well as through a participant pool at the Max Planck Institute for Human Development (for overview, see Bertram et al., 2014; Gerstorf et al., 2016). Starting in 2009, a total of 1,954 participants (younger adults = 472; older adults = 1,482) completed at least one and up to four waves of personality and health measures.
+
+Bertram, L., Böckenhoff, A., Demuth, I., Düzel, S., Eckardt, R., Li, S. C., ... & Steinhagen-Thiessen, E. (2013). [Cohort profile: the Berlin aging study II (BASE-II).](https://academic.oup.com/ije/article/43/3/703/757837) *International Journal of Epidemiology, 43*(3), 703-712. https://doi.org/10.1093/ije/dyt018
+
+Gerstorf, D., Bertram, L., Lindenberg, U., Pavelec, G., Demuth, I., Steinhagen-Thiessen, E., & Wagner, G. G. (2016). [Behavioural Science Section/The Berlin Aging Study II–An Overview.](https://core.ac.uk/download/pdf/143954814.pdf) *Gerontology, 62*, 311-315. https://doi.org/10.1159/000441495
+
+
+
+## EAS
+
+The Einstein Aging study (EAS) is a longitudinal cohort study of cognitive aging and dementia, beginning in 1993. Older adults who were at least 70 years of age, non-institutionalized, and English speaking were systematically recruited from an urban, multi-ethnic, community-dwelling population in Bronx County, NY. Participants receive comprehensive annual medical and neuropsychological evaluations (Katz et al., 2012).
+
+Katz, M. J., Lipton, R. B., Hall, C. B., Zimmerman, M. E., Sanders, A. E., Verghese, J., ... & Derby, C. A. (2012). [Age and sex specific prevalence and incidence of mild cognitive impairment, dementia and Alzheimer’s dementia in blacks and whites: A report from the Einstein Aging Study.](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3334445/) *Alzheimer Disease and Associated Disorders, 26*(4), 335-343. https://doi.org/10.1097/WAS.0b013e31823dbcfc.
+
+## ELSA
+
+The English Longitudinal Study of Ageing (ELSA) is a longitudinal cohort survey that collects multidisciplinary information on older adults living in England. Data collection began in 2002, and new participants were added at waves 3, 4, 6 and 7 to maintain size and representativeness.
+
+Marmot, M., Oldfield, Z., Clemens, S., Blake, M., Phelps, A., Nazroo, J., Steptoe, A., Rogers, N., Banks, J., Oskala, A. (2017). English Longitudinal Study of Ageing: Waves 0-7, 1998-2015. [data collection]. 27th Edition. UK Data Service. SN: 5050, http://doi.org/10.5255/UKDA-SN-5050-14
+
+
+## HRS
+
+The Health and Retirement Study (HRS) is a longitudinal panel that tracks retirement-age adults in the United States.. Data collection began in 1992, with new cohorts added throughout the 1990s.
+
+Sonnega, A., Faul, J. D., Ofstedal, M. B., Langa, K. M., Phillips, J. W., & Weir, D. R. (2014). [Cohort profile: The health and retirement study (HRS).](https://academic.oup.com/ije/article/43/2/576/2901743) *International Journal of Epidemiology, 43*(2), 576-585.
+
+## ILSE
+
+The Interdisciplinary Longitudinal Study of Adult Development and Aging (ILSE; e.g., Allemand, Schaffhuser, & Martin, 2015; Sattler et al., 2015) is a multidisciplinary longitudinal study investigating the aging process of two German birth cohorts born between 1930-1932 and 1950-1952. For the current analysis, only individuals from the older cohort (i.e., born in 1930-1932) were included as our focus was on older age. At baseline, the sample consisted of 500 older participants (mean age = 62.97 years, SD = 0.91, range = 60-64 years; 52% male).
+
+Allemand, M., Schaffhuser, K., & Martin, M. (2015). [Long–term correlated change between personality traits and perceived social support in middle adulthood.](https://journals.sagepub.com/doi/pdf/10.1177/0146167215569492) *Personality and Social Psychology Bulletin, 41,* 420–432. doi:10.1177/0146167215569492
+
+Sattler, C., Wahl, H.-W., Schröder, J., Kruse, A., Schönknecht, P., Kunzmann, U., … Zenthöfer, A. (2015). Interdisciplinary Longitudinal Study on Adult Development and Aging (ILSE). In N. A. Pachana (Ed.), *Encyclopedia of Geropsychology* (pp. 1–10). New York, NY: Springer.
+
+## LBC-1936
+
+The Lothian Birth Cohort 1936 consists of surviving members’ cohorts of the 1947, Scottish Mental Health Survey. The 1936 cohort was recruited between 2004 and 2007 by identifying individuals from the original 1947 cohort who were residing in Edinburgh and the surrounding areas. In total, 1,091 participants entered the studied.
+
+Deary, I. J., Gow, A. J., Pattie, A., & Starr, J. M. (2011). [Cohort profile: the Lothian Birth Cohorts of 1921 and 1936.](https://academic.oup.com/ije/article/41/6/1576/741376) *International Journal of Epidemiology, 41*(6), 1576-1584.
+
+Deary, I. J., Gow, A. J., Taylor, M. D., Corley, J., Brett, C., Wilson, V., ... & Starr, J. M. (2007). [The Lothian Birth Cohort 1936: a study to examine influences on cognitive ageing from age 11 to age 70 and beyond.](https://bmcgeriatr.biomedcentral.com/articles/10.1186/1471-2318-7-28) *BMC Geriatrics, 7*(1), 28.
+
+Taylor, A. M., Pattie, A., & Deary, I. J. (2018). [Cohort profile update: the Lothian Birth Cohorts of 1921 and 1936.](https://academic.oup.com/ije/article/47/4/1042/4931207) *International Journal of Epidemiology, 47*(4), 1042-1042r.
+
+## LBLS
+
+The Long Beach Longitudinal Study (LBLS) started in 1978, and consisted of 589 adults aged 28-84. Participants completed measures of health, memory, and intelligence. This sample was surveyed again in 1994-1995, and has since been reassessed two additional times (2000-2002 and 2008-2013). Additional cohorts were added in the second two waves of data collections (Zelinski & Kennison, 2001). The average age of the sample used in this study was 69.34 (13.83), and 52.3% are female. Personality was assessed using the NEO in 1994/1995.
+
+Zelinski, E. M., & Kennison, R. F. (2001). [The Long Beach Longitudinal Study: Evaluation of longitudinal effects of aging on memory and cognition.](https://www.researchgate.net/profile/Robert_Kennison/publication/11905425_The_Long_Beach_Longitudinal_Study_Evaluation_of_Longitudinal_Effects_of_Aging_on_Memory_and_Cognition/links/0c96052950fc536429000000.pdf) *Home Health Care Services Quarterly, 19*(3), 45-55.
+
+## MAP
+
+The Memory and Aging Project (MAP) is a longitudinal, epidemiologic clinical-pathologic cohort study of common chronic conditions of aging with emphasis on decline in cognitive and motor function and risk of AD. Participants are older adults recruited from retirement communities and subsidized senior housing facilities throughout Chicagoland and northeastern Illinois. Participants do not have known dementia at baseline and agree to annual clinical evaluation, cognitive testing, and brain and other tissue donation after death.
+
+A Bennett, D., A Schneider, J., S Buchman, A., L Barnes, L., A Boyle, P., & S Wilson, R. (2012). [Overview and findings from the Rush Memory and Aging Project.](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3439198/) *Current Alzheimer Research, 9*(6), 646-663.
+
+Bennett, D. A., Buchman, A. S., Boyle, P. A., Barnes, L. L., Wilson, R. S., & Schneider, J. A. (2018). [Religious orders study and Rush memory and aging project.](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6380522/) *Journal of Alzheimer's Disease, 64*(s1), S161-S189.
+
+## MAS
+The Sydney Memory and Ageing Study (MAS) is an ongoing longitudinal cohort study of brain ageing and dementia in older individuals, who undertake medical, neuropsychological and psychosocial assessments approximately every two years. Individuals aged 70-90 and living in the Australian community at baseline were randomly recruited through the electoral roll (Sachdev et al., 2010). The baseline MAS cohort comprised 1,037 individuals (55.2% male) without dementia, aged between 70 and 91 years (mean = 79 years).  
+
+Sachdev, P. S., Brodaty, H., Reppermund, S., Kochan, N. A., Trollor, J. N., Draper, B., … the Memory and Ageing Study Team. (2010). [The Sydney Memory and Ageing Study (MAS): methodology and baseline medical and neuropsychiatric characteristics of an elderly epidemiological non-demented cohort of Australians aged 70-90 years.]https://www.cambridge.org/core/services/aop-cambridge-core/content/view/597631961DCE67C34CE595A549D7A920/S1041610210001067a.pdf/sydney_memory_and_ageing_study_mas_methodology_and_baseline_medical_and_neuropsychiatric_characteristics_of_an_elderly_epidemiological_nondemented_cohort_of_australians_aged_7090_years.pdf *International Psychogeriatrics, 22*(08), 1248–1264.
+
+
+## MIDUS
+
+MIDUS is an ongoing national study of 7,108 participants in the U.S. that began in 1994/1995, and has since added two additional waves of data collection, in 2004/2005, and 2013/2014. The study is interdisciplinary in nature with the aim to understand midlife development (Brim, Ryff, & Kessler, 2004). 
+
+Brim, O. G., Ryff, C. D., & Kessler, R. C. (2004). *How healthy are we? A national study of well-being at midlife.* Chicago, IL: Chicago University Press. 
+
+## NAS
+The VA Normative Aging Study (NAS) is a study of the medical and psychosocial aging among U.S. men, and is funded by the U.S. Department of Veterans Affairs. The sample was originally based in the Greater Boston, MA metro area, and consisted of 2,280 men enrolled 1961-1970, who were on average 42 years old at enrollment (SD=8, range = 21 - 81).
+
+Bosse, R., Ekerdt, D., & Silbert, J. (1984). The Veterans Administration Normative Aging Study. In S.A. Mednick, M. Harway, & K.M. Finello (Eds.), *Handbook of Longitudinal Research: Vol. 2. Teenage and Adult Cohorts* (pp. 273-289). New York: Praeger.
+
+## OATS
+The Older Australian Twins Study (OATS) is a multi-site longitudinal study of monozygotic (MZ) and dizygotic (DZ) twins aged $\geq$ 65 years, with a cohort of 623 participants assessed at baseline, and is one of the largest and most comprehensive studies of older twins in Australia (Sachdev et al., 2009). The study includes comprehensive psychiatric, psychological, cognitive, cardiovascular, metabolic, and neuroimaging assessments, which capture a wide range of physical and psychological health markers, as well as lifestyle, social, and health-economic factors that contribute to ageing. Included in the measurement of psychological variables in OATS was the assessment of personality, which was measured at baseline using the Revised NEO Personality Inventory (NEO-PI-R; Costa & McRae, 1992). The longitudinal twin cohort design enables the disentanglement of genetic and environmental factors that contribute to, and moderate the role of risk factors, on the ageing process. At present, three waves, each spaced two years apart, have been completed, although due to cohort attrition, only 391 participants from the initial cohort have completed the third wave. The mean age of the cohort at baseline was 71.48 years, with an average of 10.6 years of education, and consisting of 35.3% males.
+
+
+Sachdev, P. S., Lammel, A., Trollor, J. N., Lee, T., Wright, M. J., Ames, D., ... & OATS Research Team. (2009). [A comprehensive neuropsychiatric study of elderly twins: the Older Australian Twins Study.](https://www.cambridge.org/core/services/aop-cambridge-core/content/view/E34197100EE8ECF6895147774D42256C/S1832427400010276a.pdf/div-class-title-a-comprehensive-neuropsychiatric-study-of-elderly-twins-the-older-australian-twins-study-div.pdf) *Twin Research and Human Genetics, 12*(6), 573-582.
+
+## ROS
+
+The Religious Orders Study (ROS) is a longitudinal, epidemiologic clinical-pathologic cohort study of aging and Alzheimer's disease (AD) that enrolls older Catholic nuns, priests, and brothers from more than 40 groups across US. Participants do not have known dementia at baseline and agree to annual clinical evaluation, cognitive testing, and brain and other tissue donation after death.
+
+A Bennett, D., A Schneider, J., Arvanitakis, Z., & S Wilson, R. (2012). [Overview and findings from the religious orders study.](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3409291/) *Current Alzheimer Research, 9*(6), 628-645.
+
+Bennett, D. A., Buchman, A. S., Boyle, P. A., Barnes, L. L., Wilson, R. S., & Schneider, J. A. (2018). [Religious orders study and Rush memory and aging project.](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6380522/) *Journal of Alzheimer's Disease, 64*(s1), S161-S189.
+
+## SLS
+The Seattle Longitudinal Study (SLS) started in 1956 and has since collected data on close to 6,000 participants in a cohort sequential design (Schaie, Willis, & Caskie, 2004). Participants were sampled randomly from members of a large health maintenance organization (HMO) in the Seattle, Washington area. The full big five personality traits have been assessed four times, in 2001, 2005, 2008, and 2012. A total of 1,656 participants aged 26 to 101 completed at least one personality assessment between 2001 and 2012.
+
+Schaie, K. W., Willis, S. L., & Caskie, G. I. (2004). [The Seattle longitudinal study: Relationship between personality and cognition.](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1474018/) *Aging Neuropsychology and Cognition, 11*(2-3), 304-324. doi:10.1080/13825580490511134
+
+
+## WLS
+
+The Wisconsin Longitudinal Study (WLS) follows a cohort of men and women who graduated from Wisconsin high schools in 1957. Data from graduate participants (n = 10 317) span almost 60 years from the baseline assessment in 1957, with follow-up assessments collected in 1967, 1975, 1993, 2004, and most recently in 2011. In addition to the original cohort, subsequent assessments included randomly selected siblings and spouses of graduate participants.
+
+Herd, P., Carr, D., & Roan, C. (2014). [Cohort profile: Wisconsin longitudinal study (WLS).](https://academic.oup.com/ije/article/43/1/34/729687) *International Journal of Epidemiology, 43*(1), 34-41.
+
+# Measurement Wave or Timing 
+
+## Base II
+
+Baseline was defined as the first time at which a participant had completed the personality measures. This ranged from 2009 to 2014, with the majority of participants starting in 2009.
+
+
+## EAS 
+Baseline was defined as the first time at which participants had completed the personality scales which ranged from 2005 to 2016. Participants receive comprehensive annual medical and neuropsychological evaluations.
+
+
+## ELSA
+Although recruitment and biennial testing occasions commenced in 2002, personality assessment was not administered iuntil 2010 (wave 5), which is defined as baseline for the purposes of this study. Face-to-face interviews, a computer assisted personal interview, and self-completed questionnaires were completed at every wave. A nurse assessment was completed every four years.
+
+## HRS
+Baseline was defined as the first time at which participants had completed the personality scales (for more information, see below). This ranged from 2006 to 2014. Participants were assessed every two years regarding health information.
+
+## ILSE
+The observation period of ILSE was 12 years, including three measurement occasions. The assessments were conducted in 1994 (baseline), 1998 (Time 2; T2), and 2006 (Time 3; T3). Whereas personality data are available at all three measurement occasions, health variables are only available at baseline and T2.
+
+
+## LBC-1936
+
+Baseline for LBC is defined as the first wave of personality assessment, which took place across 2006 and 2007.
+
+## LBLS
+Baseline was defined as the first time at which participants completed the personality scale. For the mortality and health behaviors studies, baseline personality was assessed in the 1994-1995 wave for panels 1 and 2. For panel 3, baseline personality was assessed in the 2000-2001 wave. For the chronic conditions study, only baseline data from 2000 was utilized as the item indicating presence or absence of heart disease was added during this wave.
+
+## MIDUS
+Data collection began in 1994/1995 on the initial sample (MIDUS 1), and was repeated on surviving participants in 2004/2005 (MIDUS 2) and again in 2013/2014 (MIDUS 3). Participants are still being followed and new cohorts are being recruited into the study (refresher sample). 
+
+## MAP
+Enrollment began in 1997 and is ongoing. Clinical evaluations and cognitive assessments occur annually. Neuroticism collected at baseline since study start; conscientiousness and extraversion collected at baseline since 2008 (openness and agreeableness not collected).
+
+## MAS 
+
+
+## NAS
+Data collection began in 1961-70, and is ongoing. Surviving participants were examined every 3-5 years, depending on age (until 1984 men under 52 were seen every 5 years, and older men were seen every 3; since then all are seen every 3 years) for follow up examinations. Mail surveys are conducted periodically. data Personality was assessed, by mail, for the current paper beginning in 1990.
+## OATS 
+Data collection commenced between 2007 and 2008 and is ongoing. Participants complete rigorous medical, psychological (including personality questionnaires), and cognitive function tests every 2 years. Data from the first 3 waves of OATS has been included as part of this series.
+## ROS
+Enrollment began in 1994 and is ongoing. Clinical evaluations and cognitive assessments occur annually. NEO personality assessment collected at baseline since study start.
+
+
+
+## SLS
+Baseline was defined as the as the first time at which a participant had completed the personality measures between 2001 and 2012. For the health behavior and chronic conditions project, the 2001 personality assessment could not be used because the corresponding health data was missing. For these analyses, the earliest possible baseline assessment was in 2005.
+
+## WLS
+Personality measures were first introduced in the WLS in 1993, which served as the baseline assessment for the present analyses. Health, demographic characteristics, and other information were collected in the 1993, 2004, and 2011 waves through in-person, mail, and telephone surveys.
+
+
+
+
+# Personality Measures
+
+## Base II
+Personality was assessed using a German short version of the Big Five Inventory (BFI-S; John & Srivastava, 1999; see also Mueller et al., 2016 for details). The BFI-S contains three items for each of the five factors that were answered on a 7-point Likert scale ranging from 1 (strongly disagree) to 7 (strongly agree).
+
+John, O. P., & Srivastava, S. (1999). The big five trait taxonomy: history, measurement, and theoretical perspectives. In L. Pervin & O. John (Eds.), *Handbook of personality theory and research* (pp. 102–138). New York: Guilford.
+
+Mueller, S., Wagner, J., Drewelies, J., Duezel, S., Eibich, P., Specht, J., ... & Gerstorf, D. (2016). [Personality development in old age relates to physical health and cognitive performance: Evidence from the Berlin Aging Study II.](https://www.sciencedirect.com/science/article/pii/S0092656616301039) *Journal of Research in Personality, 65,* 94-108. https://doi.org/10.1016/j.jrp.2016.08.007
+
+
+## EAS 
+Personality was by the International Personality Item Pool (IPIP-50, Goldberg, 1992; Saucier, 1994).  The 50 items were rated on a 5-point Likert-type scale ranging from 1 (very inaccurate) to 5 (very accurate).
+
+Goldberg, L. R. (1999). A broad-bandwidth, public domain, personality inventory measuring the lower-level facets of several five-factor models. In I. Mervielde, I. Deary, F. De Fruyt, & F. Ostendorf (Eds.), *Personality Psychology in Europe*, Vol. 7 (pp. 7-28). Tilburg, The Netherlands: Tilburg University Press.
+
+Goldberg, L. R., Johnson, J. A., Eber, H. W., Hogan, R., Ashton, M. C., Cloninger, C. R., & Gough, H. C. (2006). [The International Personality Item Pool and the future of public-domain personality measures.](https://www.sciencedirect.com/science/article/pii/S0092656605000553)
+*Journal of Research in Personality, 40,* 84-96.
+
+
+## ELSA
+
+ELSA assessed levels of the Big Five personality traits using a version of the Midlife Development Inventory (MIDI; Lachman & Weaver, 1997), which was revised from the personality assessments used in the HRS. The assessment includes self-ratings on 26 items, each rated on a 4-point Likert scale (see HRS sub-section for more information). Cronbach’s alpha revealed adequate reliability estimates for each personality trait scale (neuroticism $\alpha = .68$; extraversion $\alpha = .76$; conscientiousness $\alpha = .67$, agreeableness $\alpha= .80$; openness $\alpha = .79$).
+
+Lachman, M. E., & Weaver, S. L. (1997). The Midlife Development Inventory (MIDI) personality scales: Scale construction and scoring. Waltham, MA: Brandeis University.
+
+## HRS
+The HRS used the Midlife Development Inventory Personality Scales (MIDI; Lachman & Weaver, 1997) for assessment of personality traits. This is an adjective measure in which respondents evaluated how well each adjective described them on a scale from 1 (A lot) to 4 (Not at all). Responses were reverse coded for analyses, such that higher numbers indicated that an adjective was more representative of the respondent. Each trait was assessed using the following adjective items:
+
+* Neuroticism - moody, worrying, nervous, calm (reverse-scored)
+* Conscientiousness - organized, responsible, hardworking, careless (reverse-scored), thorough 
+* Extraversion - outgoing, friendly, lively active, talkative
+* Agreeableness - helpful, warm, caring, softhearted, sympathetic
+* Openness - creative, imaginative, intelligent, curious, broad-minded, sophisticated, adventurous
+
+Participants completed this scale between one and three times during the course of data collection. For these analyses, we selected the first time participants had completed this scale and used this wave as "baseline."
+
+Lachman, M. E., & Weaver, S. L. (1997). The Midlife Development Inventory (MIDI) personality scales: Scale construction and scoring. Waltham, MA: Brandeis University.
+
+## ILSE
+The Big Five personality traits were measured using 12 items per trait of the German NEO-Five-Factor Inventory (NEO-FFI; Borkenau & Ostendorf, 1993). The items were rated on a 5-point Likert-type scale ranging from 0 (strongly disagree) to 4 (strongly agree).
+
+Borkenau, P. & Ostendorf, F. (1993). NEO-Fünf-Faktoren Inventar (NEO-FFI) nach Costa und McCrae [Five Factor Inventory according to Costa and McCrae]. Göttingen, Germany: Hogrefe.
+
+## LBC-1936
+
+Personality traits were measured using 50 items from the IPIP when participants were 67-71 years old in 2006 (N= 1,032)
+
+## LBLS 
+The LBLS used the Revised NEO Personality Inventory (NEO-PI-R; Costa & McCrae, 1992) for assessment of personality traits across 240 items from 30 facets. Six facet scores form each of five main factors (neuroticism, extraversion, openness, agreeableness, conscientiousness). Participants rated their level of agreement for each item a scale from 1 (strongly disagree) to 5 (strongly agree). For the chronic conditions study, baseline personality data was collected in 2000. For the mortality and health behaviors studies, baseline personality data was collected in 1994 for panels 1 and 2 and 2000 for panel 3.
+ 
+Costa, P.T. & McCrae, R.R. (1992). [Normal personality assessment in clinical practice: The NEO Personality Inventory.](https://www.researchgate.net/profile/Paul_Costa3/publication/232463584_Normal_Personality_Assessment_in_Clinical_Practice_The_NEO_Personality_Inventory/links/550ed48d0cf2ac2905ad119a.pdf) *Psychological Assessment, 4*(1), 5-13.
+
+## MAP
+
+From NEO Five-Factor Inventory, neuroticism collected at baseline since study start; conscientiousness and extraversion collected at baseline since 2008. Openness and agreeableness not collected. See documentation for details: https://www.radc.rush.edu/docs/var/overview.htm?category=Affect%20and%20Personality
+
+## MAS 
+
+Personality was evaluated at the initial wave using the Neuroticism, Conscientiousness and Openness subscales of the shorter version of the Revised NEO Personality Inventory (NEO-PI-R). The total inventory consisted of 36 statements, with 12 statements evaluating each of the three aforementioned personality traits (i.e., Neuroticism, Conscientiousness, and Openness ). Participants rated their agreement for each statement on a 1 (strongly disagree) to 5 (strongly agree) scale. 
+
+
+## MIDUS
+
+The Big Five personality traits were assessed using 25 adjectives from the Midlife Developmental Inventory- Personality Scales (MIDI; Lachman & Weaver, 1997). For each trait, participants rated the extent to which (on a scale of 1 to 4) adjectives described them. These adjective scores were averaged into an overall trait score ranging from 1 to 4.
+
+Lachman, M., & Weaver, S. L. (1997). The Midlife Development Inventory (MIDI) personality scales: Scale construction and scoring(Tech. Rep. No. 1). Waltham, MA: Department of Psychology, Brandeis University. 
+
+
+## NAS
+Assessment of the Big Five in the NAS began in 1990-1991 using Goldberg (1992) adjectives. For each trait, participants rated the extent to which an adjective (20 per trait) described them. These item scores were then averaged into an overall trait score ranging from 1 to 9.
+
+
+
+Goldberg, L.R. (1992) ["The development of markers for the Big-five factor structure."](https://psycnet.apa.org/journals/pas/4/1/26.html?uid=1992-25730-001) *Psychological Assessment, 4*, 26-42. http://dx.doi.org/10.1037/1040-3590.4.1.26
+
+## OATS 
+Personality was evaluated at the initial wave using the shorter version of the Revised NEO Personality Inventory (NEO-PI-R). The inventory consisted of 60 statements evaluating five personality traits (i.e., Neuroticism, Extraversion, Openness, Agreeableness, and Conscientiousness). Participants rated the extent to which they agreed with each of the 60 statements on a 1 (strongly disagree) to 5 (strongly agree) scale. 
+
+## ROS
+NEO Five-Factor Inventory. See documentation for details: https://www.radc.rush.edu/docs/var/overview.htm?category=Affect%20and%20Personality
+
+## SLS
+Personality was assessed with the revised NEO Personality Inventory consisting of 240 items (Costa & McCrae,1992). Participants indicated their agreement with self-descriptive statements on a scale from 0 (strongly disagree) to 4 (strongly agree).
+
+Costa, PT., Jr; McCrae, RR. (1992). *Revised NEO Personality Inventory (NEO-PI-R) and NEO Five-Factor Inventory (NEO-FFI) Professional Manual.* Odessa, FL: Psychological Assessment Resources.
+
+## WLS
+Personality was assessed using a subset of 29 items from the Big Five Inventory (Srivastava, John, Gosling, & Potter, 2003). Participants indicated on a scale from 1 (disagree strongly) to 6 (agree strongly) how well each statement described them ("I see myself as …"). Six items were used to assess each factor, except for neuroticism which was composed of five items:
+
+* Neuroticism - tense, not easily upset (reverse-scored), someone who worries a lot, calm in tense situations (reverse-scored), and getting nervous easily
+* Conscientiousness - someone who does a thorough job, a reliable worker, disorganized (reverse-scored), lazy at times (reverse-scored), efficient, and easily distracted (reverse-scored)
+* Openness - traditional (reverse-scored), one who likes work that is routine and simple (reverse-scored), one who values art and aesthetic experiences, having an active imagination, wanting things to be simple/clear-cut (reverse-scored), and sophisticated in music/art/literature
+* Extraversion - talkative, reserved (reverse-scored), full of energy, quiet (reverse-scored), shy/inhibited (reverse-scored), and enthusiastic
+* Agreeableness - one who finds fault with others (reverse-scored), sometimes rude to others
+(reverse-scored), generally trusting, cold and aloof (reverse-scored), considerate, and one who cooperates with others
+
+Srivastava, S., John, O. P., Gosling, S. D., & Potter, J. (2003). [Development of personality in early and middle adulthood: Set like plaster or persistent change?.](http://www.simine.com/240/readings/Srivastava_et_al_(13).pdf) *Journal of Personality and Social Psychology, 84*(5), 1041.
+
+# Mortality Data 
+
+## Base II
+
+(does not apply: not sufficient mortality data available yet)
+
+## EAS 
+Mortality information was obtained via follow-up phone calls and search in the Social Security Death Index. For the current analyses, mortality was most recently updated in 2017.
+
+## ELSA
+Mortality data is not yet available to researchers due to legal and ethical issues.
+
+## HRS
+Mortality is assessed through two methods: first, surviving panel members are sought to obtain interviews. Second, a search is made through the National Death Index.
+
+## ILSE
+Mortality data are not available in ILSE.
+
+## LBC-1936
+Date and cause of death is collected at each wave of data collection from wave 2 onwards. Updates of deaths are provided via the NHS Central Register (NHSCR) | National Records of Scotland every few months. For the current study, the final update was January 2018.
+
+## LBLS 
+Mortality information was collected in two ways: surviving participants were sought to complete follow-up interviews and deceased participants were established based on searches through the National Death Index. The last assessment of mortality was completed in 2013.
+
+## MAP
+Because MAP is an autopsy study, the exact date of death is known for most participants as it is the day an autopsy was performed. In the case of missed autopsies, in addition to contact for annual evaluations, participants are also contacted quarterly to determine vital status and changes in health, and death is occasionally learned of during quarterly contacts.
+## MAS 
+Mortality information through 2014 was obtained from a number of sources (e.g., online indexes of deaths appearing in Australian newspapers, reports from family members), which were confirmed using the National Death Index.
+
+
+## MIDUS
+Mortality information through October 2015 was obtained by three methods. First, National Death Index updates were conducted in 2006 and 2009. Second, deaths were recorded during the tracing/closeout phases after fielding the MIDUS 2 (2005-06) and MIDUS 3 (2013-15) questionnaires. Lastly, deaths were recorded as normal longitudinal sample maintenance was conducted.
+
+
+## NAS
+Vital status is monitored by periodic mailings to participants and notification from next-of-kin or postal authorities. Records of the Department of Veterans Affairs and the Social Security Administration (Death Master File) are routinely searched for possible unreported deaths. When deaths are reported, a death certificate was obtained and coded for cause of death. The current projects used the 2016 mortality update for NAS.
+
+
+
+
+## OATS
+Mortality information through 2014 was obtained from a number of sources (e.g., online indexes of deaths appearing in Australian newspapers, reports from family members), which were confirmed using the National Death Index.
+
+## ROS
+Because ROS is an autopsy study, the exact date of death is known for most participants as it is the day an autopsy was performed. In the case of missed autopsies, in addition to contact for annual evaluations, participants are also contacted quarterly to determine vital status and changes in health, and death is occasionally learned of during quarterly contacts.
+
+## SLS
+The most recent update of death records stems from May 2017 and was obtained via obituaries, family notifications, the Social Security Death Index (only current up to 2014), and websites such as Ancestry.com.
+
+
+## WLS
+Data from the WLS are linked with records from the US National Death Index. The most recent update of death records occurred in November of 2014.
+
+
+# Chronic Condition Assessment 
+
+## Base II
+Chronic conditions were assessed at every wave via self-report. Participants were asked if they had been previously diagnosed with any of the diseases listed, including diabetes, hypertension, or a heart condition (including cardiac insufficiency).
+
+
+## EAS 
+Chronic conditions were assessed at baseline and at every following wave. At each wave, participants were asked whether they had diabetes at this visit or any prior visit (0=No , 1=Yes). Diabetes status did not distinguish between Type 1 and Type 2. Participants were also asked whether they had hypertension at this visit or any prior visit (0=No, 1=Yes). Finally, participants reported whether they had any heart conditions, including heart attack or myocardial infarction, irregularities or arrhythmia, congestive heart failure, angina or chest pain, heart procedure like coronary angioplasty or placement of a stent, coronary artery bypass surgery, and implanted with a pacemaker (0=No, none of these conditions, 1=Yes, at least one of these conditions).
+
+## ELSA
+Chronic conditions were assessed at baseline and at every following wave. Participants were asked if they had been previously or newly diagnosed with diabetes, and if they injected insulin. The current study was interested in adult onset diabetes (Type 2), which does not typically require insulin injections. Therefore, Type 2 diabetes was inferred if a participant said that they had been diagnosed with diabetes and did not inject insulin. Individuals were also asked if they had been previously or newly diagnosed with high blood pressure or heart disease. Heart disease was operationalized as answering yes to at least one of the following conditions: angina, heart attack, congestive heart failure, heart murmur, abnormal heart rhythm, or "other" heart disease.
+
+## HRS
+
+Chronic condition status information was available for all three chronic conditions.
+For each condition, participants were asked whether a doctor had ever told them they have [X disease]. For high blood pressure, the specific question wording was "hypertension or high blood pressure." For diabetes, the specific question wording was "diabetes or high blood sugar." For a heart condition, the specific wording was "a heart attack, coronary heart disease, angina, congestive heart failure, or other heart problems." No other items were used to assess those three outcomes.
+
+
+## ILSE
+Chronic conditions were assessed at baseline and the second measurement occasion.
+
+Diabetes status was assessed using one item. Participants were asked whether or not they ever had or currently have diabetes. Participants responded with "yes" or "no". Furthermore, they could report the time period from when to when (year dates) they had diabetes or since when (how many years?) they have diabetes. Diabetes status did not distinguish between Type 1 and Type 2.
+
+Heart conditions were assessed using five self-reported items and a medical check of the heart sounds. The self-reported items included whether or not participants ever had a heart attack or heart operations and whether or not they ever had or currently have angina pectoris, a pacemaker or any other heart condition. Participants responded with "yes" or "no". Moreover, they could report the time period from when to when (year dates) they had or since when (how many years?) they have the particular heart conditions. Heart sounds were checked by one to two trained study geriatricians. If abnormal heart sounds were registered, it was distinguished between diastolic and systolic.
+
+Hypertension was assessed using one self-reported item. Participants were asked whether or not they ever had or currently have hypertension. Participants responded with "yes" or "no". Furthermore, they could report the time period from when to when (year dates) they had hypertension or since when (how many years?) they have hypertension.
+
+
+
+
+## LBC-1936
+Chronic conditions were assessed at all waves of data collection via self-report disease history questions. Participants responded Yes/No to questions concerning blood pressure, diabetes, high cholesterol, cardiovascular disease, blood circulation, stroke, cancer, thyroid disorder, dementia, Parkinson’s Disease, arthritis, allergies and other.
+ 
+## LBLS 
+Chronic condition status information was available for all three chronic conditions. Participants self-reported presence or absence of heart problems, high blood pressure, and/or diabetes in series of yes or no questions.
+For heart condition, the specific question wording was "Do you have heart problems?". For diabetes, the specific question was "Do you have diabetes?". For high blood pressure, the specific question was "Do you have high blood pressure?". No other items were used to assess those three outcomes.
+
+## MAP
+
+History of hypertension is based on self-report. For any given cycle, this variable indicates reported hypertension in past history or in at least one follow-up cycle up to and including that cycle. Participants are asked to respond "yes", "suspect or possible", or "no" to the following question:
+Since your interview on [date of last interview], have you been told by a doctor, nurse, or therapist that you had high blood pressure? https://www.radc.rush.edu/docs/var/detail.htm?category=Medical%20Conditions&subcategory=Blood%2 0pressure&variable=hypertension_cum
+
+Diabetes status was based on self-report as well as taking diabetes medication (yes to one or more self-report questions or reported taking a diabetes medication):
+Self-reported history of diabetes: participants are asked to respond "yes", "suspect or possible", or "no" to each of the following questions:
+Have you ever been told by a doctor, nurse, or therapist that you had diabetes, or sugar in the urine, or high blood sugar?
+Has a doctor, nurse, or therapist ever told you to take insulin or injections for your high blood sugar?
+Has a doctor, nurse, or therapist ever told you to take medicine by mouth for your blood sugar?
+https://www.radc.rush.edu/docs/var/detail.htm?category=Medical+Conditions&subcategory=Diabetes&v ariable=dm_cum
+
+Diabetes medication was assessed as part of medication inventory. Participants supplied all medications prescribed by a doctor, vitamins, supplements, and over-the-counter remedies and medicines taken in the 2  weeks  prior  to  the  evaluation.  Direct  visual  inspection  of  all  containers  of  prescription  and over-the-counter agents allowed for medication documentation. Medications were subsequently coded using the Medi-Span Drug Data Base system.
+https://www.radc.rush.edu/docs/var/detail.htm?category=Medications&subcategory=Endocrine%20medic ations&variable=diabetes_rx
+
+History of heart conditions is based on self-report. At baseline interview, the question reads: Have you ever been told by a doctor, nurse, or therapist that you had a heart attack or coronary, coronary thrombosis, coronary occlusion, or myocardial infarction? Participants are asked to respond "yes", "suspect or possible", or "no".
+https://www.radc.rush.edu/docs/var/detail.htm?category=Medical%20Conditions&subcategory=Vascular &variable=heart_cum
+## MAS 
+
+
+## MIDUS
+Chronic condition status information was available for all thee chronic conditions. 
+
+Diabetes was assessed by participants indicating if they experienced or had been treated for diabetes or high blood sugar in the past 12 months, or if they had taken any prescription medicine in the past 30 days for diabetes. Answering yes to either of these questions represented someone with diabetes (coded 1) versus those who were not (coded 0). Diabetes status did not distinguish between Type 1 and Type 2. 
+
+Heart Conditions were assessed by participants indicating if they ever had heart trouble suspected or confirmed by a doctor that included the following conditions: a heart attack, angina, valve disease, hole in the heart, blocked artery, irregular heartbeat, heart murmur, congestive heart failure. Participants were also asked if they had taken any prescriptions for a heart condition in the past 30 days. Answering yes to any of these conditions represented someone with heart disease (coded 1) versus those without heart disease (coded 0). 
+
+Hypertension was assessed by participants indicating if they experienced or had been treated for high blood pressure or hypertension in the past 12 months, or if they had taken any prescription medicine in the past 30 days for their blood pressure. Answering yes to any of these questions represented someone with hypertension (coded 1) versus those who were not (coded 0). 
+
+## NAS
+Chronic conditions were assessed in 1992 using the Health Quality of Life survey (Spiro & Bosse’, 2000). Participants were asked whether or not they had been diagnosed with several conditions, including hypertension, heart disease, or diabetes mellitus.
+
+Spiro, A. III, & Bossé, R. (2000). [Relations between health-related quality of life and well-being: The gerontologist’s new clothes?](https://journals.sagepub.com/doi/abs/10.2190/49XW-DC4U-YT00-KDB7) *International Journal of Aging and Human Development, 50*(4), 297-318
+
+## OATS 
+Chronic conditions were based on detailed self-reported medical history questionnaires administered to participants at each measurement wave. Chronic conditions was treated as a binary variable  (1 = has one or more chronic conditions; 0 = no chronic conditions). Participants with one or more of the following health conditions were categorized as having at least one chronic condition: anaemia, sleep apnoea, arthritis, asthma, autoimmune disease, cancer or leukaemia, cataracts, high cholesterol , chronic bronchitis, chronic obstructive pulmonary disease, stroke, depression, epilepsy, glaucoma, broken hip, long standing kidney disease, lupus, migraine, osteoporosis, Parkinson’s disease, periodontitis, chronic sinusitis or inflammation, and thyroid disorder. 
+## ROS
+History of hypertension is based on self-report. For any given cycle, this variable indicates reported hypertension in past history or in at least one follow-up cycle up to and including that cycle. Participants are asked to respond "yes", "suspect or possible", or "no" to the following question:
+Since your interview on [date of last interview], have you been told by a doctor, nurse, or therapist that you had high blood pressure? https://www.radc.rush.edu/docs/var/detail.htm?category=Medical%20Conditions&subcategory=Blood%2 0pressure&variable=hypertension_cum
+
+Diabetes status was based on self-report as well as taking diabetes medication (yes to one or more self-report questions or reported taking a diabetes medication):
+Self-reported history of diabetes: participants are asked to respond "yes", "suspect or possible", or "no" to each of the following questions:
+Have you ever been told by a doctor, nurse, or therapist that you had diabetes, or sugar in the urine, or high blood sugar?
+Has a doctor, nurse, or therapist ever told you to take insulin or injections for your high blood sugar?
+Has a doctor, nurse, or therapist ever told you to take medicine by mouth for your blood sugar?
+https://www.radc.rush.edu/docs/var/detail.htm?category=Medical+Conditions&subcategory=Diabetes&v ariable=dm_cum
+
+Diabetes medication was assessed as part of medication inventory. Participants supplied all medications prescribed by a doctor, vitamins, supplements, and over-the-counter remedies and medicines taken in the 2  weeks  prior  to  the  evaluation.  Direct  visual  inspection  of  all  containers  of  prescription  and over-the-counter agents allowed for medication documentation. Medications were subsequently coded using the Medi-Span Drug Data Base system.
+https://www.radc.rush.edu/docs/var/detail.htm?category=Medications&subcategory=Endocrine%20medic ations&variable=diabetes_rx
+
+History of heart conditions is based on self-report. At baseline interview, the question reads: Have you ever been told by a doctor, nurse, or therapist that you had a heart attack or coronary, coronary thrombosis, coronary occlusion, or myocardial infarction? Participants are asked to respond "yes", "suspect or possible", or "no".
+https://www.radc.rush.edu/docs/var/detail.htm?category=Medical%20Conditions&subcategory=Vascular &variable=heart_cum
+
+## SLS
+Data on medical diagnoses were drawn from medical records of the Group Health Cooperative. The chronic conditions variables indicate whether a participant had suffered from a number of chronic conditions (1 = yes, 0 = no) between 1999 to 2005 and between 2006 to 2009, including diabetes and heart conditions (circulatory disease, ischemic heart disease, other heart disease, cerebrovascular disease). High blood pressure was assessed via self-report in 2005, 2008, and 2012. For diabetes and heart conditions, personality data from 2005 was used to predict whether individuals suffered from these conditions between 2006 and 2009. For high blood pressure, we used data from the corresponding personality assessments (2005, 2008, and 2012).
+
+
+## WLS
+For each condition, participants were asked whether a medical professional has ever told them they have [specific condition]. For heart disease, participants were asked "has a medical professional ever said you have heart trouble?"
+
+# Health Behavior Assessment 
+
+## Base II
+Health behaviors were assessed via self-report questionnaires. 
+
+Physical activity was assessed at every wave, but with slightly different wording. In 2009, participants were asked how often they participated in active sport (1 = every week; 2 = every month; 3 = less often; 4 = never). In the following waves, participants were first asked if they practiced any sport, then what the most important sport was to them, and finally they were asked to indicate how often they practiced this sport (1 = daily; 2= every week; 3 = every month; 4= less often). Answers from each wave were dichotomized to be more easily comparable, with 0 indicating that a participant did not engage in any physical exercise and 1 indicating that a participant practiced any kind of sport.
+
+Smoking was assessed from 2012 onwards. Participants were asked whether they currently smoked (0 = no; 1 = yes), and how many cigarettes, cigars, and pipes they smoked per day. Numbers were summed up into a composite score.
+
+Drinking status was assessed from 2012 onwards. Participants were first asked whether they sometimes consumed alcoholic drinks (0 = no; 1 = yes) and then asked to indicate the number of glasses they typically drink per day if drinking alcohol (with one glass equaling 0,33 l beer, 0,25 l wine/sparkling wine, 0,02 l spirits). Participants answered on the following scale: 0 = 1 to 2 glasses a day; 1 = 3 to 4 glasses a day; 2 = 5 to 6 glasses a day; 3 = 7 to 9 glasses a day; 4 = 10 or more glasses a day. For analyses, participants who answered the above question with "5 to 6 glasses a day" or more were categorized as heavy drinkers, those who reported to consume less than three to four glasses or less were categorized as non-heavy drinkers.
+
+
+## EAS 
+Health behaviors were assessed by self-report. 
+
+At each wave, participants were asked whether they were currently a smoker (1=Yes, 0=No). If "Yes", they were asked how many cigarettes they now smoke per day?
+
+For drinking behavior, participants were asked whether they had at least one drink of beer, wine or liquor during the past year? (1=Yes, 0=No). If "Yes", they were asked during the past year, on the average, how many cans or bottles of beer, how many glasses of wine, and how many shorts or drinks of hard liquor, either straight or in a mixed drink they drank respectively. The answers to these three questions were summed up and divided by 365 to indicate the number of drinks each participant consumed per day in the past year.
+
+From 2005 to 2012, participants were asked to indicate in the past two weeks, how many days per week they participated in the following activity:walking for exercise, gardening or yardwork, dancing, playing golf, bowling, hiking, tennis, bicycling, and swimming, jogging or running, and aerobics or aerobic dance. After 2012, participants were asked to indicate in the past two weeks, how many hours per week they spent in the following activity: walking for exercise, gardening or yardwork, dancing, calisthenics, playing golf, bowling, horseback riding, hiking, tennis, bicycling, and swimming, jogging or running, aerobics or aerobic dance, and handball or racquetball. Due to different response scales and physical activities in different waves, a binary variable was created to indicate whether participants were physical active at all in the past 2 weeks. If participants reported at least one day or one hour in any of these activities per week, they were coded as 1=physical active. Otherwise, they were coded as 0=not physical active.
+
+
+
+
+## ELSA
+Health behaviours were assessed by self-report.
+
+Smoking status was assessed by the item "are you currently a smoker", while frequency of smokes was assessed by two items: "how many smokes do you have per day on weekends?" and "how many smokes do you have per day on weekdays?" An average was computed to represent the mean number of smokes that the individual had per day.
+Drinking status was assessed by the item "are you currently a drinker?" For drinking frequency, an example of a standard drink for each category was provided. Participants were asked "how many drinks do you consume per week?" in relation to each of the following categories: (i) beer, (ii) wine, and (iii) spirits. The values were summed and divided by 7, indicating the average number of drinks each participant consumed per day.
+Participants were asked questions regarding the frequency (more than once per week, once a week, 1-3 times a month, hardly ever or never) and vigor (mild, moderate, vigorous) of participation in physical activities. The items were first re-coded so that higher values indicated more exercise, and then summed to represent the frequency of physical activity (note: this variable computation did not include giving more weight to activities dependent on vigor).
+
+## HRS
+Health behavior variables were drawn from the RAND version P cleaned data sets, which is
+well-documented at this link. Smoker was coded as 0 if the participant currently does not smoke and 1 if they do. Drinker was coded as 0 if the participant does not currently drink alcohol and 1 if they do.
+Physical activity was assessed using three variables, one for light activity ("sports or activities that are mildly energetic, such as vacuuming, laundry, home repairs"), one for moderate activity ("sports or activities that are moderately energetic, such as gardening, cleaning the car, walking at a moderate pace, dancing, floor or stretching exercises") and one for vigorous activity ("sports or activities that are vigorous, such as running or jogging, swimming, cycling, aerobics or gym workouts, tennis, or digging with a spade or shovel"). For each of these, participants reported the degree to which they engaged in that type of activity: 1 = Never, 2 = Less than once per week, 3 = 1-3 times per month, 4 = 1-2 times per week, 5 = 3+ times per week.
+
+## ILSE
+Health behavior variables were assessed at baseline and the second measurement occasion. The current smoking status was coded as 0 if the participants currently do not smoke and 1 if they do. For drinker, a dummy variable was created from three alcohol sources, that is beer, wine and liquor. Drinking status was coded as 0 if the participants do not currently drink alcohol and 1 if they do. Physical activity was measured using one self-report item. Participants were asked whether or not they are physically active.
+Physical activity was coded as 0 if the participants currently are not physically active and 1 if they are.
+
+
+
+
+## LBC-1936 
+Data on health behaviors were collected at each wave of data collection via self-report questionnaire. 
+
+Smoking history was categorized as current smoker , ex-smoker, or never smoked. For the current study, this was recoded as ex-smoker or never = 0, current smoker = 1.
+
+Alcohol consumption at baseline was assessed with a binary Yes/No self-report question.
+
+Physical activity was coded as 0 = no activity, 1 = some activity, based on self-report of days of activity per month.
+
+## LBLS 
+
+## MAP
+
+Smoking status at baseline is measured with smoking-related data gathered at the baseline interview. Current and former smoking habits are assessed using the following questions:
+
+* Do you smoke cigarettes now?
+* Did you ever smoke cigarettes regularly?
+
+https://www.radc.rush.edu/docs/var/detail.htm?category=Lifestyle&subcategory=Alcohol%20and%20tob acco%20use&variable=smoking
+
+Drinking was coded as 0 if the participant does not currently drink alcohol (at baseline) and 1 if they do. 
+
+Physical activity (5 items) is assessed using questions adapted from the 1985 National Health Interview Survey. The variable measures the sum of hours per week that the participant engages in 5 categories of activities:
+* Walking for exercise
+* Gardening or yard work
+* Calisthenics or general exercise
+* Bicycle riding (including stationary bikes)
+* Swimming or water exercises
+
+## MAS 
+
+
+
+## MIDUS
+Self-reported health behavior data were collected at each wave of measurement. 
+Smoking was assessed with a question asking whether participants currently smoked (0= no; 1 = yes), and how many cigarettes they smoked per day in the one year they smoked heaviest in their life.
+Drinking was assessed with a question asking participants during the year they drank most, how many drinks they consumed on days that they drank. This question was used to determine those that did not report any drinking (coded 0) versus those that did (coded 1). The quantity of alcohol consumption was a count variable of how many drinks per occasion.  
+Physical activity was assessed with questions about participants’ extent of light, moderate, and vigorous physical activity both during work and leisure time, throughout all four seasons of the year. These scores were 
+
+## NAS
+Levenson, M.R., Aldwin, C.M., & Spiro, A. III. (1998). Age, cohort, and period effects on alcohol consumption and problem drinking: Findings from the Normative Aging Study. Journal of Studies on Alcohol, 59, 712-722.
+(need citations?) Drinking behavior was assessed by mail in 1991, in which participants were asked the total number of drinks they typically drank per day. Smoking was assessed during the in-person exam, and participants indicated their current smoking status (1=never, 2=quit, 3=regular, 4=occasional, 5= current). This was recoded for the current project so that only individuals who endorsed currently smoking (5) were considered smokers. Physical activity was assessed using the Health and Social Behavior Survey, in which participants indicated the amount of physical activity they participated in weekly (1=DAILY 2=3-4 TIMES A WEEK 3=ONCE OR TWICE WEEK 4=2-3 TIMES MONTH 5=ONCE A MONTH 6=LESS ONCE A MONTH 7=NEVER)
+## OATS 
+Smoking status at baseline (0 = not smoking, 1 = currently smoking) was determined using multiple questions in the baseline medical history questionnaire. Specifically, participants who reported never having smoked (on a variable labelled "smoke_ever") at wave 1 where coded as not smoking on this variable. Participants that had smoked previously (on the variable "smoke_ever") but reported an age where they stopped smoking at wave 1 (on a variable called "smoke_stop_age") that was younger than their current age (on the variable "age_eachwave") were also coded as not smoking. Participants that reported that they had smoked previously (on the "smoke_ever" variable") but did not report an age when they stopped smoking at wave 1 (on "smoke_stop_age") were coded as currently smoking. Participants that reported they had smoked previously (on the variable "smoke_ever") and that they had smoked in the last month (on a variable called "smoke_last_month") were coded as currently smoking.
+Drinking status at baseline (0 = non-drinker, 1 = drinker) was determined using the following rules: If the participant reported that he/she drunk alcohol in the last year (on a variable "alcohol_freq") then they were categorized as a drinker. Alternatively, if the participant reported that he/she had never drunk alcohol (on a variable "alcohol_ever" or that he/she had not drunk alcohol in the last year (on a variable "alcohol_freq"), then they were coded as a non-drinker.
+Physical activity was assessed with a detailed lifestyle questionnaire. Firstly, participants rated how many times in the last month they engaged in sporting activities on a 1 (never did this activity) to 5 (5 or more times) scale. Participants were also asked how many times per week, for more than 15 minutes, they engaged in (i) strenuous exercise (running, jogging, hockey, football, soccer, squash, basketball, cross country skiing, judo, roller skating, vigorous swimming, vigorous long-distance bicycling), moderate exercise (e.g., fast walking, baseball, tennis, easy bicycling, volleyball, badminton, easy swimming, alpine skiing, popular and folk dancing) and mild/light exercise (e.g., yoga, archery, fishing from a river bank, bowling, horseshoes, golf, snowmobiling, easy walking). Finally, participants were asked to rate a series of individual exercises in terms of the (i) the number of times they performed each activity per week for more than 15 minutes, and (ii) the amount of time they performed each activity (using the following scale: 1: less than 1 hour a week; 2: 1-2.5 hours a week; 3: 3-4.5 hours a week; 4: 5-6.5 hours a week; 5: 7-8.5 hours a week; and 6: 9 or more hours a week. Participants reporting that they engaged in at least one exercise/physical activity, or reporting having engaged in strenuous, moderate, and/or light exercise at least once a week were coded as 1 = active (otherwise, participants were coded as inactive). 
+
+## ROS
+Smoking status at baseline is measured with smoking-related data gathered at the baseline interview. Current and former smoking habits are assessed using the following questions:
+* Do you smoke cigarettes now?
+* Did you ever smoke cigarettes regularly?
+https://www.radc.rush.edu/docs/var/detail.htm?category=Lifestyle&subcategory=Alcohol%20and%20tob acco%20use&variable=smoking
+
+Drinking was coded as 0 if the participant does not currently drink alcohol (at baseline) and 1 if they do. 
+
+Physical activity (5 items) is assessed using questions adapted from the 1985 National Health Interview Survey. The variable measures the sum of hours per week that the participant engages in 5 categories of activities:
+
+* Walking for exercise
+* Gardening or yard work
+* Calisthenics or general exercise
+* Bicycle riding (including stationary bikes)
+* Swimming or water exercises
+
+https://www.radc.rush.edu/docs/var/detail.htm?category=Lifestyle&subcategory=Physical%20activity%2 0and%20BMI&variable=phys5itemsum
+
+
+## SLS
+All health behaviors were self-reported and assessed at every wave. Smoking was assessed by asking participants "Do you currently smoke?" (yes/no). Physical activity was assessed by asking participants how many hours per week they pursued different kinds of physical activities (e.g., dancing, walking, hiking, participant sports,...). For the current analysis, answers were converted into a dichotomous variable, with 0 indicating that a participant did not engage in any physical exercise and 1 indicating that a participant practiced any kind of sport. Alcohol consumption was assessed by asking participants to indicate the number of alcoholic drinks (liquor shots, beer, wine) they drank last week. For the current analysis, participants who indicated that they drank more than more than 7 (women) or 14 (men) glasses per week were categorized as heavy drinkers, those who reported to consume less than that were categorized as non-heavy drinkers.
+
+
+## WLS
+Frequency of smoking, drinking, and physical activity were self-reported at each wave. Participants were coded as 1 if they indicated that they currently smoke regularly (otherwise 0). Participants indicated how much they currently smoke in terms of average number of packs per day, which was converted into number of cigarettes per day using a standard of 20 cigarettes/pack. Responses for cigars or pipe tobacco were assigned a value of 1 unit/day. Current drinking was assessed via one item asking participants to estimate the number of days in the past month in which they consumed alcohol.
+
+Participants who indicated that they had consumed alcohol in the past month were coded as drinkers (drinkers = 1, non-drinkers = 0). Average alcohol consumption was assessed from the item "What is the average number of drinks you had on the days you consumed any alcoholic beverages such as beer, wine, liquor, or mixed alcoholic drinks in the past month?" Those who did not drink in the past month were given a value of 0.
+
+At baseline (1993), physical activity was assessed using two items: "How often do you participate in light physical activity such as walking, dancing, gardening, golfing, bowling, etc.?" and "How often do you participate in vigorous physical exercise or sports such as aerobics, running, swimming, bicycling, etc.?". This was originally coded as 1 = three or more times per week, 2 = once or twice per week, 3 = about one to three times per month, 4 = one or fewer times per month. These were rescaled to indicate how often participants engaged in these activities per month (three time per week = 12 times/month, once or twice per week = 6 per month, etc.) and the two variables were combined. The resulting variable approximates how often participants engage in light or vigorous physical activity in an average month.
+
+For the 2004 and 2011 waves, this variable was constructed from four variables asking participants to estimate the number of hours/month in the past year they spent engaging in: light physical activity alone (e.g. light housework, gardening, or walking by yourself), light PA with others (walking with friends, bowling, playing softball or other team sports with light activity), vigorous PA alone (jogging, swimming, biking, or going to the gym by yourself), and vigorous PA with others (jogging, swimming, biking, or going to the gym with friends or playing team sports). These items were averaged to create an item reflecting the overall average number of hours per month spent engaging in physical activity.
+
+# Covariates 
+
+## Age
+
+### Base II
+
+Age was assessed as years at baseline (i.e., the year participants first completed the personality assessment).
+
+### EAS 
+Age was assessed as years at baseline (i.e., the year participants first completed the personality assessment).
+
+### ELSA
+Age was assessed as age in years at baseline (i.e., the age they were when they first completed the personality assessment).
+
+### HRS
+Age as assessed as age at baseline (i.e., the age they were when they first completed the personality assessment).
+
+### ILSE
+Age was assessed as age in years at baseline (i.e., the age they were when they first completed the personality assessment).
+
+
+
+
+### LBC-1936 
+Participants age at testing is calculated in days from their date of birth and the date of testing at each wave. For the current study, this was converted to age in years by dividing age in days by 365.25.
+### LBLS 
+Age was defined as the age of the participant when he or she completed the NEO-PI-R for the first time. For the mortality and health behaviors studies, baseline age for panels 1 and 2 was the participant’s age at the 1994 wave. For panel 3, baseline age was the participant’s age at the 2000 wave. For the chronic conditions study, baseline age was the participant’s age at the 2000 wave.
+
+### MAP
+Age as assessed as age at baseline (i.e., the age they were when they first completed the personality assessment).
+### MAS 
+
+### MIDUS
+Participants age was first assessed in the initial wave of data collection (1994/1995) by gathering the year of birth. This was converted to age (in years) for analysis.
+
+
+### NAS
+Age was first assessed at the time they completed their military survey (1990)
+### OATS 
+
+Age was assessed at baseline and all follow-up waves in years. 
+
+
+### ROS
+Age as assessed as age at baseline (i.e., the age they were when they first completed the personality assessment).
+
+### SLS
+Age was assessed as years at baseline (i.e., the year participants first completed the personality assessment).
+
+### WLS
+Participants reported date of birth upon first intake into the study. This was used to create a baseline age variable for the purposes of this study.
+
+##Gender 
+
+### Base II
+Gender was self-reported at baseline. This was originally coded as 1 = male and 2 = female. We adjusted the values such that 0 = male and 1 = female, to allow for easier interpretation of coefficients.
+
+### EAS 
+Gender was self-reported at baseline (F=Female, M=Male) and was re-coded as 0=male and 1=female.
+
+
+
+
+### ELSA
+Sex was self-reported. Response options were 1=male and 2=female. The variable was re-coded so that 1=female and 0=not female.
+
+### HRS
+Gender was assessed with the question "What is your sex?" This was originally coded as 1 = Male, 2 = Female. We adjusted the values such that 0 = Male and 1 = Female, to allow for easier interpretation of coefficients.
+
+### ILSE
+Gender was assessed at baseline. This was originally coded as 1 = male and 2 = female. We adjusted the values such that 0 = male and 1 = female, to allow for easier interpretation of coefficients.
+
+
+### LBC-1936 
+Sex was self-reported at wave 1 and coded 0 = male, 1 = female.
+
+### LBLS 
+Information on gender was assessed through self-report to the question "What is your sex?" at baseline. The original variable was coded as 1=male/2=female; however, the original variable was recoded as a dichotomous variable where 0=male and 1=female for the current analyses. 
+### MIDUS
+Sex was self-reported at wave 1, and coded as 0=male, 1=female.
+
+
+### NAS
+All participants in the NAS are male.
+
+### OATS 
+
+Gender was self-reported at baseline. This was originally coded as 1 = male and 2 = female. This variable was recoded so that 0 = male and 1 = female.
+
+
+### ROS
+Gender was assessed at baseline. This was originally coded as 1 = Male, 2 = Female. We adjusted the values such that 0 = Male and 1 = Female, to allow for easier interpretation of coefficients.
+
+### MAP
+Gender was assessed at baseline. This was originally coded as 1 = Male, 2 = Female. We adjusted the values such that 0 = Male and 1 = Female, to allow for easier interpretation of coefficients.
+### MAS 
+### SLS
+Gender was self-reported at baseline and originally coded as 1 = male and 2 = female. We adjusted the values such that 0 = male and 1 = female.
+
+
+
+
+### WLS
+Self-reported gender was re-coded to indicate a value of 0 for men and 1 for women.
+
+## Education 
+
+### Base II
+Education was indicated by the number of years in formal schooling (ranging from 7 to 18).
+
+### EAS 
+Education was assessed by the number of years of education reported at baseline (ranging from 3 to 24).
+
+
+### ELSA
+Education was coded categorically, with the following response options:
+* 1=NVQ4/NVQ5/Degree or equiv
+* 2=Higher ed below degree
+* 3=NVQ3/GCE A Level equiv
+* 4=NVQ2/GCE O Level equiv
+* 5=NVQ 1/CSE other grade equiv
+* 6=Foreign/other
+* 7=No qualification
+The variable was re-coded so that 1=no qualification and 7=highest qualification.
+
+### HRS
+
+Education was measured as years of education (ranging from 0 to 17).
+
+### ILSE
+Education was assessed on an ordinal scale ranging from 1 to 4, including the years of education (1 = <10 years, 2 = 11–12 years, 3 = 13–15 years, 4 = >15 years).
+
+### LBC-1936 
+Education was assessed at initial interview at wave 1. Data was collected on age at leaving school, further and higher education, highest qualification obtained and years of education. The latter variable was used in the current study.
+
+### LBLS 
+Education was assessed at baseline and defined as the number of years of education that the participant completed (ranging from 0 to 20).
+
+### MAP
+Years of education is based on the number of years of regular school reported at baseline.
+### MAS 
+
+
+### MIDUS
+Education was assessed during the 1994/1995 wave of data collection. Participants were asked to select the highest level of education they had completed, ranging from 1 (no school/some grade school) to 12 (Ph.D, MD, other professional degree).
+
+
+### NAS
+Education was assessed during the 1992 Healthy Quality of Life survey, and ranged from 1=grade school to 6=post graduate school.
+
+
+
+
+### OATS
+
+Participants reported at each wave the number of years of formal education they had completed
+
+### ROS
+Years of education is based on the number of years of regular school reported at baseline.
+
+### SLS
+Education was indicated by the number of years in formal schooling (ranging from 8 to 20).
+
+
+### WLS
+Education was coded as a continuous variable from 0 to 21 approximating years of formal education based on self-reported highest degree:
+0 – 11 representing number of years of formal education
+12 – High school graduate or less, or less than one year of college
+13 – One-year college certificate, one year of college (no degree)
+14 – Two-year teaching certificate, associate degree, two-year diploma, or two years of college (no degree)
+15 – College trained registered nurses, one or more years post two-year degree (but no higher degree), three or more years of college (no degree or certificate)
+16 – Bachelor’s degree
+17 – Master’s degree with major field
+18 – Two-year master’s or one or more years post one-year master’s
+19 - DDS, LLD, LLB, JD, or one or more years post two-year master’s (No higher degree)
+20 – PhD, MD, other doctorates not previously included, or one or more years post-professional degree
+21 – Post-doc education
+
+
+## BMI
+
+### Base II
+BMI was computed from self-reported height and weight.
+
+### EAS 
+BMI was calculated based on self-reported height and weight.
+
+
+
+
+### ELSA
+Body mass index was calculated at the wave following baseline. BMI was computed based on measurements of height and weight taken by a nurse practitioner.
+
+### HRS
+BMI was calculated from self-reported height and weight.
+
+### ILSE
+BMI was calculated during the medical checkup using participants’ current height and weight.
+
+### LBC-1936
+BMI was calculated from height and weight at each wave of data collection.
+
+### LBLS 
+Body mass index was calculated from self-reported height in inches and weight in pounds in the 2000 wave which was converted to kg/m2.
+
+### MAP
+BMI is calculated using weight and height measurements. Weight and height are measured and recorded at each visit by a trained technician blinded to previously collected data. BMI is calculated as weight in kilograms divided by height in meters squared.
+### MAS 
+
+
+
+### MIDUS
+Body mass index was calculated at baseline based on participants’ self-reported height and weight. 
+
+### NAS
+BMI was calculated during the in-person exam, as measured by a trained examiner, using participant’s current height and weight.
+### OATS 
+
+BMI was calculated as weight (in kg) divided by height (in metres) squared, based on weight and height measurements taken during medical examination completed at baseline. 
+
+### ROS
+BMI is calculated using weight and height measurements. Weight and height are measured and recorded at each visit by a trained technician blinded to previously collected data. BMI is calculated as weight in kilograms divided by height in meters squared.
+
+### SLS
+BMI was computed from height and weight measurements obtained at a medical examination performed at baseline.
+
+### WLS
+Body mass index was calculated at each wave based on participants’ self-reported height and weight.
+
+
+
+
+## Self-rated Health
+
+### Base II
+Self-rated health was assessed at every wave. Participants were asked to indicate "How would you describe your current health status" on a scale ranging from 1 (very good) to 5 (bad). Answers were recoded so that higher values represent better self-rated health.
+
+### EAS 
+At each wave, participants were asked "compared with a year ago, would you say your health is now better, worse or about the same (1=better 2=worse 3=about the same)?"
+
+### ELSA
+Self rated health was assessed at baseline. Individuals were asked "how healthy do you believe you are?", and response options ranged from 1 (excellent health) to 5 (poor health). The variable was reverse coded so that high values indicated better self-rated health.
+
+### HRS
+Participants reported on their general health on a scale from 1 (Excellent) to 5 (Poor). This was reverse coded in analyses for ease of interpretation.
+
+### ILSE
+Participants reported on their general health on a scale from 1 (very good) to 6 (very bad).
+
+### LBC-1936 
+Self-rated health was not collected at baseline in LBC1936.
+
+### LBLS 
+Self-rated health was originally assessed as the participants’ self-reported health compared to peers their age on a 1 to 6 scale (1=very good, 6 =very poor). Self-rated health was recoded such that higher values indicated better health (1=very poor, 6 =very good) in the present analyses.
+
+### MAP
+Self-reported health is not collected.
+
+### MAS
+
+Self-rated health was evaluated by asking participants to rate on a 1 (poor) to 5 (excellent) scale the following question: "In general, how would you rate your health?".
+
+### MIDUS
+In the 1994/1995 wave of data collection, participants were asked to rate their present health on a scale of 0 (worst possible health) to 10 (the best possible health).
+
+### NAS
+IN the 1992 Health Quality of Life survey, participants were asked to rank their current health ("in general, would you say your health is….?"), from 1=very poor to 5=excellent.
+
+### OATS 
+Self-rated health was evaluated by asking participants to rate on a 1 (poor) to 5 (excellent) scale the following question: "In general, how would you rate your health?".
+
+### ROS
+Self-reported health is not collected.
+
+
+### SLS
+Self-reported health was measured each wave. Participants were asked to answer the question "Compared to other people my age, I believe my health to be…" on a scale from 1 (very good) to 6 (very poor). For the current analyses the variable was recoded so that higher values indicate better health.
+
+### WLS
+Self-rated health was measured at each wave. Participants rated their current health on a five-point scale from 1 (very poor) to 5 (excellent).
+
+
+## Has Chronic Condition 
+
+### Base II
+Chronic conditions were assessed at every wave. Participants were asked to indicate if they had ever been diagnosed with any chronic condition listed (0 = no; 1 = yes). Some diseases were included in every wave (e.g., diabetes, hypertension, heart condition, stroke) while others were only included in some waves (e.g., asthma, lung disease, back pain, osteoporosis, and others). If participants endorsed any condition (other than diabetes, hypertension, and heart condition) or the "other chronic condition" option, they were marked as 1 (having a chronic condition), if they endorsed none of the conditions and the "no chronic condition" option, they were marked as 0 (not having a chronic condition). If participants did not endorse any of the conditions nor the "other chronic condition" or the "no chronic condition" option, data was assumed missing.
+
+### EAS 
+At each wave, participants were also asked whether they had the following conditions at this visit or any prior visit: stroke, any cancer, COPD, thyroid disease, osteoarthritis and rheumatoid arthritis (0=No, 1=Yes). If the participants answered "Yes" to any of these conditions, they were coded as 1 (having a chronic condition). Otherwise, they were coded as 0 (having none of these chronic condition).
+
+### ELSA
+All chronic conditions newly reported at baseline and fed forward from previous waves were summed so that answering yes to any one of the following conditions indicated that the participant has a chronic condition (e.g. yes=1, no=0): chronic lung disease; asthma; arthritis; osteoporosis; cancer or malignant tumour; Parkinson’s Disease; psychiatric problems; dementia; malignant blood disorder.
+
+### HRS
+In the same set of questions in which participants reported whether they had been diagnosed with hypertension, diabetes and heart disease, they were also asked whether they had ever been told they have "cancer or a malignant tumor, excluding minor skin cancer," "chronic lung disease such as chronic bronchitis or emphysema," "a stroke," or "arthritis or rheumatism?" If they answered yes to any of these, they were marked as 1 (having a chronic condition). Otherwise, they were marked as 0.
+
+### ILSE
+In the same set of questions in which participants reported whether or not they ever had or currently have diabetes, heart conditions or hypertension, they were also asked to report on other chronic conditions such as disorders of esophagus, stomach, liver, gall, pancreas, kidney, prostate, musculoskeletal system, lip metabolism, thyroid, brain/nerves, gout, stroke, allergies, vision/hearing disorders, bronchitis, venous insufficiency, pain or another condition. If they answered yes to any of these, they were marked as 1 (having a chronic condition). Otherwise, they were marked as 0.
+
+
+### LBC-1936 
+Chronic conditions at baseline was treated as a binary variable (1 = has one or more chronic conditions; 0 = has no chronic conditions). This variable was created based on the self-report history of health conditions at wave 1 (high cholesterol, cardiovascular disease, blood circulation problems, stroke and cancer).
+
+### LBLS 
+
+### MAP
+At baseline, participants were asked if they had a history of cancer, thyroid disease, head injury, or stroke (stroke was based on a combination of the self-report and clinician rating). If they answered yes to any of these, they were marked as 1 (having a chronic condition). Otherwise, they were marked as 0. For details on each of these conditions, see documentation: https://www.radc.rush.edu/docs/var/detail.htm?category=Medical%20Conditions&subcategory=Cancer& variable=cancer_bl https://www.radc.rush.edu/docs/var/detail.htm?category=Medical%20Conditions&subcategory=Thyroid &variable=thyroid_bl https://www.radc.rush.edu/docs/var/detail.htm?category=Medical+Conditions&subcategory=Head+injury &variable=headinjrloc_bl https://www.radc.rush.edu/docs/var/detail.htm?category=Medical%20Conditions&subcategory=Vascular &variable=stroke_cum
+
+### MAS
+
+### MIDUS
+
+### NAS
+In the 1992 Health-Related Quality of Life survey, participants were coded as having any medical conditions, or not.
+chronic conditions - in 1992 QOL survey, asked several questions (yes/no) about ---
+* having chronic disease or long-standing health condition
+* doc ever told you that you have hypertension or high BP
+* doc ever told you that you have diabetes or high blood sugar
+* chronic bronchitis, emphysema, or asthma
+* do you currently have heart disease, angina, or heart failure
+
+### OATS 
+Chronic conditions were based on detailed self-reported medical history questionnaires administered to participants at each measurement wave. Chronic conditions was treated as a binary variable (1 = has one or more chronic conditions; 0 = no chronic conditions). Participants with one or more of the following health conditions were categorized as having a chronic condition: anaemia, sleep apnoea, arthritis, asthma, autoimmune disease, cancer or leukaemia, cataracts, high cholesterol , chronic bronchitis, chronic obstructive pulmonary disease, stroke, depression, epilepsy, glaucoma, broken hip, long standing kidney disease, lupus, migraine, osteoporosis, Parkinson’s disease, periodontitis, chronic sinusitis or inflammation, and thyroid disorder. 
+
+### ROS
+At baseline, participants were asked if they had a history of cancer, thyroid disease, head injury, or stroke (stroke was based on a combination of the self-report and clinician rating). If they answered yes to any of these, they were marked as 1 (having a chronic condition). Otherwise, they were marked as 0. For details on each of these conditions, see documentation: https://www.radc.rush.edu/docs/var/detail.htm?category=Medical%20Conditions&subcategory=Cancer& variable=cancer_bl https://www.radc.rush.edu/docs/var/detail.htm?category=Medical%20Conditions&subcategory=Thyroid &variable=thyroid_bl https://www.radc.rush.edu/docs/var/detail.htm?category=Medical+Conditions&subcategory=Head+injury &variable=headinjrloc_bl https://www.radc.rush.edu/docs/var/detail.htm?category=Medical%20Conditions&subcategory=Vascular &variable=stroke_cum
+
+### SLS
+Participants were marked as 1 (having a chronic condition) if they had been diagnosed with any of the following conditions at baseline based on medical records: Malignant neoplasm, cancer, endocrine disease, glaucoma, cataract, arthropathy, osteoarthritis, other joint disorder. For participants whose baseline was in 2005, health data from 1999 to 2005 was used. For individuals whose baseline was in 2008, we used medical data from 2006 to 2009.
+
+### WLS
+Similar to the questions for diabetes, hypertension, and heart disease, participants were asked "has a medical professional ever said that you have X condition?" for the following chronic conditions: asthma, arthritis/rheumatism, bronchitis/emphysema, cancer, chronic liver trouble, multiple sclerosis, and colitis. If they responded yes to any of these, participants were coded as having a chronic condition.
+
+
+
+
+
+
+
+
