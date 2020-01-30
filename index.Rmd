@@ -24,7 +24,7 @@ To estimate the population effect size of the healthy neuroticism interaction, w
 
 Some datasets in the IALSA network are controlled by data-sharing agreements that prohibit sending data to analysts outside the organization. Consequently, a master data analyst wrote template scripts that would conduct identical (or near identical) analyses across all datasets. Individual study sites assigned study-specific data analysts to prepare the data for analysis, including ensuring data were appropriately structured and that variables were named to match the analysis template. All data analysts met in Chicago, IL USA in January 2018, where study-analysts downloaded the template scripts and analyzed their data. These scripts aggregate summary statistics, which were uploaded to the Open Science Framework. The master data analyst downloaded these output files and analyzed them using a separate script, which conducted the meta-analysis. 
 
-All scripts, including the template script, the study-specific scripts (which were sometimes adjusted to include appropriate covariates and outcomes), the study-output files, and the meta-analytic files and outputs are all available on OSF. A table of contents for those files is included for each study on this website.
+All scripts, including the template script, the study-specific scripts (which were sometimes adjusted to include appropriate covariates and outcomes), the study-output files, and the meta-analytic files and outputs are all available on OSF ([osf.io/kcquy](https://osf.io/kcquy/)). A table of contents for those files is included for each study on this website.
 
 # This website
 

@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 
 <head>
 
 <meta charset="utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
 
@@ -89,7 +89,6 @@ code {
 }
 img {
   max-width:100%;
-  height: auto;
 }
 .tabbed-pane {
   padding-top: 12px;
@@ -238,6 +237,7 @@ $(document).ready(function () {
   border: none;
   display: inline-block;
   border-radius: 4px;
+  background-color: transparent;
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li {
@@ -250,48 +250,9 @@ $(document).ready(function () {
 }
 </style>
 
-<script>
-$(document).ready(function () {
-  window.buildTabsets("TOC");
-});
-
-$(document).ready(function () {
-  $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
-  });
-});
-</script>
-
 <!-- code folding -->
 
 
-
-<script>
-$(document).ready(function ()  {
-
-    // move toc-ignore selectors from section div to header
-    $('div.section.toc-ignore')
-        .removeClass('toc-ignore')
-        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
-
-    // establish options
-    var options = {
-      selectors: "h1,h2",
-      theme: "bootstrap3",
-      context: '.toc-content',
-      hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
-      },
-      ignoreSelector: ".toc-ignore",
-      scrollTo: 0
-    };
-    options.showAndHide = true;
-    options.smoothScroll = true;
-
-    // tocify
-    var toc = $("#TOC").tocify(options).data("toc-tocify");
-});
-</script>
 
 <style type="text/css">
 
@@ -305,6 +266,12 @@ $(document).ready(function ()  {
 }
 }
 
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
 
 .toc-content {
   padding-left: 30px;
@@ -469,7 +436,10 @@ div.tocify {
           <a href="chronic_cross_sectional_forest.html">Forest plot (published)</a>
         </li>
         <li>
-          <a href="chronic_cross_sectional_predicted.html">Prediced values by study</a>
+          <a href="chronic_cross_sectional_forest_nocov.html">Forest plot (no covariates)</a>
+        </li>
+        <li>
+          <a href="chronic_cross_sectional_predicted.html">Predicted values by study</a>
         </li>
         <li>
           <a href="chronic_cross_sectional_age_forest.html">Moderated by age</a>
@@ -489,7 +459,10 @@ div.tocify {
           <a href="chronic_longitudinal_forest.html">Forest plot (published)</a>
         </li>
         <li>
-          <a href="chronic_longitudinal_predicted.html">Prediced values by study</a>
+          <a href="chronic_longitudinal_forest_nocov.html">Forest plot (no covariates)</a>
+        </li>
+        <li>
+          <a href="chronic_longitudinal_predicted.html">Predicted values by study</a>
         </li>
         <li>
           <a href="chronic_longitudinal_age_forest.html">Moderated by age</a>
@@ -933,25 +906,25 @@ intrcpt
 -0.03
 </td>
 <td style="text-align:right;">
--0.10
+-0.09
 </td>
 <td style="text-align:right;">
 0.04
 </td>
 <td style="text-align:left;">
-.407
+.393
 </td>
 <td style="text-align:right;">
 -0.03
 </td>
 <td style="text-align:right;">
--0.10
+-0.09
 </td>
 <td style="text-align:right;">
 0.04
 </td>
 <td style="text-align:left;">
-.406
+.397
 </td>
 </tr>
 <tr>
@@ -974,13 +947,13 @@ personality_q
 -0.03
 </td>
 <td style="text-align:right;">
--0.16
+-0.15
 </td>
 <td style="text-align:right;">
-0.10
+0.09
 </td>
 <td style="text-align:left;">
-.663
+.637
 </td>
 <td style="text-align:right;">
 -0.04
@@ -989,10 +962,10 @@ personality_q
 -0.16
 </td>
 <td style="text-align:right;">
-0.09
+0.08
 </td>
 <td style="text-align:left;">
-.578
+.549
 </td>
 </tr>
 <tr>
@@ -1012,28 +985,28 @@ personality_qBFI
 .027
 </td>
 <td style="text-align:right;">
-0.09
+0.07
 </td>
 <td style="text-align:right;">
--0.01
+0.00
 </td>
 <td style="text-align:right;">
-0.19
+0.15
 </td>
 <td style="text-align:left;">
-.065
+.062
 </td>
 <td style="text-align:right;">
-0.09
+0.07
 </td>
 <td style="text-align:right;">
--0.01
+0.00
 </td>
 <td style="text-align:right;">
-0.18
+0.15
 </td>
 <td style="text-align:left;">
-.064
+.063
 </td>
 </tr>
 <tr>
@@ -1053,28 +1026,28 @@ personality_qMIDI
 .258
 </td>
 <td style="text-align:right;">
-0.02
+0.01
 </td>
 <td style="text-align:right;">
--0.07
+-0.05
 </td>
 <td style="text-align:right;">
-0.10
+0.08
 </td>
 <td style="text-align:left;">
-.680
+.697
 </td>
 <td style="text-align:right;">
-0.02
+0.01
 </td>
 <td style="text-align:right;">
--0.07
+-0.06
 </td>
 <td style="text-align:right;">
-0.10
+0.08
 </td>
 <td style="text-align:left;">
-.700
+.721
 </td>
 </tr>
 <tr>
@@ -1094,28 +1067,28 @@ personality_qNEO-FFI
 .224
 </td>
 <td style="text-align:right;">
-0.05
+0.04
 </td>
 <td style="text-align:right;">
 -0.05
 </td>
 <td style="text-align:right;">
-0.15
+0.13
 </td>
 <td style="text-align:left;">
-.357
+.404
 </td>
 <td style="text-align:right;">
-0.05
+0.04
 </td>
 <td style="text-align:right;">
 -0.05
 </td>
 <td style="text-align:right;">
-0.14
+0.13
 </td>
 <td style="text-align:left;">
-.361
+.403
 </td>
 </tr>
 <tr grouplength="5">
@@ -1424,6 +1397,49 @@ $(document).ready(function () {
 });
 
 
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
 </script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->

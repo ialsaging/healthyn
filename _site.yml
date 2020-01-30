@@ -49,7 +49,9 @@ navbar:
           menu:
             - text: "Forest plot (published)"
               href: "chronic_cross_sectional_forest.html"
-            - text: "Prediced values by study"
+            - text: "Forest plot (no covariates)"
+              href: "chronic_cross_sectional_forest_nocov.html"              
+            - text: "Predicted values by study"
               href: "chronic_cross_sectional_predicted.html"
             - text: "Moderated by age"
               href: "chronic_cross_sectional_age_forest.html"
@@ -61,7 +63,9 @@ navbar:
           menu:
             - text: "Forest plot (published)"
               href: "chronic_longitudinal_forest.html"
-            - text: "Prediced values by study"
+            - text: "Forest plot (no covariates)"
+              href: "chronic_longitudinal_forest_nocov.html"
+            - text: "Predicted values by study"
               href: "chronic_longitudinal_predicted.html"
             - text: "Moderated by age"
               href: "chronic_longitudinal_age_forest.html"

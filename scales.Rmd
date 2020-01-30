@@ -11,43 +11,45 @@ output:
 This page contains a table summarizing the inclusion of specific aspects or facets in the instruments used in the healthy neuroticism coordinated analysis. 
 
 
-|                       | IPIP-50 | IPIP | Goldberg | BFI | BFI-S | NEO-FFI | NEO-PI-R | MIDI |
+| **Conscientiousness** | IPIP-50 | IPIP | Goldberg | BFI | BFI-S | NEO-FFI | NEO-PI-R | MIDI |
 |-----------------------|:-------:|:----:|:--------:|:---:|:-----:|:-------:|:--------:|:----:|
-| **Conscientiousness**                                                                      ||
 | Organized             |    x    |   x  |     x    |     |       |         |          |   x  |
+| Orderly               |         |      |          |  x  |       |    x    |     x    |      |
 | Responsible           |    x    |   x  |     x    |     |       |         |          |   x  |
 | Reliable              |    x    |   x  |     x    |     |       |         |          |      |
+| Dependability         |         |      |          |     |       |    x    |          |      |
 | Conscientious         |    x    |   x  |     x    |     |       |         |          |      |
+| Efficient             |         |      |          |     |   x   |         |          |      |
 | Practical             |    x    |   x  |     x    |     |       |         |          |      |
+| Competent             |         |      |          |  x  |       |         |     x    |      |
+| Dutifulness           |         |      |          |  x  |       |         |     x    |      |
 | Thorough              |    x    |   x  |     x    |     |   x   |         |          |      |
 | Hardworking           |    x    |   x  |     x    |     |       |         |          |   x  |
 | Thrifty               |    x    |   x  |     x    |     |       |         |          |      |
+| Careful               |         |      |          |     |       |         |          |   x  |
 | Cautious              |    x    |   x  |     x    |     |       |         |          |      |
 | Serious               |    x    |   x  |     x    |     |       |         |          |      |
-| Competent             |         |      |          |  x  |       |         |     x    |      |
-| Orderly               |         |      |          |  x  |       |    x    |     x    |      |
-| Dutifulness           |         |      |          |  x  |       |         |     x    |      |
+| Deliberation          |         |      |          |  x  |       |         |     x    |      |
 | Achievement           |         |      |          |  x  |       |         |     x    |      |
 | Self-Discipline       |         |      |          |  x  |   x   |         |     x    |      |
-| Deliberation          |         |      |          |  x  |       |         |     x    |      |
-| Efficient             |         |      |          |     |   x   |         |          |      |
-| Careful               |         |      |          |     |       |         |          |   x  |
 | Goal Striving         |         |      |          |     |       |    x    |          |      |
-| Dependability         |         |      |          |     |       |    x    |          |      |
-| **Neuroticism**       |         |      |          |     |       |         |          |      |
+
+| **Neuroticism**       | IPIP-50 | IPIP | Goldberg | BFI | BFI-S | NEO-FFI | NEO-PI-R | MIDI |
+|-----------------------|:-------:|:----:|:--------:|:---:|:-----:|:-------:|:--------:|:----:|
 | Angry                 |    x    |   x  |     x    |  x  |       |         |     x    |      |
 | Tense (Anxious)       |    x    |   x  |     x    |  x  |   x   |    x    |     x    |   x  |
 | Nervous               |    x    |   x  |     x    |     |   x   |         |          |   x  |
-| Envious               |    x    |   x  |     x    |     |       |         |          |      |
-| Unstable              |    x    |   x  |     x    |     |       |         |          |      |
+| Worry                 |         |      |          |     |   x   |         |          |   x  |
 | Discontented          |    x    |   x  |     x    |     |       |         |          |      |
+| Envious               |    x    |   x  |     x    |     |       |         |          |      |
 | Insecure              |    x    |   x  |     x    |     |       |         |          |      |
+| Unstable              |    x    |   x  |     x    |     |       |         |          |      |
+| Impulsiveness         |         |      |          |  x  |       |         |     x    |      |
 | Emotional             |    x    |   x  |     x    |     |       |         |          |      |
 | Guilt-Ridden          |    x    |   x  |     x    |     |       |         |          |      |
 | Moody                 |    x    |   x  |     x    |     |       |         |          |   x  |
 | Depression            |         |      |          |  x  |       |    x    |     x    |      |
 | Self-Conscious        |         |      |          |  x  |       |         |     x    |      |
-| Vulnerable            |         |      |          |  x  |       |         |     x    |      |
-| Impulsiveness         |         |      |          |  x  |       |         |     x    |      |
-| Worry                 |         |      |          |     |   x   |         |          |   x  |
 | Self-Reproach (Blame) |         |      |          |     |       |    x    |          |      |
+| Vulnerable            |         |      |          |  x  |       |         |     x    |      |
+
