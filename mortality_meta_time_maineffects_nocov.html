@@ -11,7 +11,7 @@
 
 
 
-<title>Predicted Values: Physical activity status</title>
+<title>Meta analysis of main effects of neuroticism and conscientiousness (time since baseline as metric)</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -603,34 +603,138 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Predicted Values: Physical activity status</h1>
+<h1 class="title toc-ignore">Meta analysis of main effects of neuroticism and conscientiousness (time since baseline as metric)</h1>
 
 </div>
 
 
-<p>This document contains the plot of predicted probabilities from each individual study, as well as the weighted average effect, from the cross-sectional analyses.</p>
-<p><img src="behavior_active_predicted_files/figure-html/plot-1.png" width="672" /></p>
+<p>This document contains the meta-analysis of the surivival models, using time since baseline as the metric of interest and neuroticism by conscientiousness as the predictor of interest.</p>
+<p>Please note these models were developed after peer review – they do not appear in our preregistration. In addition, there have been some difficulties in estimating the models in all datasets. The information provided here is our most up-to-date version; these analyses were performed on 2020-02-13</p>
+<p><img src="mortality_meta_time_maineffects_nocov_files/figure-html/forest_plot-1.png" width="672" /></p>
+<pre class="r"><code>save(meta.results.time.neur, file = here(&quot;morality/created data/main_effects_neur.Rdata&quot;))
+save(meta.results.time.con,  file = here(&quot;morality/created data/main_effects_con.Rdata&quot;))</code></pre>
 <div id="code" class="section level1">
 <h1>Code</h1>
-<p>The following packages were used to generate this figure:</p>
-<pre class="r"><code>library(tidyverse)
+<p>The following packages were used to generate this table:</p>
+<pre class="r"><code>library(papaja)
+library(tidyverse)
 library(metafor)
+library(knitr)
+library(kableExtra)
 library(here)</code></pre>
-<p>The files needed for this table are available at <a href="https://osf.io/mzfu9/">osf.io/mzfu9</a> in the Meta Analysis Output folder.</p>
-<p>First we load the meta-analysis objects. To see how these objects were created, see the meta-analysis script titled <code>active_meta-analysis.R</code> that are available at <a href="https://osf.io/zvsfb/">osf.io/zvsfb</a>.</p>
-<pre class="r"><code>load(here(&quot;behavior/created data/plot_active.Rdata&quot;))</code></pre>
-<p>We plot the values.</p>
-<pre class="r"><code>active.plot %&gt;%
-  ggplot(., aes(x = x, y = predicted)) +
-  geom_ribbon(aes(ymin=lower, ymax=upper), fill=&quot;black&quot;, alpha=.15,
-              data = weighted.vals)+
-  geom_line(aes(color = study), lty=&quot;dashed&quot;) +
-  geom_line(data = weighted.vals, color=&quot;black&quot;) +
-  scale_x_continuous(&quot;Neuroticism&quot;)+
-  scale_y_continuous(&quot;Probability of \n being currently active&quot;) +
-  facet_wrap(~group) +
-  theme_bw() +
-  theme(legend.position = &quot;bottom&quot;)</code></pre>
+<p>Specify the location of the study analysis objects. The first author stored these in a Box Sync folder, but you may have downloaded these to a different location. The files needed for this table are available at <a href="https://osf.io/mzfu9/">osf.io/mzfu9</a> in the Individual Study Output folder.</p>
+<pre class="r"><code>data.path = here(&quot;mortality/study output/&quot;)</code></pre>
+<p>First we load the individual study analysis objects.</p>
+<pre class="r"><code>study.names = c(&quot;EAS&quot;, &quot;HRS&quot;,&quot;LBLS&quot;, &quot;MAP&quot;, &quot;MIDUS&quot;, &quot;NAS&quot;, &quot;ROS&quot;, &quot;SLS&quot;, &quot;WLS&quot;)
+
+lapply(paste0(data.path, study.names, &quot;_survival_output.Rdata&quot;), load, .GlobalEnv)</code></pre>
+<pre class="r"><code>meta.data.time &lt;- data.frame()
+
+n &lt;- 0
+
+for(i in study.names){
+  n &lt;- n+1
+  x &lt;- get(paste0(i, &quot;_survival_output&quot;))
+  meta.data.time[n, &quot;study&quot;] &lt;- i
+  meta.data.time[n, &quot;n_coef&quot;] &lt;- x$time$model0a$coef[&quot;z.neur&quot;, &quot;coef&quot;]
+  meta.data.time[n, &quot;n_se&quot;] &lt;- x$time$model0a$coef[&quot;z.neur&quot;, &quot;se(coef)&quot;]
+  meta.data.time[n, &quot;c_coef&quot;] &lt;- x$time$model0a$coef[&quot;z.con&quot;, &quot;coef&quot;]
+  meta.data.time[n, &quot;c_se&quot;] &lt;- x$time$model0a$coef[&quot;z.con&quot;, &quot;se(coef)&quot;]
+  meta.data.time[n, &quot;n&quot;] &lt;- x$time$model0a$ntotal
+  meta.data.time[n, &quot;n_died&quot;] &lt;- x$descriptives$died.tab[&quot;1&quot;]
+}
+
+meta.results.time.neur &lt;- rma(yi = n_coef, 
+                              sei = n_se, 
+                              ni = n,  
+                              measure = &quot;RR&quot;,
+                              slab = study, 
+                              data = meta.data.time)
+
+meta.results.time.con &lt;- rma(yi = c_coef, 
+                              sei = c_se, 
+                              ni = n,  
+                              measure = &quot;RR&quot;,
+                              slab = study, 
+                              data = meta.data.time)
+
+meta.data.time = meta.data.time %&gt;%
+  gather(&quot;key&quot;, &quot;value&quot;, n_coef, n_se, c_coef, c_se) %&gt;%
+  separate(&quot;key&quot;, into = c(&quot;trait&quot;, &quot;key&quot;)) %&gt;%
+  spread(&quot;key&quot;, &quot;value&quot;)
+
+meta.results.time = rma(yi = coef, 
+                        sei = se, 
+                        ni = n,  
+                        measure = &quot;RR&quot;,
+                        slab = study, 
+                        data = meta.data.time)</code></pre>
+<pre class="r"><code>meta.data.time = meta.data.time %&gt;%
+  #mutate(study = gsub(&quot;LBC&quot;, &quot;LBC1936&quot;, study)) %&gt;%
+  arrange(trait, study)
+
+#find plot limits
+max.ci = meta.data.time %&gt;%
+  mutate(ci = exp(coef+1.96*se)) %&gt;%
+  arrange(desc(ci))
+max.ci = max.ci[2, &quot;ci&quot;]
+
+#max.ci = max(exp(neur.data$estimate+1.96*neur.data$se))
+min.ci = min(exp(meta.data.time$coef-1.96*meta.data.time$se))
+
+range = max.ci-min.ci
+
+lower = min.ci-(range)
+upper = max.ci+(range)*.5
+
+#estimate position of extra information
+pos = min.ci-lower
+pos = pos/2
+pos = c(lower+.8*pos, lower+1.6*pos)
+
+unique = nrow(meta.data.time)/2
+rows = c(1:unique, (unique+6):((2*unique)+5))
+cex.set = .65
+
+forest(meta.data.time$coef, meta.data.time$se^2,
+       cex = cex.set,
+       slab = meta.data.time$study,
+       xlim = c(lower, upper),
+       alim = c(min.ci, max.ci),
+       transf=exp,
+       rows = rows[order(rows,decreasing = T)],
+       ylim = c(-1, 5+max(rows)),
+       refline = 1,
+       ilab = meta.data.time[,c(&quot;n&quot;, &quot;n_died&quot;)],
+       ilab.xpos = pos)
+
+addpoly(meta.results.time.con, row = unique+5, 
+        cex = cex.set,transf =exp, mlab=&quot;&quot;, col = &quot;blue&quot;)
+addpoly(meta.results.time.neur, row = min(rows)-1, 
+        cex = cex.set,transf =exp, mlab=&quot;&quot;, col = &quot;blue&quot;)
+
+text(lower, unique+5, pos=4, cex = cex.set,
+     bquote(paste(&quot;(Q = &quot;,
+                  .(formatC(meta.results.time.con$QE, digits=2, format=&quot;f&quot;)),
+                  &quot;, df = &quot;, .(meta.results.time.con$k - meta.results.time.con$p),
+                  &quot;, p = &quot;, .(formatC(meta.results.time.con$QEp, digits=2, format=&quot;f&quot;)), 
+                  &quot;; &quot;, I^2, &quot; = &quot;,
+                  .(formatC(meta.results.time.con$I2, digits=1, format=&quot;f&quot;)), &quot;%)&quot;)))
+text(lower, min(rows)-1, pos=4, cex = cex.set,
+     bquote(paste(&quot;(Q = &quot;,
+                  .(formatC(meta.results.time.neur$QE, digits=2, format=&quot;f&quot;)),
+                  &quot;, df = &quot;, .(meta.results.time.neur$k - meta.results.time.neur$p),
+                  &quot;, p = &quot;, .(formatC(meta.results.time.neur$QEp, digits=2, format=&quot;f&quot;)), 
+                  &quot;; &quot;, I^2, &quot; = &quot;,
+                  .(formatC(meta.results.time.neur$I2, digits=1, format=&quot;f&quot;)), &quot;%)&quot;)))
+text(lower, 5.5+max(rows),
+     &quot;Study&quot;, cex = cex.set*1.2, pos = 4)
+text(upper, 5.5+max(rows),
+     &quot;Risk Ratio [95% CI]&quot;, cex = cex.set*1.2, pos=2)
+text(lower, max(rows)+1.5,
+     &quot;Main Effect of Conscientiousness&quot;, cex = cex.set*1.1, pos = 4, font = 2)
+text(lower, unique+2,
+     &quot;Main Effect of Neuroticism&quot;, cex = cex.set*1.1, pos = 4, font = 2)</code></pre>
 </div>
 
 

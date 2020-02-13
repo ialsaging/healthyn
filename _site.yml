@@ -15,6 +15,8 @@ navbar:
             href: "mortality_meta_time.html"
           - text: "Main effects of personality"
             href: "mortality_meta_time_maineffects.html"
+          - text: "Main effects of personality (no covariates"
+            href: "mortality_meta_time_maineffects_nocov.html"
           - text: "Hazard ratio plot"
             href: "mortality_meta_time_hrPlot.html"
           - text: "Surival plot"
