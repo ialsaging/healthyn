@@ -1,0 +1,136 @@
+---
+title: "Meta analysis of interaction with no covariates(time since baseline as metric)"
+output: 
+  html_document:
+    toc: TRUE
+    toc_depth: 2
+    toc_float: TRUE
+    theme: cosmo
+---
+This document contains the meta-analysis of the surivival models, using time since baseline as the metric of interest and neuroticism by conscientiousness as the predictor of interest.
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+options(knitr.kable.NA = '')
+```
+
+
+```{r load_packages, warning = FALSE, message = FALSE, results = 'hide', echo = F}
+library(papaja)
+library(tidyverse)
+library(metafor)
+library(knitr)
+library(kableExtra)
+library(here)
+```
+
+
+```{r data_path, echo = F}
+data.path = here("mortality/study output/")
+```
+
+
+```{r study_names, results = 'hide', echo = F}
+study.names = c("EAS", "HRS","LBLS", "MAP", "MIDUS", "NAS", "ROS", "SLS", "WLS")
+
+lapply(paste0(data.path, study.names, "_survival_output.Rdata"), load, .GlobalEnv)
+```
+
+
+```{r meta_analysis, echo = F}
+meta.data.time <- data.frame()
+n <- 0
+
+for(i in study.names){
+  n <- n+1
+  x <- get(paste0(i, "_survival_output"))
+  meta.data.time[n, "study"] <- i
+  meta.data.time[n, "coef"] <- x$time$model0b$coef["z.neur:z.con", "coef"]
+  meta.data.time[n, "se"] <- x$time$model0b$coef["z.neur:z.con", "se(coef)"]
+  meta.data.time[n, "n"] <- x$time$model0b$ntotal
+  meta.data.time[n, "n_died"] <- x$descriptives$died.tab["1"]
+
+}
+
+meta.results.time <- rma(yi = coef, 
+                    sei = se, 
+                    ni = n,  
+                    measure = "RR",
+                    slab = study, 
+                    data = meta.data.time)
+```
+
+```{r, echo = F}
+save(meta.results.time, file = here("mortality/created data/meta_time_nocov.Rdata"))
+```
+
+
+```{r forest_plot, echo = F}
+
+#find plot limits
+max.ci.mod1 = max(exp(meta.data.time$coef+1.96*meta.data.time$se))
+min.ci.mod1 = min(exp(meta.data.time$coef-1.96*meta.data.time$se))
+range.mod1 = max.ci.mod1-min.ci.mod1
+
+lower.mod1 = min.ci.mod1-(range.mod1*2.5)
+upper.mod1 = max.ci.mod1+(range.mod1*1.5)
+
+cex.set = .7
+
+#estimate position of extra information
+pos.mod1 = min.ci.mod1-lower.mod1
+pos.mod1 = pos.mod1/6
+pos.mod1 = c(lower.mod1+2.5*pos.mod1,
+             lower.mod1+4*pos.mod1)
+
+meta.data.time$study = gsub("LBC", "LBC1936", meta.data.time$study)
+
+#forest plot
+forest(meta.results.time,
+       xlim = c(lower.mod1, upper.mod1),
+       cex = cex.set,
+       slab = meta.data.time$study,
+       transf=exp,
+       refline = 1,
+       ilab = meta.data.time[,c("n", "n_died")],
+       ilab.xpos = pos.mod1)
+
+#additional text
+text(c(pos.mod1), length(study.names)+1.5,
+     c("N", "Died"), cex = cex.set)
+text(lower.mod1, length(study.names)+1.5,
+     "Study", cex = cex.set, pos = 4)
+text(upper.mod1, length(study.names)+1.5,
+     "Interaction Hazard Ratio [95% CI]", cex = cex.set, pos=2)
+text(lower.mod1, -1.5, pos=4, cex=cex.set, 
+     bquote(paste("(Q = ",
+     .(formatC(meta.results.time$QE, digits=2, format="f")), ", df = ", .(meta.results.time$k - meta.results.time$p),
+     ", p = ", .(formatC(meta.results.time$QEp, digits=2, format="f")), "; ", I^2, " = ",
+     .(formatC(meta.results.time$I2, digits=1, format="f")), "%)")))
+```
+
+# Code
+
+
+The following packages were used to generate this table: 
+
+```{r ref.label = "load_packages", warning = FALSE, message = FALSE, results = 'hide', eval = F}
+```
+
+Specify the location of the study analysis objects. The first author stored these in a Box Sync folder, but you may have downloaded these to a different location. The files needed for this table are available at [osf.io/mzfu9](https://osf.io/mzfu9/) in the Individual Study Output folder.
+
+```{r ref.label = "data_path", eval = F}
+```
+
+First we load the individual study analysis objects.
+
+```{r ref.label = "study_names", results = 'hide', eval = F}
+```
+
+
+```{r ref.label = "meta_analysis", eval = F}
+```
+
+
+```{r ref.label = "forest_plot", eval = F}
+```

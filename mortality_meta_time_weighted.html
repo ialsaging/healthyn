@@ -11,7 +11,7 @@
 
 
 
-<title>Forest Plot: Longitudinal Analyses (controlling for Self-Rated Health)</title>
+<title>Meta analysis of interaction (weighted by number who died)</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -609,206 +609,144 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Forest Plot: Longitudinal Analyses (controlling for Self-Rated Health)</h1>
+<h1 class="title toc-ignore">Meta analysis of interaction (weighted by number who died)</h1>
 
 </div>
 
 
-<p>This document contains the forest plot summarizing the longitudinal analyses that controlled for self-rated health. These analyses were part of the pre-registration. However, post-registration, it was discovered that many studies did not have this variable. For the manuscript, we chose to remove self-rated health as a covariate in order to include all studies in the analyses. We repeated the analyses with self-rated health as a covariate using the studies that have this variable, as sensitivity analyses. The results are summarized here.</p>
-<p><img src="chronic_longitudinal_srh_forest_files/figure-html/forest-1.png" width="672" /></p>
+<p>This document contains the meta-analysis of the surivival models, using time since baseline as the metric of interest and neuroticism by conscientiousness as the predictor of interest. Here, we weight the datasets in the meta analysis by number of participants who died during the study period.</p>
+<p><img src="mortality_meta_time_weighted_files/figure-html/moderated-1.png" width="672" /></p>
 <div id="code" class="section level1">
 <h1>Code</h1>
-<p>The following packages were used to generate this figure:</p>
-<pre class="r"><code>library(tidyverse)
+<p>The following packages were used to generate this table:</p>
+<pre class="r"><code>library(papaja)
+library(tidyverse)
 library(metafor)
-library(papaja)
+library(knitr)
+library(kableExtra)
 library(here)</code></pre>
-<p>The files needed for this table are available at <a href="https://osf.io/mzfu9/">osf.io/mzfu9</a> in the Meta Analysis Output folder.</p>
-<p>First we load the meta-analysis objects. As we load them in, we rename some of the objects (as they were given the same name during creation).</p>
-<pre class="r"><code>load(here(&quot;chronic/meta output/hbp_long_srh.Rdata&quot;))
-meta.long.hbp = meta.int.mod3
-lowc_long_ci.hbp = meta_lowc_ci_mod3
-hghc_long_ci.hbp = meta_hghc_ci_mod3
+<p>The files needed for this table are available at <a href="https://osf.io/mzfu9/">osf.io/mzfu9</a> in the Individual Study Output folder.</p>
+<p>First we load the individual study analysis objects.</p>
+<pre class="r"><code>study.names = c(&quot;EAS&quot;, &quot;HRS&quot;, &quot;LBC&quot;, &quot;LBLS&quot;, &quot;MAP&quot;, &quot;MAS&quot;, &quot;MIDUS&quot;, &quot;NAS&quot;, &quot;OATS&quot;, &quot;ROS&quot;, &quot;SLS&quot;, &quot;WLS&quot;)
 
-load(here(&quot;chronic/meta output/diabetes_long_srh.Rdata&quot;))
-meta.long.diabetes = meta.int.mod3
-lowc_long_ci.diabetes = meta_lowc_ci_mod3
-hghc_long_ci.diabetes = meta_hghc_ci_mod3
+lapply(here(paste0( &quot;mortality/study output/&quot;, study.names, &quot;_survival_output.Rdata&quot;)), load, .GlobalEnv)</code></pre>
+<pre class="r"><code>meta.data.time &lt;- data.frame()
+n &lt;- 0
 
-load(here(&quot;chronic/meta output/heart_long_srh.Rdata&quot;))
-meta.long.heart = meta.int.mod3
-lowc_long_ci.heart = meta_lowc_ci_mod3
-hghc_long_ci.heart = meta_hghc_ci_mod3
+for(i in study.names){
+  n &lt;- n+1
+  x &lt;- get(paste0(i, &quot;_survival_output&quot;))
+  meta.data.time[n, &quot;study&quot;] &lt;- i
+  meta.data.time[n, &quot;coef&quot;] &lt;- x$time$model2$coef[&quot;z.neur:z.con&quot;, &quot;coef&quot;]
+  meta.data.time[n, &quot;se&quot;] &lt;- x$time$model2$coef[&quot;z.neur:z.con&quot;, &quot;se(coef)&quot;]
+  meta.data.time[n, &quot;n&quot;] &lt;- x$time$model2$ntotal
+  meta.data.time[n, &quot;n_died&quot;] &lt;- x$descriptives$died.tab[&quot;1&quot;]
+  
+  meta.data.time[n, &quot;lowC.est&quot;] &lt;- x$HR.N$time$LowC$est
+  meta.data.time[n, &quot;lowC.se&quot;] &lt;- x$HR.N$time$LowC$se
+  meta.data.time[n, &quot;hghC.est&quot;] &lt;- x$HR.N$time$HghC$est
+  meta.data.time[n, &quot;hghC.se&quot;] &lt;- x$HR.N$time$HghC$se
+  
+  #calculate hazard ratios at low and high C
+  lowC.HR &lt;- exp(x$HR.N$time$LowC$est)
+  lowC.HR.lwr &lt;- exp(x$HR.N$time$LowC$est - 1.96*x$HR.N$time$LowC$se)
+  lowC.HR.upr &lt;- exp(x$HR.N$time$LowC$est + 1.96*x$HR.N$time$LowC$se)
+  meta.data.time[n, &quot;lowC.CI&quot;] &lt;- paste0(printnum(lowC.HR),&quot; [&quot;,printnum(lowC.HR.lwr),&quot;, &quot;,printnum(lowC.HR.upr),&quot;]&quot;)
 
-rm(meta.int.mod3)
-rm(meta_lowc_ci_mod3)
-rm(meta_hghc_ci_mod3)</code></pre>
-<p>The data frames contain the estimates and standard errors for each study, as well as confidence intervals. We bind these into a single large data frame.</p>
-<pre class="r"><code>data_long_hbp &lt;- data_long_hbp %&gt;%
-  # select relevant variables
-  dplyr::select(contains(&quot;name&quot;), contains(&quot;mod3&quot;)) %&gt;%
-  # remove rows with missing values
-  filter(!is.na(n_mod3)) %&gt;%
-  # add column to indicate outcome
-  mutate(outcome = &quot;hbp&quot;)
+  hghC.HR &lt;- exp(x$HR.N$time$HghC$est)
+  hghC.HR.lwr &lt;- exp(x$HR.N$time$HghC$est - 1.96*x$HR.N$time$HghC$se)
+  hghC.HR.upr &lt;- exp(x$HR.N$time$HghC$est + 1.96*x$HR.N$time$HghC$se)
+  meta.data.time[n, &quot;hghC.CI&quot;] &lt;- paste0(printnum(hghC.HR),&quot; [&quot;,printnum(hghC.HR.lwr),&quot;, &quot;,printnum(hghC.HR.upr),&quot;]&quot;)
 
-data_long_diab &lt;- data_long_diab %&gt;%
-  # select relevant variables
-  dplyr::select(contains(&quot;name&quot;), contains(&quot;mod3&quot;)) %&gt;%
-  # remove rows with missing values
-  filter(!is.na(n_mod3)) %&gt;%
-  # add column to indicate outcome
-  mutate(outcome = &quot;diabetes&quot;)
+}
 
-data_long_heart &lt;- data_long_heart %&gt;%
-  # select relevant variables
-  dplyr::select(contains(&quot;name&quot;), contains(&quot;mod3&quot;)) %&gt;%
-  # remove rows with missing values
-  filter(!is.na(n_mod3)) %&gt;%
-  # add column to indicate outcome
-  mutate(outcome = &quot;heart&quot;)
+meta.results.time &lt;- rma(yi = coef, 
+                    sei = se, 
+                    ni = n,  
+                    measure = &quot;RR&quot;,
+                    slab = study, 
+                    weights = n_died,
+                    data = meta.data.time)</code></pre>
+<pre class="r"><code>#meta-analyze HR at low and high c
 
-data_long_all &lt;- data_long_hbp %&gt;%
-  full_join(data_long_diab) %&gt;%
-  full_join(data_long_heart) %&gt;%
-  mutate(n_mod3 = printnum(n_mod3)) #format as integer with commas</code></pre>
-<p>Next we calculate the bounds of the figure (along the x-axis), based on the data we know will be plotted. Then we use the known bounds to point to where we want the extra information. For this figure, extra information is the sample size, the estimate and confidence interval of the simple slopes of neuroticism at ±1SD conscientiousness.</p>
-<p>After looking at the plot, we noticed that upper bound one of the confidence intervals (study: EAS, outcome: diabetes) is substantially larger than the other studies. To improve the aesthetic quality of the graph, we use the second largest upper bound as our limit for visualization. The exact numeric bounds are displayed in the figure.</p>
-<pre class="r"><code>  # find maximum upper bound of confidence intervals
-max.ci.long = exp(data_long_all$int_est_mod3 + 1.96*data_long_all$int_se_mod3)
-max.ci.long = max.ci.long[order(max.ci.long, decreasing = T)][2]
-  # find minimum lower bound of confidence intervals
-min.ci.long = min(exp(data_long_all$int_est_mod3 - 1.96*data_long_all$int_se_mod3))
+meta.low.time &lt;- rma(yi = lowC.est, 
+                    sei = lowC.se, 
+                    ni = n,  
+                    measure = &quot;RR&quot;,
+                    slab = study, 
+                    data = meta.data.time)
 
-range.long = max.ci.long-min.ci.long
+meta.hgh.time &lt;- rma(yi = hghC.est, 
+                    sei = hghC.se, 
+                    ni = n,  
+                    measure = &quot;RR&quot;,
+                    slab = study, 
+                    data = meta.data.time)
 
-#give some space on either side. These are the plot bounds
-lower.long = min.ci.long-(range.long*2.5) 
-upper.long = max.ci.long+(range.long)
+
+#find plot limits
+max.ci.mod1 = max(exp(meta.data.time$coef+1.96*meta.data.time$se))
+min.ci.mod1 = min(exp(meta.data.time$coef-1.96*meta.data.time$se))
+range.mod1 = max.ci.mod1-min.ci.mod1
+
+lower.mod1 = min.ci.mod1-(range.mod1*2.5)
+upper.mod1 = max.ci.mod1+(range.mod1)
+
+cex.set = .7
 
 #estimate position of extra information
-lower.long = min.ci.long-(range.long*2.5)
-upper.long = max.ci.long+(range.long*.75)
+pos.mod1 = min.ci.mod1-lower.mod1
+pos.mod1 = pos.mod1/13
+pos.mod1 = c(lower.mod1+3*pos.mod1,
+             lower.mod1+5*pos.mod1,
+             lower.mod1+8*pos.mod1,
+             lower.mod1+11*pos.mod1)
 
-#estimate position of extra information
-  # range of space between left side of plot and lowerbound of confidence intervals
-pos.long = min.ci.long-lower.long
-  # break that into equal sections. I find that 11 works for one column of sample
-  # sizes and two columns of estimates and confidence intervals
-pos.long = pos.long/11
-  #use the sections for figure out where you want each column to be in that space
-pos.long = c(lower.long+3*pos.long,
-             lower.long+6*pos.long,
-             lower.long+9*pos.long)</code></pre>
-<p>Now we calculated the needed space along the y-axis. First we determine how many extra rows we need between each “set” of analyses (in this case, between each chronic condition). We need two extra rows for specific information: the weighted average estimates and a label. From there, I added extra rows until the figure looked appealing. I ended up with 5 extra rows.</p>
-<p>From there, I figure out which rows will be filled with each set of analyses. It’s important to remember that rows start from the bottom and as you move up the figure, the row number increases.</p>
-<pre class="r"><code>extra.space = 5
+#extract weighted values at -1 and +1 sd
+meta_est_lowc_mod1 = printnum(exp(meta.low.time$b))
+meta_lwr_lowc_mod1 = printnum(exp(meta.low.time$ci.lb))
+meta_upr_lowc_mod1 = printnum(exp(meta.low.time$ci.ub))
+meta_lowc_ci_mod1 = paste0(meta_est_lowc_mod1, &quot; [&quot;,
+                           meta_lwr_lowc_mod1, &quot;, &quot;,
+                           meta_upr_lowc_mod1, &quot;]&quot;)
 
-# which rows are for heart disease
-total.heart = nrow(data_long_heart)
-rows.heart = c(1, total.heart)
+meta_est_hghc_mod1 = printnum(exp(meta.hgh.time$b))
+meta_lwr_hghc_mod1 = printnum(exp(meta.hgh.time$ci.lb))
+meta_upr_hghc_mod1 = printnum(exp(meta.hgh.time$ci.ub))
+meta_hghc_ci_mod1 = paste0(meta_est_hghc_mod1, &quot; [&quot;,
+                           meta_lwr_hghc_mod1, &quot;, &quot;,
+                           meta_upr_hghc_mod1, &quot;]&quot;)
 
-# which rows are for diabetes
-total.diabetes = nrow(data_long_diab)
-# skip row for diabetes summary, space, and heart title
-rows.diabetes = c(rows.heart[2] + extra.space, rows.heart[2] + extra.space + total.diabetes - 1)
+meta.data.time$study = gsub(&quot;LBC&quot;, &quot;LBC1936&quot;, meta.data.time$study)
 
-# which rows are for highblood pressure
-total.hbp = nrow(data_long_hbp)
-# skip row for hbp summary, space, title
-rows.hbp = c(rows.diabetes[2] + extra.space, rows.diabetes[2] + extra.space + total.hbp - 1)</code></pre>
-<p>The last step before beginning the plot is to set the font size and formatting. <code>font = 1</code> is the non-bold, non-italic font.</p>
-<pre class="r"><code>cex.value = .65
-par(font = 1)</code></pre>
-<p>The final chunck builds the forest plot. Comments are included throughout as a guide.</p>
-<pre class="r"><code>forest(data_long_all$int_est_mod3, #estimate
-       data_long_all$int_se_mod3^2, #variance
-       xlim = c(lower.long, upper.long), #limits of x-axis, full figure
-       alim = c(min.ci.long, max.ci.long),
-       ylim = c(-1, nrow(data_long_all) + extra.space*2 + 2), # limits of y-axis
-       cex = cex.value, #font size
-       slab = data_long_all$name, #study label
-       transf=exp, #transformation to estimates (takes from log odds to odds ratio)
-       refline = 1, # where is the vertical line representing the null?
-       # which rows do I fill in. Remember, data frame goes from top to bottom, but row numbers on 
-       # figure go from bottom to top
-       rows = c(rows.hbp[2]:rows.hbp[1], 
-                rows.diabetes[2]:rows.diabetes[1],
-                rows.heart[2]:rows.heart[1]),
-       # what extra information is added?
-       ilab = data_long_all[,c(&quot;n_mod3&quot;, &quot;neur_lowc_ci_mod3&quot;, &quot;neur_hghc_ci_mod3&quot;)],
-       # where does extra information go?
-       ilab.xpos = pos.long)
+#forest plot
+forest(meta.results.time,
+       xlim = c(lower.mod1, upper.mod1),
+       cex = cex.set,
+       slab = meta.data.time$study,
+       transf=exp,
+       refline = 1,
+       ilab = meta.data.time[,c(&quot;n&quot;, &quot;n_died&quot;,
+                                &quot;lowC.CI&quot;,
+                                &quot;hghC.CI&quot;)],
+       ilab.xpos = pos.mod1)
 
-# add weighted average effects polygon
-addpoly(meta.long.hbp, row=rows.hbp[1]-1, cex = cex.value, transf = exp, mlab = &quot;&quot;, col = &quot;blue&quot;)
-addpoly(meta.long.diabetes, row=rows.diabetes[1]-1, cex = cex.value, transf = exp, mlab = &quot;&quot;, col = &quot;blue&quot;)
-addpoly(meta.long.heart, row=rows.heart[1]-1, cex = cex.value, transf = exp, mlab = &quot;&quot;, col = &quot;blue&quot;)
-
-### add text with Q-value, dfs, p-value, and I^2 statistic for subgroups
-text(x = lower.long, y = rows.hbp[1]-2.25, pos=4, cex = cex.value,
-     bquote(paste(&quot;RE Model for hypertension analyses (Q = &quot;,
-                  .(formatC(meta.long.hbp$QE, digits=2, format=&quot;f&quot;)),
-                  &quot;, df = &quot;, .(meta.long.hbp$k - meta.long.hbp$p),
-                  &quot;, p = &quot;, .(formatC(meta.long.hbp$QEp, digits=2, format=&quot;f&quot;)), &quot;; &quot;, I^2, &quot; = &quot;,
-                  .(formatC(meta.long.hbp$I2, digits=1, format=&quot;f&quot;)), &quot;%)&quot;)))
-text(x = lower.long, y = rows.diabetes[1]-2.25, pos=4, cex = cex.value,
-     bquote(paste(&quot;RE Model for diabetes analyses (Q = &quot;,
-                  .(formatC(meta.long.diabetes$QE, digits=2, format=&quot;f&quot;)),
-                  &quot;, df = &quot;, .(meta.long.diabetes$k - meta.long.diabetes$p),
-                  &quot;, p = &quot;, .(formatC(meta.long.diabetes$QEp, digits=2, format=&quot;f&quot;)), &quot;; &quot;, I^2, &quot; = &quot;,
-                  .(formatC(meta.long.diabetes$I2, digits=1, format=&quot;f&quot;)), &quot;%)&quot;)))
-text(x = lower.long, y = rows.heart[1]-2.25, pos=4, cex = cex.value,
-     bquote(paste(&quot;RE Model for heart disease analyses (Q = &quot;,
-                  .(formatC(meta.long.heart$QE, digits=2, format=&quot;f&quot;)),
-                  &quot;, df = &quot;, .(meta.long.heart$k - meta.long.heart$p),
-                  &quot;, p = &quot;, .(formatC(meta.long.heart$QEp, digits=2, format=&quot;f&quot;)), &quot;; &quot;, I^2, &quot; = &quot;,
-                  .(formatC(meta.long.heart$I2, digits=1, format=&quot;f&quot;)), &quot;%)&quot;)))
-
-#bold font
-par(font = 2)
-
-# add &quot;overall&quot;&quot; label to each set of analyses
-text(lower.long, y = c(rows.hbp[1]-1, rows.diabetes[1]-1, rows.heart[1]-1), pos = 4, cex = cex.value, &quot;Overall&quot;)
-
-# add overall sample sizes for each set of analyses
-text(x = pos.long[1], y = rows.hbp[1]-1, cex = cex.value, printnum(sum(data_long_hbp$n_mod3), int=T))
-text(x = pos.long[1], y = rows.diabetes[1]-1, cex = cex.value, printnum(sum(data_long_diab$n_mod3), int = T))
-text(x = pos.long[1], y = rows.heart[1]-1, cex = cex.value, printnum(sum(data_long_heart$n_mod3), int =T))
-
-# add weighted average simple slopes for each set of analyses
-text(x = pos.long[2], y = rows.hbp[1]-1, cex = cex.value, lowc_long_ci.hbp)
-text(x = pos.long[2], y = rows.diabetes[1]-1, cex = cex.value, lowc_long_ci.diabetes)
-text(x = pos.long[2], y = rows.heart[1]-1, cex = cex.value, lowc_long_ci.heart)
-
-text(x = pos.long[3], y = rows.hbp[1]-1, cex = cex.value, hghc_long_ci.hbp)
-text(x = pos.long[3], y = rows.diabetes[1]-1, cex = cex.value, hghc_long_ci.diabetes)
-text(x = pos.long[3], y = rows.heart[1]-1, cex = cex.value, hghc_long_ci.heart)
-
-# column labels
-text(lower.long, nrow(data_long_all) + extra.space*2 + 1,
-     &quot;Study&quot;, cex = cex.value, pos = 4)
-text(upper.long, nrow(data_long_all) + extra.space*2 + 1,
-     &quot;Interaction Coefficient Odds Ratio [95% CI]&quot;, cex = cex.value, pos=2)
-text(pos.long[1], nrow(data_long_all) + extra.space*2 + 1,
-     &quot;Sample Size&quot;, cex = cex.value)
-text(pos.long[2], nrow(data_long_all) + extra.space*2 + 1,
-     &quot;-1SD Con&quot;, cex = cex.value)
-text(pos.long[3], nrow(data_long_all) + extra.space*2 + 1,
-     &quot;+1SD Con&quot;, cex = cex.value)
-text((pos.long[2]+pos.long[3])/2, nrow(data_long_all) + extra.space*2 + 2,
-     &quot;Neuroticism Coefficient&quot;, cex = cex.value)
-
-#bold and italic font, plus bigger text
-par(font = 4)
-
-# outcome labels
-text(lower.long, rows.hbp[2] + 1,
-     &quot;Hypertension/High Blood Pressure&quot;, cex = cex.value, pos = 4)
-text(lower.long, rows.diabetes[2] + 1,
-     &quot;Diabetes/High Blood Glucose&quot;, cex = cex.value, pos = 4)
-text(lower.long, rows.heart[2] + 1,
-     &quot;Heart Disease&quot;, cex = cex.value, pos = 4)</code></pre>
+#additional text
+text(c(pos.mod1), length(study.names)+1.5,
+     c(&quot;N&quot;, &quot;Died&quot;, &quot;-1SD Con&quot;, &quot;+1SD Con&quot;), cex = cex.set)
+text((pos.mod1[4]+pos.mod1[5])/2, length(study.names)+2.5,
+     &quot;Neuroticism Hazard Ratio&quot;, cex = cex.set)
+text(lower.mod1, length(study.names)+1.5,
+     &quot;Study&quot;, cex = cex.set, pos = 4)
+text(upper.mod1, length(study.names)+1.5,
+     &quot;Interaction Hazard Ratio [95% CI]&quot;, cex = cex.set, pos=2)
+text(pos.mod1[3:4], -1,
+     c(meta_lowc_ci_mod1, meta_hghc_ci_mod1), cex = cex.set)
+text(lower.mod1, -2, pos=4, cex=cex.set, 
+     bquote(paste(&quot;(Q = &quot;,
+     .(formatC(meta.results.time$QE, digits=2, format=&quot;f&quot;)), &quot;, df = &quot;, .(meta.results.time$k - meta.results.time$p),
+     &quot;, p = &quot;, .(formatC(meta.results.time$QEp, digits=2, format=&quot;f&quot;)), &quot;; &quot;, I^2, &quot; = &quot;,
+     .(formatC(meta.results.time$I2, digits=1, format=&quot;f&quot;)), &quot;%)&quot;)))</code></pre>
 </div>
 
 
