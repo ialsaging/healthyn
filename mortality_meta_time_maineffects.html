@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 
 <head>
 
 <meta charset="utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
 
@@ -88,7 +88,6 @@ code {
 }
 img {
   max-width:100%;
-  height: auto;
 }
 .tabbed-pane {
   padding-top: 12px;
@@ -237,6 +236,7 @@ $(document).ready(function () {
   border: none;
   display: inline-block;
   border-radius: 4px;
+  background-color: transparent;
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li {
@@ -249,48 +249,9 @@ $(document).ready(function () {
 }
 </style>
 
-<script>
-$(document).ready(function () {
-  window.buildTabsets("TOC");
-});
-
-$(document).ready(function () {
-  $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
-  });
-});
-</script>
-
 <!-- code folding -->
 
 
-
-<script>
-$(document).ready(function ()  {
-
-    // move toc-ignore selectors from section div to header
-    $('div.section.toc-ignore')
-        .removeClass('toc-ignore')
-        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
-
-    // establish options
-    var options = {
-      selectors: "h1,h2",
-      theme: "bootstrap3",
-      context: '.toc-content',
-      hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
-      },
-      ignoreSelector: ".toc-ignore",
-      scrollTo: 0
-    };
-    options.showAndHide = true;
-    options.smoothScroll = true;
-
-    // tocify
-    var toc = $("#TOC").tocify(options).data("toc-tocify");
-});
-</script>
 
 <style type="text/css">
 
@@ -304,6 +265,12 @@ $(document).ready(function ()  {
 }
 }
 
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
 
 .toc-content {
   padding-left: 30px;
@@ -402,7 +369,16 @@ div.tocify {
           <a href="mortality_meta_time.html">Forest plot of interaction</a>
         </li>
         <li>
+          <a href="mortality_meta_time_nocov.html">Forest plot of interaction (no covariates)</a>
+        </li>
+        <li>
+          <a href="mortality_meta_time_weighted.html">Forest plot of interaction (weighted)</a>
+        </li>
+        <li>
           <a href="mortality_meta_time_maineffects.html">Main effects of personality</a>
+        </li>
+        <li>
+          <a href="mortality_meta_time_maineffects_nocov.html">Main effects of personality (no covariates)</a>
         </li>
         <li>
           <a href="mortality_meta_time_hrPlot.html">Hazard ratio plot</a>
@@ -468,7 +444,10 @@ div.tocify {
           <a href="chronic_cross_sectional_forest.html">Forest plot (published)</a>
         </li>
         <li>
-          <a href="chronic_cross_sectional_predicted.html">Prediced values by study</a>
+          <a href="chronic_cross_sectional_forest_nocov.html">Forest plot (no covariates)</a>
+        </li>
+        <li>
+          <a href="chronic_cross_sectional_predicted.html">Predicted values by study</a>
         </li>
         <li>
           <a href="chronic_cross_sectional_age_forest.html">Moderated by age</a>
@@ -488,7 +467,10 @@ div.tocify {
           <a href="chronic_longitudinal_forest.html">Forest plot (published)</a>
         </li>
         <li>
-          <a href="chronic_longitudinal_predicted.html">Prediced values by study</a>
+          <a href="chronic_longitudinal_forest_nocov.html">Forest plot (no covariates)</a>
+        </li>
+        <li>
+          <a href="chronic_longitudinal_predicted.html">Predicted values by study</a>
         </li>
         <li>
           <a href="chronic_longitudinal_age_forest.html">Moderated by age</a>
@@ -600,7 +582,13 @@ div.tocify {
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="study_info.html">Study Information</a>
+    </li>
+    <li>
       <a href="chronic_packages.html">R Packages Used</a>
+    </li>
+    <li>
+      <a href="scales.html">Personality scale content</a>
     </li>
   </ul>
 </li>
@@ -633,7 +621,115 @@ div.tocify {
 <p>The following packages were used to generate this table:</p>
 <p>The files needed for this table are available at <a href="https://osf.io/mzfu9/">osf.io/mzfu9</a> in the Individual Study Output folder.</p>
 <p>First we load the individual study analysis objects.</p>
-<p><img src="mortality_meta_time_maineffects_files/figure-html/bounds-1.png" width="672" /></p>
+<pre class="r"><code>study.names = c(&quot;EAS&quot;, &quot;HRS&quot;, &quot;LBC&quot;, &quot;LBLS&quot;, &quot;MAP&quot;, &quot;MAS&quot;, &quot;MIDUS&quot;, &quot;NAS&quot;, &quot;OATS&quot;, &quot;ROS&quot;, &quot;SLS&quot;, &quot;WLS&quot;)
+lapply(here(paste0(&quot;mortality/study output/&quot;, study.names, &quot;_survival_output.Rdata&quot;)), load, .GlobalEnv)</code></pre>
+<pre class="r"><code>meta.data.time &lt;- data.frame()
+
+n &lt;- 0
+
+for(i in study.names){
+  n &lt;- n+1
+  x &lt;- get(paste0(i, &quot;_survival_output&quot;))
+  meta.data.time[n, &quot;study&quot;] &lt;- i
+  meta.data.time[n, &quot;n_coef&quot;] &lt;- x$time$model1$coef[&quot;z.neur&quot;, &quot;coef&quot;]
+  meta.data.time[n, &quot;n_se&quot;] &lt;- x$time$model1$coef[&quot;z.neur&quot;, &quot;se(coef)&quot;]
+  meta.data.time[n, &quot;c_coef&quot;] &lt;- x$time$model1$coef[&quot;z.con&quot;, &quot;coef&quot;]
+  meta.data.time[n, &quot;c_se&quot;] &lt;- x$time$model1$coef[&quot;z.con&quot;, &quot;se(coef)&quot;]
+  meta.data.time[n, &quot;n&quot;] &lt;- x$time$model1$ntotal
+  meta.data.time[n, &quot;n_died&quot;] &lt;- x$descriptives$died.tab[&quot;1&quot;]
+}
+
+meta.results.time.neur &lt;- rma(yi = n_coef, 
+                              sei = n_se, 
+                              ni = n,  
+                              measure = &quot;RR&quot;,
+                              slab = study, 
+                              data = meta.data.time)
+
+meta.results.time.con &lt;- rma(yi = c_coef, 
+                              sei = c_se, 
+                              ni = n,  
+                              measure = &quot;RR&quot;,
+                              slab = study, 
+                              data = meta.data.time)
+
+meta.data.time = meta.data.time %&gt;%
+  gather(&quot;key&quot;, &quot;value&quot;, n_coef, n_se, c_coef, c_se) %&gt;%
+  separate(&quot;key&quot;, into = c(&quot;trait&quot;, &quot;key&quot;)) %&gt;%
+  spread(&quot;key&quot;, &quot;value&quot;)
+
+meta.results.time = rma(yi = coef, 
+                        sei = se, 
+                        ni = n,  
+                        measure = &quot;RR&quot;,
+                        slab = study, 
+                        data = meta.data.time)</code></pre>
+<pre class="r"><code>meta.data.time = meta.data.time %&gt;%
+  #mutate(study = gsub(&quot;LBC&quot;, &quot;LBC1936&quot;, study)) %&gt;%
+  arrange(trait, study)
+
+#find plot limits
+max.ci = meta.data.time %&gt;%
+  mutate(ci = exp(coef+1.96*se)) %&gt;%
+  arrange(desc(ci))
+max.ci = max.ci[2, &quot;ci&quot;]
+
+#max.ci = max(exp(neur.data$estimate+1.96*neur.data$se))
+min.ci = min(exp(meta.data.time$coef-1.96*meta.data.time$se))
+
+range = max.ci-min.ci
+
+lower = min.ci-(range)
+upper = max.ci+(range)*.5
+
+#estimate position of extra information
+pos = min.ci-lower
+pos = pos/2
+pos = c(lower+.8*pos, lower+1.6*pos)
+
+unique = nrow(meta.data.time)/2
+rows = c(1:unique, (unique+6):((2*unique)+5))
+cex.set = .65
+
+forest(meta.data.time$coef, meta.data.time$se^2,
+       cex = cex.set,
+       slab = meta.data.time$study,
+       xlim = c(lower, upper),
+       alim = c(min.ci, max.ci),
+       transf=exp,
+       rows = rows[order(rows,decreasing = T)],
+       ylim = c(-1, 5+max(rows)),
+       refline = 1,
+       ilab = meta.data.time[,c(&quot;n&quot;, &quot;n_died&quot;)],
+       ilab.xpos = pos)
+
+addpoly(meta.results.time.con, row = unique+5, 
+        cex = cex.set,transf =exp, mlab=&quot;&quot;, col = &quot;blue&quot;)
+addpoly(meta.results.time.neur, row = min(rows)-1, 
+        cex = cex.set,transf =exp, mlab=&quot;&quot;, col = &quot;blue&quot;)
+
+text(lower, unique+5, pos=4, cex = cex.set,
+     bquote(paste(&quot;(Q = &quot;,
+                  .(formatC(meta.results.time.con$QE, digits=2, format=&quot;f&quot;)),
+                  &quot;, df = &quot;, .(meta.results.time.con$k - meta.results.time.con$p),
+                  &quot;, p = &quot;, .(formatC(meta.results.time.con$QEp, digits=2, format=&quot;f&quot;)), 
+                  &quot;; &quot;, I^2, &quot; = &quot;,
+                  .(formatC(meta.results.time.con$I2, digits=1, format=&quot;f&quot;)), &quot;%)&quot;)))
+text(lower, min(rows)-1, pos=4, cex = cex.set,
+     bquote(paste(&quot;(Q = &quot;,
+                  .(formatC(meta.results.time.neur$QE, digits=2, format=&quot;f&quot;)),
+                  &quot;, df = &quot;, .(meta.results.time.neur$k - meta.results.time.neur$p),
+                  &quot;, p = &quot;, .(formatC(meta.results.time.neur$QEp, digits=2, format=&quot;f&quot;)), 
+                  &quot;; &quot;, I^2, &quot; = &quot;,
+                  .(formatC(meta.results.time.neur$I2, digits=1, format=&quot;f&quot;)), &quot;%)&quot;)))
+text(lower, 5.5+max(rows),
+     &quot;Study&quot;, cex = cex.set*1.2, pos = 4)
+text(upper, 5.5+max(rows),
+     &quot;Risk Ratio [95% CI]&quot;, cex = cex.set*1.2, pos=2)
+text(lower, max(rows)+1.5,
+     &quot;Main Effect of Conscientiousness&quot;, cex = cex.set*1.1, pos = 4, font = 2)
+text(lower, unique+2,
+     &quot;Main Effect of Neuroticism&quot;, cex = cex.set*1.1, pos = 4, font = 2)</code></pre>
 </div>
 
 
@@ -654,6 +750,49 @@ $(document).ready(function () {
 });
 
 
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
 </script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->

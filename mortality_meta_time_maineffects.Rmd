@@ -39,10 +39,10 @@ for(i in study.names){
   x <- get(paste0(i, "_survival_output"))
   meta.data.time[n, "study"] <- i
   meta.data.time[n, "n_coef"] <- x$time$model1$coef["z.neur", "coef"]
-  meta.data.time[n, "n_se"] <- x$time$model2$coef["z.neur", "se(coef)"]
+  meta.data.time[n, "n_se"] <- x$time$model1$coef["z.neur", "se(coef)"]
   meta.data.time[n, "c_coef"] <- x$time$model1$coef["z.con", "coef"]
-  meta.data.time[n, "c_se"] <- x$time$model2$coef["z.con", "se(coef)"]
-  meta.data.time[n, "n"] <- x$time$model2$ntotal
+  meta.data.time[n, "c_se"] <- x$time$model1$coef["z.con", "se(coef)"]
+  meta.data.time[n, "n"] <- x$time$model1$ntotal
   meta.data.time[n, "n_died"] <- x$descriptives$died.tab["1"]
 }
 
@@ -155,15 +155,15 @@ The files needed for this table are available at [osf.io/mzfu9](https://osf.io/m
 
 First we load the individual study analysis objects.
 
-```{r load_data, echo = F, results = 'hide'}
+```{r load_data, eval = F, results = 'hide'}
 ```
 
 
-```{r extract, echo = F}
+```{r extract, eval = F}
 ```
 
 
-```{r bounds, echo = F}
+```{r bounds, eval = F}
 ```
 
 

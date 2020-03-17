@@ -76,6 +76,25 @@ rows = sapply(study.names, function(x) which(describe.df$study == x))
 rows = lapply(rows, function(x) c(min(x), max(x)))
 ```
 
+
+```{r LBC, echo = F}
+non = 966
+smoke = 125
+
+N = non+smoke
+p = smoke/N
+q = 1-p
+
+M = p
+SD = p*q
+
+describe.df$mean[describe.df$study == "LBC" & describe.df$var == "smoker"] = M
+describe.df$sd[describe.df$study == "LBC" & describe.df$var == "smoker"] = SD
+describe.df$min[describe.df$study == "LBC" & describe.df$var == "smoker"] = 0
+describe.df$max[describe.df$study == "LBC" & describe.df$var == "smoker"] = 1
+```
+
+
 ```{r table, results = 'asis', echo = F}
 describe.df %>%
   dplyr::select(-study) %>%
@@ -134,6 +153,11 @@ Next we extract and wrangle the descriptive statistics (a data frame created usi
 We identify the rows corresponding to each data set. We then select the minimum and maximum rows as starting and end points for grouping.
 
 ```{r ref.label = "rows", eval = F}
+```
+The LBC dataset incorrectly considered the smoking variable to be a factor level variable, and did not appropriate compute the descriptie statistics. Given the numbers we have at baseline -- 966 non- and former-smokers and 125 current smokers -- we can calculate appropriate statistics by hand. These values are estimated before removing participants based on the inclusion/exclusion criteria, but they are our best guess until we can update the data file from this dataset.
+
+```{r ref.lable = "LBC", eval = F}
+
 ```
 
 Finally, we pipe the data frame into the `kable()` function and additional formatting through the `kableExtra` package. We remove the study column, as this becomes redundant with the grouping headers. 
